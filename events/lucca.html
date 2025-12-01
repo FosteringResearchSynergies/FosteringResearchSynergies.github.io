@@ -5,6 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fostering Research Sinergies - IMT Lucca 2025</title>
     <link rel="stylesheet" href="../styles.css">
+    <style>
+        /* Mobile optimizations for Lucca event page */
+        @media (max-width: 768px) {
+            .event-detail-header {
+                padding: 2rem 0 !important;
+            }
+
+            .event-detail-title {
+                font-size: 1.8rem !important;
+            }
+
+            .event-info {
+                flex-direction: column !important;
+                gap: 0.5rem !important;
+            }
+
+            .event-info-item {
+                font-size: 0.9rem;
+            }
+
+            /* Make grid stack vertically on mobile */
+            .content .grid[style*="grid-template-columns: 2fr 1fr"] {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Reorder sidebar boxes to appear after main content */
+            .content .grid > div:last-child {
+                order: 2;
+            }
+
+            .content .grid > div:first-child {
+                order: 1;
+            }
+
+            /* Better spacing for registration boxes on mobile */
+            .registration-box {
+                margin-top: 1.5rem !important;
+            }
+
+            /* Improve program tabs on mobile */
+            .program-tabs {
+                flex-direction: column !important;
+                gap: 0.5rem !important;
+            }
+
+            .tab-button {
+                width: 100%;
+                padding: 0.6rem 1rem !important;
+                font-size: 0.9rem !important;
+            }
+
+            /* Better schedule items on mobile */
+            .schedule-item {
+                padding: 1rem !important;
+            }
+
+            .schedule-time {
+                font-size: 0.9rem;
+            }
+
+            .schedule-title {
+                font-size: 1rem !important;
+            }
+
+            /* Make acknowledgment text smaller on mobile */
+            .content p[style*="font-size: 0.85rem"] {
+                font-size: 0.75rem !important;
+                padding: 0 0.5rem;
+            }
+
+            /* Ensure banner scales properly */
+            .content img[alt="EFC Banner"] {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -37,8 +114,9 @@
         </div>
     </nav>
 
-    <header class="event-detail-header">
-        <div class="container">
+    <header class="event-detail-header" style="background-image: url('../pictures/Scuola IMT Campus SF.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); z-index: 1;"></div>
+        <div class="container" style="position: relative; z-index: 2;">
             <h2 class="event-detail-title">Fostering Research Sinergies - IMT Lucca 2025</h2>
             <div class="event-info">
                 <div class="event-info-item">
@@ -199,15 +277,9 @@
                         <ul style="list-style: none; padding: 0;">
                             <li style="padding: 0.5rem 0; border-bottom: 1px solid #ddd; font-size: 0.9rem;">
                                 <strong>Participation to the workshop is free</strong><br>
-                                Accomodation and meals will be covered by the host organization for all participants. Financial support for travel expenses can be provided in exceptional cases. 
+                                Accomodation and meals, including social dinner, will be covered by the host organization for all participants. Financial support for travel expenses can be provided in exceptional cases. 
                             </li>
                         </ul>
-                        
-                        <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
-                            The workshop registration includes access to all sessions, coffee breaks, lunch, and social dinner.
-                        </p>
-                        
-                       
                     </div>
 
                     <div class="registration-box" style="margin-top: 2rem;">
@@ -221,7 +293,7 @@
                         <p>For questions about the workshop, please contact:</p>
                         <p style="margin-top: 1rem;">
                             <strong>Email:</strong><br>
-                            workshop2025@example.com
+                            frscrefimt@gmail.com
                         </p>
                     </div>
 
