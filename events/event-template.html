@@ -8,16 +8,32 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="container">
+        <div class="container" style="display: flex; align-items: center; gap: 2rem;">
             <div class="nav-brand">
                 <h1>PhD & Postdoc Network</h1>
             </div>
             <ul class="nav-menu">
                 <li><a href="../index.html">Home</a></li>
-                <li><a href="../events.html" class="active">Events</a></li>
+                <li class="dropdown">
+                    <a href="../events.html" class="active">Events</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-submenu-title">Upcoming Events</li>
+                        <li><a href="lucca.html">FRS 2025 - Lucca</a></li>
+                        <hr>
+                        <li class="dropdown-submenu-title">Past Events</li>
+                        <li><a href="frs2024-winter.html">FRS 2024 - Rome</a></li>
+                        <li><a href="winter-2024.html">Winter Conference 2024</a></li>
+                    </ul>
+                </li>
                 <li><a href="../about.html">About</a></li>
                 <li><a href="../contact.html">Contact</a></li>
             </ul>
+            <div class="nav-controls">
+                <button class="nav-btn" onclick="history.back()" title="Go Back">◄</button>
+                <button class="nav-btn" onclick="history.forward()" title="Go Forward">►</button>
+                <button class="nav-btn" onclick="location.reload()" title="Reload">⟳</button>
+                <button class="nav-btn" onclick="location.href='../index.html'" title="Home">⌂</button>
+            </div>
         </div>
     </nav>
 
