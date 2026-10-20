@@ -1,0 +1,38 @@
+# The same tests as scripts/check.sh on a laptop (HTML, links, personal data, web and mobile in headless
+# Chrome) on every PR into main or deploy, so nothing goes live untested even when a PR is merged from the
+# GitHub interface. Screenshots of every page at every width are attached to the run.
+name: check
+
+on:
+  pull_request:
+    branches: [main, deploy]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: scripts/check.sh
+        run: scripts/check.sh
+      - name: Screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: _screenshots/
+          retention-days: 14
+          if-no-files-found: ignore
