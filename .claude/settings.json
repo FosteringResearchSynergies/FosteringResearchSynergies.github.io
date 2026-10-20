@@ -5,10 +5,9 @@
       "Bash(git status)",
       "Bash(git status *)",
       "Bash(git diff)",
-      "Bash(git diff *)",
-      "Bash(git log *)",
-      "Bash(git show *)",
-      "Bash(git fetch *)",
+      "Bash(git fetch origin)",
+      "Bash(git fetch origin --prune)",
+      "Bash(git worktree list)",
       "Bash(git worktree list *)",
       "Bash(git add *)",
       "Bash(git commit *)",
@@ -25,8 +24,10 @@
     ],
     "ask": [
       "Bash(git push *)",
+      "Bash(git -C * push *)",
       "Bash(git branch -D *)",
       "Bash(git worktree remove *)",
+      "Bash(git -C * worktree remove *)",
       "Bash(gh pr create *)",
       "Bash(gh pr merge *)",
       "Bash(gh pr comment *)",
@@ -43,11 +44,11 @@
   "hooks": {
     "PreToolUse": [
       {
-        "matcher": "Edit|Write|MultiEdit|NotebookEdit|Bash",
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit|Bash|PowerShell",
         "hooks": [
           {
             "type": "command",
-            "command": "f=\"$CLAUDE_PROJECT_DIR/.claude/hooks/guard_protected_branches.py\"; if [ -f \"$f\" ]; then exec python3 \"$f\"; fi",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard_protected_branches.py\"",
             "timeout": 10
           }
         ]

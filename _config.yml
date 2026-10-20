@@ -1,8 +1,21 @@
-# Build Jekyll di GitHub Pages ("Deploy from branch"), in uso finché il sito non passa al nuovo
-# generatore (docs/ROADMAP.md). Serve solo a non pubblicare i file interni del repository.
+# Jekyll build of GitHub Pages ("Deploy from branch"), used until the site moves to the new generator
+# (docs/ROADMAP.md). It only keeps the repository's internal files off the public site.
+# Setting `exclude` replaces Jekyll's default list (Gemfile, Gemfile.lock, node_modules, vendor/...),
+# so those entries are repeated here. "*.md" must stay quoted: a bare * starts a YAML alias.
 exclude:
+  - "*.md"
+  - README.md
   - CLAUDE.md
   - CLAUDE.local.md
-  - README.md
   - docs/
   - scripts/
+  - src/
+  - .claude/
+  - .github/
+  - eleventy.config.js
+  - package.json
+  - package-lock.json
+  - node_modules/
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
