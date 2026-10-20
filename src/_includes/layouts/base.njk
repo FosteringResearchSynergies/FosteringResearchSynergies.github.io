@@ -4,8 +4,11 @@
 {% include "head.njk" %}
 </head>
 <body>
-{% include "nav.njk" %}
+<a class="skip-link" href="#main">Skip to content</a>
+{% include "header.njk" %}
+<main id="main">
 {{ content | safe }}
+</main>
 {% include "footer.njk" %}
 </body>
 </html>
