@@ -1,0 +1,66 @@
+/* Honest placeholders (CLAUDE.md, "Contenuti"; docs/DESIGN.md: hazard-hatched boxes with mono tags).
+   Markup comes only from the `placeholder` include (src/_includes/placeholder.njk):
+     lorem    <p data-placeholder="lorem">Lorem ipsum...</p>           label "Placeholder text · " from here
+     tba      <span data-placeholder="tba">Dates TBA</span>             label "TBA" in the text
+     unbuilt  <div data-placeholder="unbuilt" role="note"><strong>Not developed yet:</strong> ...</div>
+   Each type has a written label, so the colour is never the only cue. Text is ink on a pale giallo
+   fill (16.5:1); the ink and giallo stripes only frame the text, never sit behind it.
+   The selectors name the element the include writes (p, span, div): that also puts them above the
+   interim [data-placeholder] rules that /styles.css still carries for the pages of the old site. */
+
+p[data-placeholder="lorem"],
+span[data-placeholder="tba"],
+div[data-placeholder="unbuilt"] {
+    border-radius: var(--radius-s);
+    color: var(--color-ink);
+    font-weight: var(--weight-regular);
+}
+
+/* lorem: text the team has to write. Hatched strip on the left, label before the text. */
+p[data-placeholder="lorem"] {
+    padding: var(--space-xs) var(--space-s) var(--space-xs) calc(var(--space-s) + var(--space-2xs));
+    border: 1px solid var(--color-ink);
+    background: var(--hatch) left top / var(--space-2xs) 100% no-repeat, var(--color-placeholder);
+}
+
+p[data-placeholder="lorem"]::before {
+    content: "Placeholder text · ";
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+}
+
+/* tba: a missing data point inside a sentence or a field. Inline tag with a short hatch. */
+span[data-placeholder="tba"] {
+    display: inline-block;
+    padding: 0 0.45em 0 calc(0.45em + var(--space-2xs));
+    border: 1px solid var(--color-ink);
+    background: var(--hatch) left top / var(--space-2xs) 100% no-repeat, var(--color-placeholder);
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-snug);
+}
+
+/* unbuilt: a feature that does not exist yet. Box with a full hatched frame. */
+div[data-placeholder="unbuilt"] {
+    padding: var(--space-s) var(--space-m);
+    border: var(--space-2xs) solid transparent;
+    background: linear-gradient(var(--color-placeholder), var(--color-placeholder)) padding-box,
+        var(--hatch) border-box;
+}
+
+div[data-placeholder="unbuilt"] > strong:first-child {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+}
+
+div[data-placeholder="unbuilt"] a {
+    color: var(--color-ink);
+}
