@@ -43,8 +43,9 @@ Bloccano i contenuti, non il lavoro tecnico: finché mancano, la pagina usa i pl
    Chi finanzia Parma, e ci sono loghi o diciture obbligatorie?
 4. **Programma e keynote**: speaker confermati (nome, affiliazione, titolo), oppure "Program: TBA"?
 5. **Organizzatori**: chi è nel comitato di Parma e nel team FRS, con consenso a essere elencati?
-6. **Edizioni passate**: anno, sede e contenuti di v1.0 Lucca e v1.X Vienna. Pagine d'archivio o solo
-   voci nella timeline?
+6. **Edizioni passate**: v1.0 Lucca (novembre 2023), v1.X Vienna (febbraio 2024) e FRSummer 2025 a Lipari
+   (v2.X) vengono dall'organizzatore, a memoria: confermare mesi e versioni, aggiungere giorni, sede e
+   contenuti. Pagine d'archivio o solo voci nella timeline?
 7. **Roma 2024**: quali testi di `events/frs2024-winter.html` avete scritto voi? Si possono togliere
    battute, statistiche non verificate e aneddoti?
 8. **Dominio**: `frs-workshop.imtlucca.it` è stato stampato su materiali di Lucca 2025?

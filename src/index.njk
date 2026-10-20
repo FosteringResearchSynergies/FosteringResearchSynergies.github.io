@@ -83,8 +83,11 @@ eleventyComputed:
                 <p class="edition-tag" aria-hidden="true"></p>
                 {%- endif %}
                 <h3 class="edition-city"><span class="edition-city-name chars-{{ edition.city | fitChars }}">{{ edition.city or placeholder("tba") }}</span></h3>
-                {%- if showDates or edition.host or edition.venue.name %}
+                {%- if edition.name or showDates or edition.host or edition.venue.name %}
                 <dl class="edition-info">
+                    {%- if edition.name %}
+                    <dt class="label">Name</dt><dd>{{ edition.name }}</dd>
+                    {%- endif %}
                     {%- if showDates %}
                     <dt class="label">Dates</dt><dd>{% if edition.dates.start %}{{ edition.dates.start | dateRange(edition.dates.end) }}{% else %}{{ placeholder("tba") }}{% endif %}</dd>
                     {%- endif %}
