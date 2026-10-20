@@ -12,7 +12,8 @@ Sito: <https://fosteringresearchsynergies.github.io/> · Contatto: frscrefimt@gm
 
 | Percorso | Contenuto |
 | --- | --- |
-| `*.html`, `events/`, `pictures/`, `styles.css`, `navbar.js` | il sito attuale (HTML statico) |
+| `src/` | sorgenti del sito per [Eleventy](https://www.11ty.dev/): pagine, layout e include (`src/_includes/`), dati (`src/_data/`), file statici; il build va in `_site/`, l'unica cosa pubblicata |
+| `package.json`, `package-lock.json`, `eleventy.config.js` | generatore e strumenti di controllo, con le versioni bloccate |
 | `docs/` | piano (`ROADMAP.md`), inventario dei problemi (`AUDIT.md`), direzione visiva (`DESIGN.md`) |
 | `scripts/` | `check.sh` (controlli e test web e mobile prima di ogni PR e di ogni pubblicazione), `viewports.mjs` (i test in Chrome, usato da `check.sh`), `preview.sh` (anteprima locale) |
 | `.github/workflows/` | `check.yml`: gli stessi controlli su ogni PR verso `main` e `deploy` |
@@ -53,13 +54,15 @@ non esistono ancora. I dettagli sono in [`CLAUDE.md`](CLAUDE.md).
 
 ## Anteprima e controlli in locale
 
-Servono `bash`, `python3`, Node.js (per `npx`, che scarica `html-validate` e `linkinator`) e Google
-Chrome o Chromium (se non è nel PATH: `CHROME=/percorso/di/chrome`). Su Windows usa Git Bash, con
-`python3` nel PATH.
+Servono `bash`, `python3`, Node.js 20 o successivo con npm e Google Chrome o Chromium (se non è nel
+PATH: `CHROME=/percorso/di/chrome`). Su Windows usa Git Bash, con `python3` nel PATH.
 
 ```bash
-scripts/preview.sh   # avvia un server locale e stampa l'URL (Ctrl+C per fermarlo)
-scripts/check.sh     # HTML valido, link, link finti, dati personali, test web e mobile, placeholder rimasti
+npm ci                      # installa Eleventy, html-validate e linkinator alle versioni di package-lock.json
+npm run build               # cancella _site/ e lo ricostruisce da src/
+npm run dev -- --port=8080  # anteprima con ricarica automatica; se la porta è occupata dà errore
+scripts/preview.sh   # come npm run dev, con una porta ricavata dal percorso del checkout (Ctrl+C per fermarlo)
+scripts/check.sh     # build, HTML valido, link, link finti, dati personali, test web e mobile, placeholder rimasti
 ```
 
 `scripts/check.sh` apre ogni pagina in Chrome headless a 320, 375 e 768px (come su telefono e tablet) e a
