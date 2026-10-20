@@ -1,0 +1,25 @@
+/* Status chip: a short state in a mono tag ("Upcoming", "Past", "Call open").
+     <span class="chip">Past</span>
+     <span class="chip chip--accent">Upcoming</span>   filled with the edition accent
+   A missing value is never a chip: it is a tba placeholder (include `placeholder`). */
+
+.chip {
+    display: inline-block;
+    padding: 0.2em 0.65em;
+    border: 1px solid var(--color-ink);
+    border-radius: var(--radius-pill);
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-label);
+    line-height: var(--leading-snug);
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.chip--accent {
+    background: var(--accent);
+    color: var(--accent-ink);
+}

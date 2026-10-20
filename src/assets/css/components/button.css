@@ -1,0 +1,36 @@
+/* Call to action, only on a real link (CLAUDE.md: no fake or disabled buttons; without a URL the page
+   shows a plain status line instead).
+     <a class="button" href="https://...">Register</a>              edition accent fill
+     <a class="button button--secondary" href="/editions/">Archive</a>
+   Giallo Parma is a fill here, with ink text (10.0:1). */
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2xs);
+    min-height: 2.75rem;
+    padding: var(--space-2xs) var(--space-m);
+    border: var(--border-strong);
+    border-radius: var(--radius-s);
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-family: var(--font-display);
+    font-size: var(--text-m);
+    font-stretch: var(--stretch-heading);
+    font-weight: var(--weight-heading);
+    line-height: var(--leading-tight);
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow var(--duration) var(--ease), transform var(--duration) var(--ease);
+}
+
+.button:hover {
+    box-shadow: var(--shadow-offset);
+    transform: translate(-2px, -2px);
+}
+
+.button--secondary {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+}

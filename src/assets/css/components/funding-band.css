@@ -1,0 +1,39 @@
+/* Funding band: full-width strip in the blue of the EFC/PNRR banner, so the mandatory logo strip sits
+   flush (docs/DESIGN.md; Lucca 2025, and any edition with a funding obligation). Put it outside any
+   .container, as a direct child of <main>, so it spans the whole width without 100vw tricks.
+     <section class="funding-band" aria-label="Funding">
+       <div class="container funding-band__inner">
+         <img class="funding-band__logos" src="/assets/..." alt="(funders, from editions.yml)" width="1260" height="145">
+         <p class="funding-band__text">Acknowledgement text required by the funder, verbatim.</p>
+       </div>
+     </section>
+   Text and alt come from the data (funding.text, funding.image_alt): never written here. */
+
+.funding-band {
+    --focus-color: var(--color-white);
+    --focus-halo: var(--color-ink);
+    padding-block: var(--space-l);
+    background: var(--color-funding);
+    color: var(--color-white);
+}
+
+.funding-band__inner {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-s);
+    text-align: center;
+}
+
+/* Scales down with the column (max-width in base.css), never up. */
+.funding-band__logos {
+    display: block;
+}
+
+.funding-band__text {
+    max-width: var(--measure);
+    font-size: var(--text-s);
+}
+
+.funding-band a {
+    color: inherit;
+}
