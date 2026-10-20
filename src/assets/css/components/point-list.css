@@ -1,0 +1,65 @@
+/* List of short points (About): a filet on top of each, a heading and one paragraph. With the class
+   is-numbered every point starts with its number in the accent (01, 02, ...), like the section heads.
+
+   <ul class="point-list">                      or <ol class="point-list is-numbered">
+     <li class="point"><h3 class="point-title">Who we are</h3><p class="point-text">...</p></li>
+   </ul> */
+
+.point-list {
+    display: grid;
+    counter-reset: point;
+}
+
+.point {
+    display: grid;
+    gap: var(--space-2-5);
+    padding-block: var(--space-5) var(--space-8);
+    border-top: var(--rule) solid var(--color-rule);
+}
+
+.point-title {
+    font-size: var(--step-2);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+}
+
+.point-text {
+    max-width: var(--measure-short);
+}
+
+.point-list.is-numbered .point::before {
+    content: counter(point, decimal-leading-zero);
+    counter-increment: point;
+    color: var(--color-accent);
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+@media (min-width: 48rem) and (max-width: 63.99rem) {
+    .point {
+        grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+        column-gap: var(--gap);
+    }
+
+    .point::before,
+    .point-title {
+        grid-column: 1 / span 5;
+    }
+
+    .point-text {
+        grid-column: 6 / -1;
+    }
+
+    .point-list.is-numbered .point-text {
+        grid-row: 1 / span 2;
+    }
+}
+
+@media (min-width: 64rem) {
+    .point:last-child {
+        padding-bottom: 0;
+    }
+}

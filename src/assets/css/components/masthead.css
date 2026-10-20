@@ -1,0 +1,88 @@
+/* Masthead of the home: the site name set very large, initials in the accent, a lead paragraph and a
+   link to the next edition in the side column.
+
+   <section class="masthead">
+     <div class="wrap masthead-grid">
+       <h1 class="masthead-title">
+         <span class="masthead-line"><span class="masthead-initial">F</span>ostering</span> ...
+       </h1>
+       <div class="masthead-side"><p class="masthead-lede">...</p> <a class="arrow-link">...</a></div>
+     </div>
+   </section> */
+
+.masthead {
+    padding-block: var(--space-fluid-xl) var(--space-fluid-2xl);
+}
+
+.masthead-title {
+    margin-left: -0.05em;
+    font-size: var(--step-hero);
+    font-weight: 700;
+    line-height: 0.92;
+    letter-spacing: -0.042em;
+}
+
+.masthead-line {
+    display: block;
+}
+
+.masthead-initial {
+    color: var(--color-accent);
+}
+
+.masthead-side {
+    display: grid;
+    gap: var(--space-8);
+    margin-top: var(--space-fluid-m);
+}
+
+.masthead-lede {
+    max-width: var(--measure-lede);
+    font-family: var(--font-display);
+    font-size: var(--step-lede);
+    font-weight: 500;
+    line-height: 1.24;
+    letter-spacing: -0.015em;
+}
+
+@media (min-width: 48rem) and (max-width: 63.99rem) {
+    .masthead-side {
+        grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+        column-gap: var(--gap);
+        align-items: start;
+    }
+
+    .masthead-lede {
+        grid-column: 1 / span 6;
+    }
+
+    .masthead-side > .arrow-link {
+        grid-column: 8 / -1;
+    }
+}
+
+@media (min-width: 64rem) {
+    .masthead-grid {
+        display: grid;
+        grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+        column-gap: var(--gap);
+        align-items: end;
+    }
+
+    .masthead-title {
+        grid-column: 1 / span 8;
+        font-size: var(--step-hero-wide);
+    }
+
+    .masthead-side {
+        grid-column: 9 / -1;
+        gap: var(--space-10);
+        margin-top: 0;
+        padding-bottom: var(--space-2);
+    }
+
+    .masthead-lede {
+        font-size: var(--step-1);
+        line-height: 1.3;
+    }
+}
