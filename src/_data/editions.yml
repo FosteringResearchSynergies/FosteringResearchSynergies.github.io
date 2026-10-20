@@ -21,7 +21,6 @@
     address: null
   participants: null
   summary: null
-  accent: lucca
   program: null
   milestones: []
   links:
@@ -44,7 +43,6 @@
     address: null
   participants: null
   summary: null
-  accent: vienna
   program: null
   milestones: []
   links:
@@ -70,7 +68,6 @@
   participants: null
   # TODO(team): verificare. Testo di src/events.njk senza "50+" ed "epic" (docs/AUDIT.md, content-28).
   summary: "The second edition of FRS brought together young researchers from CREF, IMT Lucca, and CSH Vienna for three days of network theory, economic complexity, social dynamics, and informal scientific exchange. Features included 5 senior talks, 30+ presentations, a complexity quiz, and a social dinner in San Lorenzo."
-  accent: rome
   program: "2024-rome"
   milestones: []
   links:
@@ -94,7 +91,6 @@
   # TODO(team): verificare il numero di partecipanti (la pagina dice "30 participants expected").
   participants: null
   summary: null
-  accent: lucca
   program: "2025-lucca"
   milestones: []
   links:
@@ -126,7 +122,6 @@
     address: null
   participants: null
   summary: null
-  accent: parma
   program: null
   milestones: []
   links:
@@ -150,7 +145,6 @@
 #     address: null               # address of the venue (never a private address)
 #   participants: null            # number given by the team; null if unknown
 #   summary: null                 # one or two sentences for cards and timeline; null = lorem placeholder
-#   accent: null                  # edition colour, the data-accent value of the CSS: parma | lucca | rome | vienna
 #   program: null                 # file in src/_data/programs/ without ".yml"; null = "Program TBA"
 #   milestones: []                # key dates in order; the state is set by hand (no build-time "today")
 #   # - label: null               # e.g. abstract deadline, registration deadline
