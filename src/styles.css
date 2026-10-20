@@ -71,9 +71,10 @@
     margin-top: var(--space-4);
 }
 
-/* The old pages set their lists with bullets inside the text column, flush left */
+/* Lists of the old pages: a small indent keeps the bullets inside the text column, whether the page
+   sets them inside (inline style) or outside */
 .content ul:not([class]) {
-    padding-left: 0;
+    padding-left: var(--space-5);
 }
 
 .content h2 {
