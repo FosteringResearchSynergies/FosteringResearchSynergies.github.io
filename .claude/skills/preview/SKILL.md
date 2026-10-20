@@ -16,8 +16,8 @@ scripts/check.sh
 ```
 
 Lo script controlla il checkout in cui si trova, qualunque sia la cartella corrente. Exit code 0 = OK.
-Con un `package.json` cancella `_site/`, esegue `npm run build` e controlla `_site/`; altrimenti
-controlla i file HTML così come sono. Fallisce su: errori HTML (`html-validate`), link interni rotti
+Installa le dipendenze con `npm ci` se mancano o sono vecchie, cancella `_site/`, esegue
+`npm run build` e controlla `_site/`. Fallisce su: errori HTML (`html-validate`), link interni rotti
 (`linkinator`, su tutte le pagine), link `href="#"`, vuoti o `javascript:`, `<form>` senza `action`,
 numeri di telefono (indica solo file:riga), un file `CNAME` nel sito pubblicato e sui **test web e
 mobile**: ogni pagina aperta in Chrome headless a 320, 375 e 768px (emulazione mobile, touch) e a
@@ -35,7 +35,7 @@ come testato: è la condizione che l'hook chiede per pubblicare (vedi `CLAUDE.md
 Le regole di `html-validate` che l'HTML attuale non rispetta sono in `warn` fino al Giorno 3 della
 ROADMAP: quegli avvisi sono preesistenti e non bloccano, ma non aggiungerne di nuovi nei file che tocchi.
 `check.sh` li riassume per regola; per vederli riga per riga su una pagina:
-`npx --yes html-validate@9.7.1 --formatter text <pagina>` (con il generatore, la pagina in `_site/`).
+`npx --no-install html-validate --formatter text _site/<pagina>` (dopo `npm ci` e `npm run build`).
 Un errore preesistente fuori dallo scopo del task non si corregge: si segnala nella PR.
 
 Nel body della PR e nei log riporta solo exit code e conteggi, mai le righe trovate dai controlli.

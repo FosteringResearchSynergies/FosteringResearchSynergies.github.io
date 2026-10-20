@@ -1,0 +1,29 @@
+{#-
+  Honest placeholders (CLAUDE.md, "Contenuti"): the only way to mark missing content on the site.
+  scripts/check.sh counts them by type. Import the macro once per template, then call it:
+
+    {% from "placeholder.njk" import placeholder %}
+    {{ placeholder("lorem") }}                      text the team has to write (default: one lorem sentence)
+    {{ placeholder("lorem", "Lorem ipsum ...") }}   same, with a longer lorem text
+    {{ placeholder("tba", "Dates") }}               missing data point: "Dates TBA" ("TBA" alone without text)
+    {{ placeholder("unbuilt", "mailing list.") }}   feature not developed: "Not developed yet: mailing list."
+    {% call placeholder("unbuilt") %}contact form. Write to <a href="mailto:...">...</a>.{% endcall %}
+
+  The text argument is plain text (escaped); for a link or other markup use {% call %}.
+  Third argument (optional): extra classes for the element.
+  Labels: "TBA" and "Not developed yet:" are printed here; "Placeholder text · " (lorem) comes from the CSS.
+  The output stays on one line: scripts/check.sh reads it line by line.
+-#}
+{%- macro placeholder(type, text, classes) -%}
+{%- set body = caller() if caller else text -%}
+{%- set classAttr = ' class="' + (classes | escape) + '"' if classes else "" -%}
+{%- if type == "lorem" -%}
+<p{{ classAttr | safe }} data-placeholder="lorem">{{ body or "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." }}</p>
+{%- elif type == "tba" -%}
+<span{{ classAttr | safe }} data-placeholder="tba">{% if body %}{{ body }} {% endif %}TBA</span>
+{%- elif type == "unbuilt" -%}
+<div{{ classAttr | safe }} data-placeholder="unbuilt" role="note"><strong>Not developed yet:</strong> {{ body }}</div>
+{%- else -%}
+{{ ('placeholder: unknown type "' + type + '" (use lorem, tba or unbuilt)') | fail }}
+{%- endif -%}
+{%- endmacro -%}

@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fostering Research Synergies</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="navbar.js"></script>
-</head>
-<body>
-
+---
+layout: page.njk
+title: Fostering Research Synergies
+permalink: /index.html
+stylesheets:
+  - /styles.css
+---
+{% from "placeholder.njk" import placeholder %}
     <header class="hero">
         <div class="container">
             <h2>Welcome to Our Research Community</h2>
@@ -47,18 +44,9 @@
             <!-- TODO(team): annuncio dell'edizione di Parma 2026 (date, sede, call). -->
             <div class="news-item">
                 <h4>Fostering Research Synergies - Parma 2026</h4>
-                <p class="date"><span data-placeholder="tba">Dates TBA</span></p>
-                <p data-placeholder="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p class="date">{{ placeholder("tba", "Dates") }}</p>
+                {{ placeholder("lorem", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.") }}
             </div>
         </div>
-        
-    </section>
 
-    
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Fostering Research Synergies. All rights reserved.</p>
-        </div>
-    </footer>
-</body>
-</html>
+    </section>

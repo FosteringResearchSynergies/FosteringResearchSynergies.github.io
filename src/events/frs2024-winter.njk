@@ -1,13 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FRS2024 - Fostering Research Synergies v2.0</title>
-    <link rel="stylesheet" href="../styles.css">
-    <script src="../navbar.js"></script>
-</head>
-<body>
+---
+layout: page.njk
+title: FRS2024 - Fostering Research Synergies v2.0
+permalink: /events/frs2024-winter.html
+stylesheets:
+  - /styles.css
+footer:
+  copyright: "2024-2025 Fostering Research Synergies. Self-organized by young researchers, for young researchers."
+  note: "CREF Rome • IMT Lucca • CSH Vienna"
+---
 
     <header class="event-detail-header" style="background-image: url('../pictures/Centro_Ricerche_Enrico_Fermi.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative;">
         <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); z-index: 1;"></div>
@@ -396,13 +396,6 @@
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024-2025 Fostering Research Synergies. Self-organized by young researchers, for young researchers.</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">CREF Rome • IMT Lucca • CSH Vienna</p>
-        </div>
-    </footer>
-
     <script>
         function showDay(dayId) {
             const days = document.querySelectorAll('.program-day');
@@ -415,5 +408,3 @@
             event.target.classList.add('active');
         }
     </script>
-</body>
-</html>

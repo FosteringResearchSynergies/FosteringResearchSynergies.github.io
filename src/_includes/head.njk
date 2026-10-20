@@ -1,0 +1,9 @@
+{#- Page data: title (required); stylesheets (optional list of extra stylesheet URLs, loaded after
+    main.css: the pages ported from the old static site use /styles.css). -#}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }}</title>
+<link rel="stylesheet" href="/assets/css/main.css">
+{%- for href in stylesheets %}
+<link rel="stylesheet" href="{{ href }}">
+{%- endfor %}

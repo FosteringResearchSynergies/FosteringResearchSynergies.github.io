@@ -1,0 +1,20 @@
+{
+  "name": "fostering-research-synergies",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website of the Fostering Research Synergies (FRS) workshop, built with Eleventy",
+  "type": "module",
+  "scripts": {
+    "build": "node -e \"require('node:fs').rmSync('_site', { recursive: true, force: true })\" && eleventy",
+    "dev": "eleventy --serve"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "3.1.7",
+    "html-validate": "9.7.1",
+    "js-yaml": "4.1.1",
+    "linkinator": "6.3.0"
+  }
+}

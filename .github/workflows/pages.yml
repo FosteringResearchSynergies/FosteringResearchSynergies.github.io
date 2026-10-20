@@ -1,0 +1,52 @@
+# Publishes the site: on every push to deploy (a merged release or rollback PR) it builds _site/ and
+# deploys it to GitHub Pages. Only _site/ goes online: README, CLAUDE.md, docs/ and .claude/ never do.
+# Unused until Pages is switched to "GitHub Actions" (docs/ROADMAP.md, Giorno 3): until then Pages
+# publishes the deploy branch itself ("Deploy from branch").
+name: pages
+
+on:
+  push:
+    branches: [deploy]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    # A manual run publishes deploy only, never another branch.
+    if: github.ref == 'refs/heads/deploy'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: npm ci
+        run: npm ci --no-audit --no-fund
+      - name: npm run build
+        run: npm run build
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

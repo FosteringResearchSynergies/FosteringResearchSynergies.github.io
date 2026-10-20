@@ -1,0 +1,24 @@
+{#- Site navigation, rendered in the HTML (it replaces navbar.js). An item is active on its own page
+    and, with "section", on every page under that path. -#}
+{%- set navItems = [
+    { label: "Home", href: "/index.html" },
+    { label: "Events", href: "/events.html", section: "/events/" },
+    { label: "About", href: "/about.html" },
+    { label: "Contact", href: "/contact.html" }
+] -%}
+{#- Eleventy gives /index.html as "/" -#}
+{%- set here = "/index.html" if page.url == "/" else page.url -%}
+<nav class="navbar">
+    <div class="container">
+        <div class="nav-brand">
+            <h1>Fostering Research Synergies</h1>
+        </div>
+        <ul class="nav-menu">
+            {%- for item in navItems %}
+            {%- set isCurrent = here == item.href %}
+            {%- set isActive = isCurrent or (item.section and here.startsWith(item.section)) %}
+            <li><a href="{{ item.href }}"{% if isActive %} class="active"{% endif %}{% if isCurrent %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+            {%- endfor %}
+        </ul>
+    </div>
+</nav>

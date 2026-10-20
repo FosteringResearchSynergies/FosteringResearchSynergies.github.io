@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events - Fostering Research Synergies</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="navbar.js"></script>
-</head>
-<body>
-
+---
+layout: page.njk
+title: Events - Fostering Research Synergies
+permalink: /events.html
+stylesheets:
+  - /styles.css
+---
+{% from "placeholder.njk" import placeholder %}
     <header class="hero">
         <div class="container">
             <h2>Our Events</h2>
@@ -28,14 +25,12 @@
                 <div class="event-header">
                     <div>
                         <h3 class="event-title">Fostering Research Synergies - Parma 2026</h3>
-                        <p class="event-date">📅 <span data-placeholder="tba">Dates TBA</span> | 📍 Parma</p>
+                        <p class="event-date">📅 {{ placeholder("tba", "Dates") }} | 📍 Parma</p>
                     </div>
                     <span class="event-badge badge-upcoming">Upcoming</span>
                 </div>
-                <p class="event-description" data-placeholder="lorem">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-                </p>
-                <div data-placeholder="unbuilt" role="note"><strong>Not developed yet:</strong> event page and registration.</div>
+                {{ placeholder("lorem", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.", "event-description") }}
+                {{ placeholder("unbuilt", "event page and registration.") }}
             </div>
 
             <div class="section-header" style="margin-top: 4rem;">
@@ -73,11 +68,3 @@
             </div>
         </div>
     </section>
-	
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Fostering Research Synergies. All rights reserved.</p>
-        </div>
-    </footer>
-</body>
-</html>
