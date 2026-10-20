@@ -8,7 +8,9 @@
 # With a package.json (Eleventy) or a Gemfile (Jekyll) it rebuilds _site/ from scratch and checks it;
 # otherwise it checks the raw files. The output never contains absolute paths or matched personal data;
 # PR bodies and CI summaries still carry only the exit code and the counts.
-# Needs bash >= 3.2 (macOS default is fine), node/npx, python3, Google Chrome or Chromium (or CHROME=path)
+# html-validate and linkinator are devDependencies pinned in package-lock.json: `npm ci` installs them
+# (this script runs it when node_modules is missing or older than the lockfile); nothing is downloaded on the fly.
+# Needs bash >= 3.2 (macOS default is fine), node/npm, python3, Google Chrome or Chromium (or CHROME=path)
 # and the usual POSIX tools.
 set -euo pipefail
 
@@ -38,7 +40,10 @@ if [[ -f package.json || -f Gemfile ]]; then
     echo "== Build"
     rm -rf "$ROOT/_site"   # generators do not clean their output: stale pages would be checked
     if [[ -f package.json ]]; then
-        [[ -d node_modules ]] || step npm ci --no-audit --no-fund
+        # npm ci records the installed tree in node_modules/.package-lock.json: reinstall if the lockfile is newer.
+        if [[ ! -f node_modules/.package-lock.json || package-lock.json -nt node_modules/.package-lock.json ]]; then
+            step npm ci --no-audit --no-fund
+        fi
         step npm run build
     else
         step bundle exec jekyll build --quiet
@@ -88,8 +93,15 @@ count() {
     (cd "$SITE" && grep -ohE -- "$re" "$@" || true) | wc -l | tr -d ' '
 }
 
+for tool in html-validate linkinator; do
+    if [[ ! -e "$ROOT/node_modules/.bin/$tool" ]]; then
+        echo "== Result: FAILED ($tool is not installed: it comes from package-lock.json, run npm ci)"
+        exit 1
+    fi
+done
+
 echo "== HTML validation (${#pages[@]} pages)"
-hv="$(cd "$SITE" && npx --yes html-validate@9.7.1 --formatter text "${pages[@]}" 2>&1)" || status=1
+hv="$(cd "$SITE" && npx --no-install html-validate --formatter text "${pages[@]}" 2>&1)" || status=1
 if [[ -n "$hv" ]]; then
     printf '%s\n' "$hv" | grep -v ': warning \[' | scrub | redact || true
     # Rules set to "warn" in .htmlvalidate.json for the legacy pages: summarised, not listed.
@@ -98,7 +110,7 @@ if [[ -n "$hv" ]]; then
 fi
 
 echo "== Internal links (every page)"
-(cd "$SITE" && npx --yes linkinator@6.3.0 "${pages[@]}" --server-root "$SITE" --recurse --verbosity error \
+(cd "$SITE" && npx --no-install linkinator "${pages[@]}" --server-root "$SITE" --recurse --verbosity error \
     --skip '^(?!http://localhost)https?://') 2>&1 | scrub | redact || status=1
 
 echo "== Fake links and form targets (\"#\", \"\", javascript:; pages and scripts)"
