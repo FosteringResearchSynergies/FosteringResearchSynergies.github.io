@@ -1,0 +1,21 @@
+/* Motif icons (docs/DESIGN.md): 3-node directed triads from the network-motif literature, used instead
+   of emoji. Files in src/assets/icons/, one inline SVG each, drawn with currentColor and marked
+   aria-hidden="true": the meaning is always given by text next to the icon (legend, slot title).
+     motif-ffl.svg       feed-forward loop (X→Y, X→Z, Y→Z)   keynote
+     motif-chain.svg     chain (X→Y→Z)                       talk session, talk
+     motif-cycle.svg     3-cycle (X→Y→Z→X)                   group games
+     motif-complete.svg  complete triad (all pairs linked)   social dinner
+   Insert the file content inline (not as <img>), so that the icon takes the text colour. */
+
+.motif {
+    display: inline-block;
+    flex: none;
+    width: 1.25em;
+    height: 1.25em;
+    vertical-align: -0.25em;
+}
+
+.motif--large {
+    width: 2.5em;
+    height: 2.5em;
+}
