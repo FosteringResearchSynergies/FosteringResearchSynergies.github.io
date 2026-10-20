@@ -1,0 +1,188 @@
+# Program of FRS 2025 · Lucca, copied from src/events/lucca.njk. Keys: see _example.yml.
+# Keynote talk titles and the talk lists of the sessions are not on the page: they stay out
+# (docs/ROADMAP.md, domanda 12; docs/AUDIT.md, critic-13).
+days:
+  - date: "2025-12-18"
+    title: null
+    slots:
+      - start: "09:30"
+        end: "10:00"
+        type: other
+        title: "Registration"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "10:00"
+        end: "10:30"
+        type: other
+        title: "Opening Remarks and Welcome"
+        theme: null
+        speakers: []
+        talks: []
+        note: "Organizing Committee"
+      - start: "10:30"
+        end: "11:00"
+        type: keynote
+        title: "Keynote Presentation"
+        theme: null
+        speakers:
+          - name: "Pietro Saggese"
+            affiliation: null
+        talks: []
+        note: null
+      - start: "11:00"
+        end: "11:30"
+        type: break
+        title: "Coffee Break"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "11:30"
+        end: "13:00"
+        type: session
+        title: "Session 1"
+        theme: "Network Theory and Structure"
+        speakers: []
+        talks: []
+        note: null
+      - start: "13:00"
+        end: "14:30"
+        type: break
+        title: "Lunch Break"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "14:30"
+        end: "16:00"
+        type: session
+        title: "Session 2"
+        theme: "Network Dynamics and Synchronization"
+        speakers: []
+        talks: []
+        note: null
+      - start: "16:00"
+        end: "16:30"
+        type: break
+        title: "Coffee Break"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "16:30"
+        end: "18:00"
+        type: other
+        title: "Group Games"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "19:00"
+        end: "00:00"
+        type: social
+        title: "Aperitivo, Dinner and Drinks in Lucca"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+
+  - date: "2025-12-19"
+    title: null
+    slots:
+      - start: "10:00"
+        end: "11:00"
+        type: session
+        title: "Session 3"
+        theme: "Innovation, Evolution and Statistical Laws"
+        speakers: []
+        talks: []
+        note: null
+      - start: "11:00"
+        end: "11:30"
+        type: break
+        title: "Coffee Break"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "11:30"
+        end: "13:00"
+        type: session
+        title: "Session 4"
+        theme: "Socio-Economics and Urban Systems"
+        speakers: []
+        talks: []
+        note: null
+      - start: "13:00"
+        end: "14:30"
+        type: break
+        title: "Lunch Break"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "14:30"
+        end: "15:00"
+        type: keynote
+        title: "Keynote Presentation"
+        theme: null
+        speakers:
+          - name: "Giacomo Livan"
+            affiliation: null
+        talks: []
+        note: null
+      - start: "15:00"
+        end: "16:00"
+        type: session
+        title: "Session 5"
+        theme: "Real and Simulated Societies"
+        speakers: []
+        talks: []
+        note: null
+      - start: "16:00"
+        end: "16:30"
+        type: break
+        title: "Coffee Break"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "16:30"
+        end: "17:30"
+        type: other
+        title: "Group Games"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "20:00"
+        end: null
+        type: social
+        title: "Conference Dinner"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+
+  # TODO(team): verificare cosa si è fatto sabato 20 dicembre (voci rimaste dal template, docs/AUDIT.md, content-48).
+  - date: "2025-12-20"
+    title: null
+    slots:
+      - start: "11:00"
+        end: "13:00"
+        type: other
+        title: "Group Activity"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "13:00"
+        end: "16:00"
+        type: social
+        title: "Lunch & Farewell"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
