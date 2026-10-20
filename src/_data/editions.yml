@@ -1,0 +1,40 @@
+# FRS editions: the only place for name, dates, place and status of each edition (CLAUDE.md: every
+# repeated fact in one data file). Templates read it as `editions`, a list in chronological order
+# (oldest first). Keys are set by the frontend; values come from the team or from the repository only.
+# Unknown value: null. Templates show null as a TBA placeholder or hide the section; never guess.
+#
+# Replace [] with the entries. The commented entry below lists every key.
+[]
+
+# - slug: null                    # URL /editions/<slug>/: "<year>-<city>" in lower case; the city alone
+#                                 # while the year is unknown
+#   name: null                    # only if the label differs from "FRS <year> · <City>"
+#   version: null                 # the team's version tag (the "v2.0" style), null if none
+#   year: null                    # four digits
+#   city: null
+#   status: upcoming              # upcoming | past
+#   dates:
+#     start: null                 # "YYYY-MM-DD", quoted
+#     end: null                   # "YYYY-MM-DD", quoted; same as start for a one-day edition
+#   host: null                    # host institution(s), as the team writes them
+#   venue:
+#     name: null                  # building and room
+#     address: null               # address of the venue (never a private address)
+#   participants: null            # number given by the team; null if unknown
+#   summary: null                 # one or two sentences for cards and timeline; null = lorem placeholder
+#   accent: null                  # edition colour, a custom property of the design system (docs/DESIGN.md)
+#   program: null                 # file in src/_data/programs/ without ".yml"; null = "Program TBA"
+#   milestones: []                # key dates in order; the state is set by hand (no build-time "today")
+#   # - label: null               # e.g. abstract deadline, registration deadline
+#   #   date: null                # "YYYY-MM-DD", quoted; null = TBA
+#   #   state: upcoming           # upcoming | open | closed
+#   links:                        # real URLs only: without a URL there is no button
+#     call: null
+#     registration: null
+#   funding: null                 # mandatory funding acknowledgement, or null if there is none:
+#   # funding:
+#   #   text: null                # wording required by the funder, verbatim
+#   #   image: null               # path of the logo strip under /assets/
+#   #   image_alt: null           # alt text naming the funders
+#   #   image_width: null         # pixels
+#   #   image_height: null
