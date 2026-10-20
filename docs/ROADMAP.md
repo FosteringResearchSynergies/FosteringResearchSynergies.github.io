@@ -19,7 +19,7 @@ all'utente prima di ogni push e di ogni PR.
 | # | Decisione | Raccomandazione | Alternativa |
 | --- | --- | --- | --- |
 | D1 | Generatore del sito | **Eleventy 3** (Nunjucks, dati in YAML), build e pubblicazione con GitHub Actions | Jekyll (build di GitHub Pages dal branch, oppure in Actions) |
-| D2 | Direzione visiva | **D3 "Motifs"** (`docs/DESIGN.md`) | D1 "Field Notes", D2 "Phase Space" |
+| D2 | Direzione visiva | **Swiss editorial** (decisa; Motifs scartata), vedi `docs/DESIGN.md` | Field Notes, Phase Space, Motifs: non adottate |
 | D3 | Dominio | **in atto**: canonico `fosteringresearchsynergies.github.io`; `frs-workshop.imtlucca.it` redirige lì dal repository `frs-workshop-redirect` | dominio IMT dismesso |
 | D4 | Chi approva le release `main` → `deploy` | una persona del team diversa da chi apre la PR | due persone a turno |
 | D5 | Lingua del sito | solo inglese | inglese e italiano (fuori dai 2-3 giorni) |
@@ -116,7 +116,7 @@ Fatto:
 
 Ancora aperto, tutto **[team]**:
 
-1. Decisioni D1, D2, D4 e D5 e, se possibile, risposte alle domande 1-3.
+1. Decisioni D1, D4 e D5 (D2 decisa il 20 ottobre 2026) e, se possibile, risposte alle domande 1-3.
 2. Merge della PR #4 (`fix/urgent-content` → `main`) con un merge commit, così `main` contiene `deploy`
    (`git merge-base --is-ancestor origin/deploy origin/main` deve riuscire).
 3. Facoltativo, protezione in più: email all'IT di IMT (bozza pronta, non inviata). Finché esiste il
@@ -168,14 +168,14 @@ Ancora aperto, tutto **[team]**:
 File toccati: `package.json`, `package-lock.json`, `eleventy.config.js`, `.gitignore`, `src/`,
 `scripts/check.sh`, `.github/workflows/`.
 
-**Pomeriggio, in parallelo, entrambi da `origin/feat/scaffold`** (task dipendente, skill `start-task`):
+**Pomeriggio** (task dipendenti, skill `start-task`): `content/data` da `origin/feat/scaffold`, `design/swiss` da `origin/content/data`:
 
 | Branch | Agente | Contenuto | File toccati |
 | --- | --- | --- | --- |
-| `design/tokens` | frontend-dev | design system D3: token, base, componenti (card, timeline, programma, banda fondi, placeholder), font ospitati nel sito, set minimo di icone a motivi in SVG; `main.css` importa anche i file vuoti `edition.css`, `archive.css` e `pages.css` per il Giorno 2 | `src/assets/css/`, `src/assets/fonts/`, `src/assets/icons/` |
+| `design/swiss` | frontend-dev | design system "Swiss editorial": token, base, layout, componenti (hero, banda della prossima edizione, lista delle edizioni, lista numerata, link con freccia, programma, banda fondi, placeholder), font Inter Tight e Inter ospitati nel sito; header, nav e footer nuovi; home generata dai dati come il prototipo approvato; pagine portate con gli stili nuovi, testi invariati; `main.css` importa anche i file vuoti `edition.css`, `archive.css` e `pages.css` per il Giorno 2 | `src/assets/css/`, `src/assets/fonts/`, `src/_includes/`, `src/index.njk`, `src/styles.css`, pagine portate (livelli dei titoli), `src/_data/site.yml`, chiave `accent` in `src/_data/editions.yml`, filtri in `eleventy.config.js` |
 | `content/data` | content-editor | solo valori, con le chiavi definite da `feat/scaffold`; dati estratti dalle pagine attuali: `site.yml`, `editions.yml` (tutte le edizioni, compresi v1.0 Lucca e v1.X Vienna; campi sconosciuti `null` = TBA), `programs/2024-rome.yml`, `programs/2025-lucca.yml`; elenco dei testi da tenere, eliminare o verificare | `src/_data/` |
 
-Ordine dei merge: `feat/scaffold`, poi `design/tokens` e `content/data`. Dal merge di `feat/scaffold`
+Ordine dei merge: `feat/scaffold`, poi `content/data`, poi `design/swiss`. Dal merge di `feat/scaffold`
 parte il freeze delle release e **[team]** aggiunge il check obbligatorio `release-source` su
 `deploy`. Verifica: `scripts/check.sh` passa sul sito portato, nessuna differenza
 di contenuto visibile.
