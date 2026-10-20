@@ -1,0 +1,8 @@
+# Build Jekyll di GitHub Pages ("Deploy from branch"), in uso finché il sito non passa al nuovo
+# generatore (docs/ROADMAP.md). Serve solo a non pubblicare i file interni del repository.
+exclude:
+  - CLAUDE.md
+  - CLAUDE.local.md
+  - README.md
+  - docs/
+  - scripts/

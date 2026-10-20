@@ -1,0 +1,16 @@
+# Claude Code: file personali e worktree locali, mai nel repository
+.claude/settings.local.json
+.claude/worktrees/
+CLAUDE.local.md
+
+# Build e dipendenze
+_site/
+.jekyll-cache/
+.sass-cache/
+node_modules/
+vendor/
+.bundle/
+
+# Sistema
+.DS_Store
+Thumbs.db

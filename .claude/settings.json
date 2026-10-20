@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(git status *)",
+      "Bash(git diff)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git show *)",
+      "Bash(git fetch *)",
+      "Bash(git worktree list *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(scripts/check.sh)",
+      "Bash(scripts/check.sh *)",
+      "Bash(scripts/preview.sh)",
+      "Bash(scripts/preview.sh *)",
+      "Bash(gh pr view *)",
+      "Bash(gh pr list *)",
+      "Bash(gh pr diff *)",
+      "Bash(gh pr checks *)",
+      "Bash(gh run list *)",
+      "Bash(gh run view *)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(git branch -D *)",
+      "Bash(git worktree remove *)",
+      "Bash(gh pr create *)",
+      "Bash(gh pr merge *)",
+      "Bash(gh pr comment *)",
+      "Bash(gh api *)",
+      "Bash(gh repo edit *)",
+      "Bash(gh release *)"
+    ],
+    "deny": [
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
+      "Bash(git push --mirror *)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "f=\"$CLAUDE_PROJECT_DIR/.claude/hooks/guard_protected_branches.py\"; if [ -f \"$f\" ]; then exec python3 \"$f\"; fi",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
