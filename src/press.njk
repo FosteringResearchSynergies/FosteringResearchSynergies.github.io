@@ -1,0 +1,28 @@
+---
+layout: base.njk
+title: In the press - Fostering Research Synergies
+permalink: /press/index.html
+---
+{#- What others published about FRS, from src/_data/press.yml: source, title as published, link. -#}
+<div class="page-head">
+    <div class="wrap">
+        <h1 class="page-title" id="page-title">In the press</h1>
+    </div>
+</div>
+
+<section class="section section-flush-top" aria-labelledby="page-title">
+    <div class="wrap">
+        <ul class="press-list">
+            {%- for item in press %}
+            {%- set words = item.title.split(" ") %}
+            <li>
+                <a class="arrow-link" href="{{ item.url }}">
+                    <span class="label arrow-link-kicker">{{ item.source }}</span>
+                    <span class="arrow-link-title">{{ words.slice(0, -1).join(" ") }} <span class="nowrap">{{ words | last }}&nbsp;<span class="arrow-link-arrow is-external" aria-hidden="true">↑</span></span></span>
+                    <span class="arrow-link-meta">{{ item.url.split("/")[2] }}</span>
+                </a>
+            </li>
+            {%- endfor %}
+        </ul>
+    </div>
+</section>
