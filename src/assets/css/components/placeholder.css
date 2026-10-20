@@ -1,0 +1,81 @@
+/* Honest placeholders (CLAUDE.md): generated only by the include placeholder.njk, counted by
+   scripts/check.sh. Each type has a visible text label, not only a colour.
+
+   tba      <span data-placeholder="tba">Dates <abbr title="To be announced">TBA</abbr></span>
+            Same type as a real value, in the display face. Hollow letters at large sizes (24px and more,
+            WCAG "large text"), filled below: a component opts in by being listed in the hollow rule
+            below, or with the class tba-hollow on the element that holds the value. The stroke takes the
+            text colour, so it keeps the contrast of real text on paper, on the blue field and on ink.
+   lorem    <p data-placeholder="lorem">Lorem ipsum ...</p>
+            Secondary colour, accent filet on the left, label "Placeholder text · " added here.
+   unbuilt  <div data-placeholder="unbuilt" role="note"><strong>Not developed yet:</strong> ...</div>
+            A box with a filet; the label in small capitals. */
+
+:root {
+    --tba-hollow-stroke: max(1.25px, 0.035em);
+}
+
+/* Inside the coloured surfaces the marks follow the text colour */
+.surface-accent,
+.surface-ink {
+    --placeholder-mark: currentColor;
+    --placeholder-text: var(--secondary-color);
+}
+
+/* ---------- tba ---------- */
+[data-placeholder="tba"] abbr {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    paint-order: stroke;
+}
+
+.next-band-fact dd,
+.edition-year,
+.tba-hollow {
+    --tba-fill: transparent;
+    --tba-stroke: var(--tba-hollow-stroke);
+}
+
+/* Only where the stroke is supported: elsewhere the letters stay filled, never invisible */
+@supports (-webkit-text-stroke: 1px) {
+    [data-placeholder="tba"] abbr {
+        -webkit-text-fill-color: var(--tba-fill, currentColor);
+        -webkit-text-stroke: var(--tba-stroke, 0) currentColor;
+    }
+}
+
+/* ---------- lorem ---------- */
+[data-placeholder="lorem"] {
+    max-width: var(--measure);
+    padding-left: var(--space-4);
+    border-left: var(--rule-strong) solid var(--placeholder-mark, var(--color-accent));
+    color: var(--placeholder-text, var(--color-ink-2));
+}
+
+[data-placeholder="lorem"]::before {
+    content: "Placeholder text · ";
+    color: var(--placeholder-mark, var(--color-accent));
+    font-family: var(--font-display);
+    font-size: var(--size-label);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* ---------- unbuilt ---------- */
+[data-placeholder="unbuilt"] {
+    max-width: var(--measure);
+    padding: var(--space-4) var(--space-5);
+    border: var(--rule) solid currentColor;
+}
+
+[data-placeholder="unbuilt"] > strong:first-child {
+    margin-right: var(--space-1);
+    color: var(--placeholder-mark, var(--color-accent));
+    font-family: var(--font-display);
+    font-size: var(--size-label);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
