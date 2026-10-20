@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
-# QA gate run before every PR: HTML validation, internal links, fake links and forms, personal data,
-# CNAME, plus a report of the honest placeholders still on the site.
+# QA gate run before every PR and before anything is published: HTML validation, internal links, fake
+# links and forms, personal data, CNAME, web and mobile checks in headless Chrome (scripts/viewports.mjs),
+# plus a report of the honest placeholders still on the site.
 #
 #   scripts/check.sh               # exit code 0 = OK; works from any directory
 #
 # With a package.json (Eleventy) or a Gemfile (Jekyll) it rebuilds _site/ from scratch and checks it;
 # otherwise it checks the raw files. The output never contains absolute paths or matched personal data;
 # PR bodies and CI summaries still carry only the exit code and the counts.
-# Needs bash >= 3.2 (macOS default is fine), node/npx and the usual POSIX tools.
+# Needs bash >= 3.2 (macOS default is fine), node/npx, python3, Google Chrome or Chromium (or CHROME=path)
+# and the usual POSIX tools.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"   # physical path: tools print that one
@@ -162,6 +164,22 @@ if [[ -e "$SITE/CNAME" ]]; then
     status=1
 fi
 
+echo "== Web and mobile (headless Chrome at 320, 375, 768 and 1280 px)"
+SHOTS="$ROOT/_screenshots"
+rm -rf "$SHOTS"
+port="$(python3 -c 'import socket; s = socket.socket(); s.bind(("127.0.0.1", 0)); print(s.getsockname()[1])')"
+python3 -m http.server "$port" --bind 127.0.0.1 --directory "$SITE" >/dev/null 2>&1 &
+server=$!
+trap 'kill "$server" 2>/dev/null || true' EXIT
+for _ in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20; do
+    python3 -c 'import sys, urllib.request; urllib.request.urlopen(sys.argv[1], timeout=1)' \
+        "http://127.0.0.1:$port/" 2>/dev/null && break
+    sleep 0.25
+done
+node "$ROOT/scripts/viewports.mjs" "http://127.0.0.1:$port/" "$SHOTS" "${pages[@]}" 2>&1 | scrub | redact || status=1
+kill "$server" 2>/dev/null || true
+echo "  screenshots for review: _screenshots/<viewport>/ (not committed)"
+
 echo "== Placeholders still on the site (report only)"
 for kind in lorem tba unbuilt; do
     printf '  %-12s %s\n' "$kind" "$(count "data-placeholder=[\"']?$kind[\"' >]" "${pages[@]}")"
@@ -183,5 +201,18 @@ else
     printf '  %-12s %s\n' "stray lorem" 0
 fi
 
-if [[ $status -eq 0 ]]; then echo "== Result: OK"; else echo "== Result: FAILED"; fi
+if [[ $status -eq 0 ]]; then
+    echo "== Result: OK"
+    # Record what passed: commit and tree (same files = same site). The guard hook lets a PR into deploy,
+    # its merge or a Pages change through only for a recorded commit or tree; with uncommitted or
+    # untracked files nothing is recorded.
+    if sha="$(git -C "$ROOT" rev-parse --verify -q 'HEAD^{commit}' 2>/dev/null)" &&
+        tree="$(git -C "$ROOT" rev-parse --verify -q 'HEAD^{tree}' 2>/dev/null)" &&
+        common="$(cd "$ROOT" && cd "$(git rev-parse --git-common-dir)" && pwd -P)" &&
+        [[ -z "$(git -C "$ROOT" status --porcelain 2>/dev/null)" ]]; then
+        printf '%s %s %s\n' "$sha" "$tree" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$common/frs-check-passed" || true
+    fi
+else
+    echo "== Result: FAILED"
+fi
 exit $status

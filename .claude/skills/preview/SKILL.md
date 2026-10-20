@@ -1,6 +1,6 @@
 ---
 name: preview
-description: Avvia l'anteprima locale del sito ed esegue i controlli QA (HTML valido, link interni, finti link, form senza action, dati personali, conteggio dei placeholder). Usala per verificare ogni modifica prima di un commit o di una PR.
+description: Avvia l'anteprima locale del sito ed esegue i controlli QA (HTML valido, link interni, finti link, form senza action, dati personali, test web e mobile in Chrome headless, conteggio dei placeholder). Usala per verificare ogni modifica prima di un commit, di una PR o di una pubblicazione.
 ---
 
 # Anteprima e controlli
@@ -19,9 +19,18 @@ Lo script controlla il checkout in cui si trova, qualunque sia la cartella corre
 Con un `package.json` cancella `_site/`, esegue `npm run build` e controlla `_site/`; altrimenti
 controlla i file HTML così come sono. Fallisce su: errori HTML (`html-validate`), link interni rotti
 (`linkinator`, su tutte le pagine), link `href="#"`, vuoti o `javascript:`, `<form>` senza `action`,
-numeri di telefono (indica solo file:riga), un file `CNAME` nel sito pubblicato. Riporta senza
-fallire: quanti placeholder restano per tipo (`lorem`, `tba`, `unbuilt`), quanti `TODO(team)` e il
-"Lorem ipsum" fuori da `data-placeholder`.
+numeri di telefono (indica solo file:riga), un file `CNAME` nel sito pubblicato e sui **test web e
+mobile**: ogni pagina aperta in Chrome headless a 320, 375 e 768px (emulazione mobile, touch) e a
+1280px, con errore se ci sono errori JavaScript, richieste fallite verso il sito, scroll orizzontale
+(con gli elementi troppo larghi) o manca il meta viewport. Riporta senza fallire: quanti placeholder
+restano per tipo (`lorem`, `tba`, `unbuilt`), quanti `TODO(team)` e il "Lorem ipsum" fuori da
+`data-placeholder`.
+
+I test web e mobile aprono Chrome headless (profilo temporaneo, solo il server locale): dillo in una
+riga quando lanci `check.sh`. Servono `python3` e Chrome o Chromium (`CHROME=/percorso` se non è nel
+`PATH`). Gli screenshot a pagina intera finiscono in `_screenshots/<larghezza>/<pagina>.png` (ignorata
+da git, rigenerata a ogni esecuzione). Con exit 0 su un albero pulito `check.sh` registra il commit
+come testato: è la condizione che l'hook chiede per pubblicare (vedi `CLAUDE.md`).
 
 Le regole di `html-validate` che l'HTML attuale non rispetta sono in `warn` fino al Giorno 3 della
 ROADMAP: quegli avvisi sono preesistenti e non bloccano, ma non aggiungerne di nuovi nei file che tocchi.
@@ -40,12 +49,12 @@ processo che hai avviato.
 
 ## Controllo visivo minimo
 
-Per ogni pagina toccata, a 375px, 768px e 1280px di larghezza:
-- nessuno scroll orizzontale, testi leggibili, immagini non sgranate né deformate;
-- menu e programma usabili da tastiera (Tab, Invio), focus visibile;
+Per ogni pagina toccata guarda con Read gli screenshot di `_screenshots/` a 320, 375, 768 e 1280px:
+- testi leggibili e non tagliati, immagini non sgranate né deformate, nessun elemento sovrapposto;
 - placeholder riconoscibili a colpo d'occhio.
 
-Se puoi, fai uno screenshot per larghezza e descrivi nella PR cosa hai verificato.
+Nell'anteprima del browser verifica anche che menu e programma siano usabili da tastiera (Tab, Invio)
+con il focus visibile. Descrivi nella PR cosa hai verificato e a quali larghezze.
 
 ## Uso del browser
 
@@ -54,9 +63,10 @@ aprirlo scrivi in una riga a cosa ti serve e quali pagine/URL aprirai (per esemp
 "Apro Chrome headless per screenshot di index.html a 375, 768 e 1280px"). Alla fine dici cosa hai
 fatto e chiudi schede e processi che hai aperto.
 
-Chrome headless gira sempre con un profilo temporaneo, mai con quello dell'utente, e salva gli
-screenshot fuori dal repository. Il binario si prende da `CHROME` oppure dal `PATH`; su macOS imposta
-`CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"`.
+Chrome headless gira sempre con un profilo temporaneo, mai con quello dell'utente; gli screenshot
+fatti a mano vanno fuori dal repository (quelli di `check.sh` stanno in `_screenshots/`, ignorata da
+git). Il binario si prende da `CHROME` oppure dal `PATH`; su macOS `check.sh` lo trova da solo, per lo
+snippet qui sotto imposta `CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"`.
 
 ```bash
 CHROME="${CHROME:-$(command -v google-chrome || command -v chromium || command -v chromium-browser)}"

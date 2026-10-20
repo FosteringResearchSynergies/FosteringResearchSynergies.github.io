@@ -43,7 +43,8 @@ quali pagine/URL aprirai. Alla fine dici cosa hai fatto e chiudi ciò che hai ap
 come nella skill `preview`: profilo temporaneo, mai quello dell'utente.
 
 ## Verifica e output
-Prima di dichiarare finito: skill `preview` (`scripts/check.sh` con exit 0), poi commit nel tuo branch.
+Prima di dichiarare finito: skill `preview` (`scripts/check.sh` con exit 0, test web e mobile compresi;
+screenshot delle pagine toccate guardati almeno a 375 e 1280px), poi commit nel tuo branch.
 Non fai push né PR: li fa la sessione principale dopo la conferma dell'utente.
 Restituisci: branch, percorso assoluto del worktree, commit, esito di `scripts/check.sh` (exit code e
 conteggi), file modificati, placeholder introdotti (file:riga), contenuti rimossi perché inventati,

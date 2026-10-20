@@ -41,37 +41,60 @@ team non passa Pages a "GitHub Actions" (ROADMAP, Giorno 3): Pages pubblicherebb
 Eleventy invece del sito. Nel passaggio del Giorno 3 il team cambia `build_type` **prima** di aprire la
 release, quindi non ci sono eccezioni. Qualsiasi altra combinazione: fermati e chiedi al team.
 
-## 3. Controlli su `origin/main`
+## 3. Test web e mobile su `origin/main` (obbligatori)
 
-In un worktree temporaneo:
+Regola del team: niente va online se i test locali, web e mobile, non sono passati sul commit da
+pubblicare. Si testa `origin/main` così come è dopo il fetch del punto 1, in un worktree temporaneo e
+pulito. Prima di lanciarlo di' in una riga che `check.sh` apre Chrome headless sulle pagine del server
+locale.
 
 ```bash
 MAIN="$(dirname "$(git rev-parse --path-format=absolute --git-common-dir)")"
 git -C "$MAIN" worktree add --detach "$MAIN/.claude/worktrees/release-check" origin/main
 "$MAIN/.claude/worktrees/release-check/scripts/check.sh"; echo "check.sh exit: $?"
-git -C "$MAIN" worktree remove --force "$MAIN/.claude/worktrees/release-check"
 ```
 
 `check.sh` deve terminare con exit 0 (gli avvisi preesistenti di `html-validate` non bloccano). Se
-fallisce, non aprire la PR: riporta all'utente i problemi trovati.
+fallisce, non aprire la PR: riporta all'utente i problemi trovati. Con exit 0 registra il commit: senza
+quella registrazione l'hook rifiuta la PR e il merge verso `deploy`.
+
+Poi guarda con Read gli screenshot in `$MAIN/.claude/worktrees/release-check/_screenshots/`: tutte le
+pagine a `mobile-375` e `desktop-1280`, e a `mobile-320` e `tablet-768` quelle cambiate dalla release.
+Cerca testi tagliati o sovrapposti, immagini deformate, menu inutilizzabile, placeholder non
+riconoscibili. Se qualcosa non va, non aprire la PR e dillo all'utente. Alla fine:
+
+```bash
+MAIN="$(dirname "$(git rev-parse --path-format=absolute --git-common-dir)")"
+git -C "$MAIN" worktree remove --force "$MAIN/.claude/worktrees/release-check"
+```
 
 ## 4. PR di release
 
-Mostra all'utente l'elenco dei commit, l'esito dei controlli e il conteggio dei placeholder, poi chiedi
-conferma: la release cambia il sito pubblico. Solo dopo il suo sì:
+Mostra all'utente l'elenco dei commit, l'esito dei test, cosa hai visto negli screenshot e il conteggio
+dei placeholder, poi chiedi conferma: la release cambia il sito pubblico. Solo dopo il suo sì:
 
 ```bash
 gh pr create --base deploy --head main --title "Release $(date +%F)" --body-file <file fuori dal repository>
 ```
 
-Il body contiene l'elenco dei commit, la modalità di pubblicazione (`legacy` o `workflow`), l'exit
-code di `scripts/check.sh` e i conteggi dei placeholder: mai le righe trovate dai controlli.
+Il body contiene l'elenco dei commit, la modalità di pubblicazione (`legacy` o `workflow`), lo sha
+testato, l'exit code di `scripts/check.sh` (test web e mobile compresi), le larghezze di cui hai guardato
+gli screenshot e i conteggi dei placeholder: mai le righe trovate dai controlli.
+
+Se l'hook rifiuta la PR perché `origin/main` non risulta testato, nel frattempo `main` è cambiato:
+ricomincia dal punto 1.
 
 ## 5. Merge
 
 Il merge lo fa chi approva le release (decisione D4 della ROADMAP), dall'interfaccia di GitHub, con
 **Create a merge commit**. Mai squash o rebase: con il merge commit `main` resta un antenato di
 `deploy` e la release successiva non genera conflitti.
+
+Prima del merge il controllo `check` della PR deve essere verde e la testa della PR deve essere il
+commit testato al punto 3 (`gh pr view <numero> --json headRefOid --jq .headRefOid`). Se `main` è
+cambiato dopo l'apertura della PR, la testa è cambiata con lui: rifai il punto 3 su quel commit prima
+del merge. Se è un agente a unire (solo su richiesta esplicita dell'utente), l'hook rifiuta
+`gh pr merge` quando la testa non è testata.
 
 Aspetta che l'utente ti dica che la PR è unita.
 
@@ -92,6 +115,8 @@ di `origin/main`.
 Modalità `legacy`: la build più recente di Pages deve essere `built` sullo sha del merge commit
 (`building` o `queued`: riprova dopo un minuto). Se dopo qualche minuto non c'è nessuna build su quello
 sha, chiedi all'utente di avviarla: `gh api -X POST repos/FosteringResearchSynergies/FosteringResearchSynergies.github.io/pages/builds`.
+L'hook la accetta perché il merge commit ha gli stessi file del commit testato (dopo un
+`git fetch origin --prune`).
 
 ```bash
 gh api repos/FosteringResearchSynergies/FosteringResearchSynergies.github.io/pages/builds/latest --jq '.status + " " + .commit'
@@ -124,12 +149,13 @@ Ogni azione qui sotto è visibile all'esterno: chiedi conferma all'utente prima 
 - **Modalità `legacy` (Pages pubblica la root di `deploy`)**: si annulla il merge di release su
   `deploy` con una PR di revert. Branch `fix/revert-<slug>` da `origin/deploy` in un worktree (skill
   `start-task`, punto 2a, con `origin/deploy` come base), `git revert -m 1 <sha del merge di release>`,
-  PR verso `deploy` approvata come una release. La correzione vera va poi su `main` con un task
+  poi `scripts/check.sh` nel worktree del revert, pulito, e revisione degli screenshot come al punto 3,
+  push e PR verso `deploy` (`--head fix/revert-<slug>`) approvata come una release. La correzione vera va poi su `main` con un task
   normale; alla release successiva il punto 1 si ferma sul revert e la decisione passa al team.
 - **Con GitHub Actions**: se il deploy fallisce resta online la versione precedente e non c'è nulla
   da annullare: apri un task di fix su `main`. Se un deploy riuscito pubblica un sito sbagliato,
-  rilancia l'ultima run buona di `pages.yml` (`gh run rerun <id>`) oppure apri la PR di revert su
-  `deploy` come sopra. Al primo deploy con Actions non esiste una run precedente: PR di revert e
+  rilancia l'ultima run buona di `pages.yml` (`gh run rerun <id>`, dopo aver rifatto i test del punto 3
+  sul commit di quella run: l'hook lo verifica) oppure apri la PR di revert su `deploy` come sopra. Al primo deploy con Actions non esiste una run precedente: PR di revert e
   **[team]** ritorno di Pages a "Deploy from branch" su `deploy` (root).
 - Mai rimettere Pages su `main` (root) e mai riaggiungere il dominio custom a questo repository: il
   vecchio dominio appartiene al repository di redirect `frs-workshop-redirect`.

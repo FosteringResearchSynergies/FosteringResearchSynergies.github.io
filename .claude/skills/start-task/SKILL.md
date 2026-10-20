@@ -85,7 +85,8 @@ non è in `main`, la PR ne mostra anche i commit.
 - Commit piccoli e atomici, messaggio in inglese all'imperativo (`Add Parma 2026 key dates`).
   Come autore è preferibile l'indirizzo noreply di GitHub: se `git config user.email` è un indirizzo
   personale, segnalalo all'utente senza cambiarlo.
-- Prima di ogni commit: skill `preview` (`scripts/check.sh` e controllo visivo).
+- Prima di ogni commit: skill `preview` (`scripts/check.sh` con i test web e mobile, e controllo
+  visivo degli screenshot in `_screenshots/`).
 - Regole sui contenuti in `CLAUDE.md`: niente fatti inventati, placeholder onesti.
 
 ## 4. Push e Pull Request verso `main`
@@ -101,8 +102,9 @@ gh pr create --base main --head <tipo>/<slug> --title "<titolo>" --body-file <fi
 ```
 
 Il body della PR contiene: cosa cambia e perché, come verificarlo, l'esito di `scripts/check.sh`
-(solo exit code e conteggi, mai le righe trovate dai controlli), i placeholder introdotti e le
-domande aperte per il team.
+(solo exit code e conteggi, mai le righe trovate dai controlli; test web e mobile compresi), le
+larghezze di cui hai guardato gli screenshot, i placeholder introdotti e le domande aperte per il
+team. Il controllo `check` su GitHub ripete i test sulla PR.
 
 ## 5. Pulizia dopo il merge
 

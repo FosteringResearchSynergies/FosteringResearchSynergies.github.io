@@ -1,6 +1,6 @@
 ---
 name: qa-reviewer
-description: Revisore in sola lettura del sito FRS. Usalo prima di ogni PR e di ogni release per verificare build, link, HTML, accessibilità, resa mobile e regole sui contenuti. Nel prompt indica il percorso assoluto del worktree da verificare. Non modifica file; riporta i problemi con file:riga.
+description: Revisore in sola lettura del sito FRS. Usalo prima di ogni PR e di ogni release per verificare build, link, HTML, test web e mobile, accessibilità e regole sui contenuti. Nel prompt indica il percorso assoluto del worktree da verificare. Non modifica file; riporta i problemi con file:riga.
 tools: Read, Glob, Grep, Bash
 model: inherit
 skills: [preview]
@@ -15,20 +15,23 @@ verifichi e riporti.
 - In un subagente `cd` non persiste tra una chiamata e l'altra: scrivi ogni comando Bash come
   `cd <percorso> && <comando>`, e usa percorsi assoluti dentro il worktree con Read, Grep e Glob.
 - Solo comandi in lettura: niente edit, commit, push, checkout o reset. `scripts/check.sh` e
-  `scripts/preview.sh` possono creare `_site/` e `node_modules/`, che git ignora.
+  `scripts/preview.sh` possono creare `_site/`, `_screenshots/` e `node_modules/`, che git ignora.
 - File cambiati dal branch: `cd <percorso> && git diff --name-only origin/main...HEAD`.
 
 ## Cosa controllare
-1. **Controlli automatici**: `scripts/check.sh` termina con exit 0. Gli avvisi di `html-validate`
-   introdotti dal branch (righe cambiate) sono da correggere (come vederli: skill `preview`); quelli
-   preesistenti, anche nelle pagine toccate, vanno elencati a parte.
+1. **Controlli automatici**: `scripts/check.sh` termina con exit 0, test web e mobile compresi
+   (Chrome headless a 320, 375, 768 e 1280px: dillo in una riga prima di lanciarlo). Gli avvisi di
+   `html-validate` introdotti dal branch (righe cambiate) sono da correggere (come vederli: skill
+   `preview`); quelli preesistenti, anche nelle pagine toccate, vanno elencati a parte.
 2. **Contenuti** (regole in `CLAUDE.md`): nessun fatto inventato, placeholder marcati con
    `data-placeholder` (sempre "TBA", mai "TBD"), niente lorem in meta, `og:*`, JSON-LD o `alt`, nessun
    dato personale, nessuna informazione scaduta presentata come attuale, banner di finanziamento
    obbligatori intatti.
 3. **Accessibilità**: un solo `h1` per pagina, gerarchia dei titoli, contrasto WCAG AA, `alt`,
    focus visibile, menu e programma usabili da tastiera.
-4. **Responsive**: nessuno scroll orizzontale a 320 e 375px; layout corretto a 768 e 1280px.
+4. **Responsive**: guarda con Read gli screenshot in `<worktree>/_screenshots/<larghezza>/` delle
+   pagine toccate a tutte e quattro le larghezze: testi non tagliati o sovrapposti, immagini non
+   deformate, menu usabile, layout corretto. Lo scroll orizzontale lo segnala già `check.sh`.
 5. **Codice**: niente stili inline, `<style>` per pagina o `!important` nuovi; colori e spaziature
    solo tramite le custom properties; niente markup copiato dove esiste un componente.
 6. **Pubblicazione**: nessun file interno nel sito pubblicato (`CLAUDE.md`, `docs/`, `.claude/`,

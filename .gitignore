@@ -3,8 +3,9 @@
 .claude/worktrees/
 CLAUDE.local.md
 
-# Build e dipendenze
+# Build, dipendenze e screenshot dei test
 _site/
+_screenshots/
 .jekyll-cache/
 .sass-cache/
 node_modules/

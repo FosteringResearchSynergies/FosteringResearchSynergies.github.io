@@ -50,8 +50,9 @@ Alla fine dici cosa hai fatto e chiudi ciò che hai aperto. Chrome headless come
 profilo temporaneo, mai quello dell'utente.
 
 ## Verifica e output
-Prima di dichiarare finito: skill `preview` (`scripts/check.sh` con exit 0, nessun nuovo avviso nei
-file toccati, controllo visivo), poi commit nel tuo branch. Non fai push né PR: li fa la sessione
+Prima di dichiarare finito: skill `preview` (`scripts/check.sh` con exit 0, test web e mobile
+compresi, nessun nuovo avviso nei file toccati, screenshot di `_screenshots/` guardati a 320, 375, 768
+e 1280px), poi commit nel tuo branch. Non fai push né PR: li fa la sessione
 principale dopo la conferma dell'utente.
 Restituisci: branch, percorso assoluto del worktree, commit, esito di `scripts/check.sh` (exit code e
-conteggi), file toccati, decisioni prese, problemi preesistenti trovati e non corretti.
+conteggi), cosa hai visto negli screenshot, file toccati, decisioni prese, problemi preesistenti trovati e non corretti.

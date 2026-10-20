@@ -90,7 +90,7 @@ che genera anche l'etichetta visibile: niente markup scritto a mano.
 ## Verifica prima di ogni PR
 
 ```bash
-scripts/check.sh     # HTML, link, link e form finti, telefoni, CNAME, file interni; conta i placeholder. Exit 0 = OK
+scripts/check.sh     # HTML, link, link e form finti, telefoni, CNAME, file interni, test web e mobile; conta i placeholder. Exit 0 = OK
 scripts/preview.sh   # server che non termina: avvialo in background e fermalo alla fine
 ```
 
@@ -98,11 +98,29 @@ Nel body della PR e nei log riporta di `check.sh` solo exit code e conteggi, mai
 Un errore preesistente fuori dallo scopo del task non si corregge: si segnala nella PR. Il body della PR
 elenca cosa cambia, come verificarlo, i placeholder introdotti e le domande aperte per il team.
 
+## Prima di pubblicare: test web e mobile
+
+Regola del team: niente va online se i test locali, **web e mobile**, non sono passati sul commit che
+si pubblica. Pubblicare vuol dire: aprire o unire una PR verso `deploy` (release o revert), cambiare
+Pages, avviare un build o un deploy (`gh api .../pages`, `gh workflow run`, `gh run rerun` su `deploy`).
+
+- `scripts/check.sh` sul commit esatto da pubblicare, in un worktree pulito (skill `release`, punto 3).
+  Oltre a HTML e link apre ogni pagina in Chrome headless a 320, 375 e 768px (emulazione mobile) e a
+  1280px, e fallisce su errori JavaScript, risorse mancanti, scroll orizzontale o meta viewport assente.
+- Poi guarda gli screenshot in `_screenshots/<larghezza>/<pagina>.png` (almeno 375 e 1280px) e riporta
+  all'utente cosa hai visto: i test automatici non vedono testi sovrapposti o immagini deformate.
+- Se passa su un albero pulito, `check.sh` registra commit e albero in `<git common dir>/frs-check-passed`;
+  l'hook rifiuta PR, merge, build e deploy di un commit non registrato. Non scrivere in quel file.
+- Su GitHub il workflow `check` esegue gli stessi test su ogni PR verso `main` e `deploy`: una PR
+  verso `deploy` si unisce solo con `check` verde.
+
 ## Uso del browser
 
 Chrome (headless o Claude in Chrome) si può usare, ma **prima** scrivi in una riga a cosa serve e quali
 pagine aprirai; alla fine di' cosa hai fatto e chiudi schede e processi. Headless sempre con un profilo
 temporaneo (`--user-data-dir`), mai con quello dell'utente. Nessun login, nessun sito esterno superfluo.
+Vale anche per `scripts/check.sh`, che apre Chrome headless da solo (profilo temporaneo, solo le pagine
+del server locale, si chiude alla fine): dillo nella riga con cui annunci il controllo.
 
 ## Cosa non va mai nel repository
 

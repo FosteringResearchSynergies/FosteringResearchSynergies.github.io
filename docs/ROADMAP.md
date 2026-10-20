@@ -59,12 +59,18 @@ Bloccano i contenuti, non il lavoro tecnico: finché mancano, la pagina usa i pl
 
 ## Modello di pubblicazione
 
-- `main`: integrazione. Si entra solo con PR; dal merge di `feat/scaffold` deve passare il controllo
-  `check` (= `scripts/check.sh` in GitHub Actions).
+- `main`: integrazione. Si entra solo con PR, che devono passare il controllo `check` (=
+  `scripts/check.sh` in GitHub Actions, test web e mobile compresi; workflow `check.yml`).
 - `deploy`: ciò che è online. Si entra solo con una PR di release da `main` (skill `release`), o con una
   PR di revert per il rollback, unita con un merge commit (mai squash o rebase) e approvata da chi ha il
   ruolo D4. Dopo ogni release
   `git merge-base --is-ancestor origin/main origin/deploy` deve riuscire.
+- **Test prima di pubblicare** (regola del team): niente va online se i test locali, web e mobile
+  (`scripts/check.sh`: HTML, link, Chrome headless a 320, 375, 768 e 1280px), non sono passati sul
+  commit che si pubblica e se nessuno ha guardato gli screenshot. Vale per PR e merge verso `deploy`,
+  cambi di Pages, build e deploy. Per gli agenti lo impone l'hook (registro dei commit testati scritto
+  da `check.sh`), per tutti il controllo `check` sulle PR verso `deploy`.
+- Le modifiche unite in `main` non vanno online da sole: serve una release `main` → `deploy`.
 - Pubblicazione oggi: Pages in modalità "Deploy from branch" su `deploy` (root), con il build Jekyll di
   GitHub; `_config.yml` esclude i file interni. Dal Giorno 3: workflow `pages.yml` su push a `deploy`
   → build → upload di `_site/` → Pages (`build_type` = `workflow`).
@@ -104,7 +110,8 @@ Fatto:
   `frs-workshop.imtlucca.it` e manda ogni percorso su github.io. Il certificato HTTPS per il vecchio
   dominio è già emesso (scade a gennaio 2027 e GitHub lo rinnova da solo).
 - Branch `deploy` creato dall'hotfix (`388acb1`); Pages in modalità "Deploy from branch" su `deploy`
-  (root), senza dominio custom, con HTTPS obbligatorio.
+  (root), senza dominio custom, con HTTPS obbligatorio. HTTPS obbligatorio attivo anche su
+  `frs-workshop-redirect`.
 - Verifica: `https://fosteringresearchsynergies.github.io/` risponde 200 in HTTPS.
 
 Ancora aperto, tutto **[team]**:
@@ -112,26 +119,26 @@ Ancora aperto, tutto **[team]**:
 1. Decisioni D1, D2, D4 e D5 e, se possibile, risposte alle domande 1-3.
 2. Merge della PR #4 (`fix/urgent-content` → `main`) con un merge commit, così `main` contiene `deploy`
    (`git merge-base --is-ancestor origin/deploy origin/main` deve riuscire).
-3. Email all'IT di IMT (bozza pronta, non ancora inviata). Due richieste: il CNAME di
+3. Facoltativo, protezione in più: email all'IT di IMT (bozza pronta, non inviata). Finché esiste il
+   repository di redirect nessuno può prendersi il dominio; la verifica lo protegge anche se quel
+   repository sparisse. Due richieste: il CNAME di
    `frs-workshop.imtlucca.it` deve puntare a `fosteringresearchsynergies.github.io.` (oggi punta a
    `frs-workshop.github.io.`, che funziona ancora ma va sostituito); un record TXT
    `_github-pages-challenge-FosteringResearchSynergies.frs-workshop.imtlucca.it` con il valore che
    GitHub mostra nelle impostazioni dell'organizzazione (Pages → Add a domain). A DNS aggiornato:
    "Verify" nelle impostazioni dell'organizzazione (impedisce ad altri account GitHub di prendersi il
    dominio).
-   Indipendente dall'email: attivare "Enforce HTTPS" nelle impostazioni Pages di
-   `frs-workshop-redirect` (il certificato c'è già).
 4. Merge di questa PR (`chore/agentic-setup`, dopo la #4): regole per gli agenti, hook, script,
-   documenti. Poi, su ogni macchina che usa Claude Code, `git -C <checkout principale> pull --ff-only`
+   test web e mobile, workflow `check.yml`, documenti. Poi, su ogni macchina che usa Claude Code, `git -C <checkout principale> pull --ff-only`
    e riavvio di Claude Code dalla radice del checkout principale: impostazioni e hook si leggono da lì
-   all'avvio. Serve `python3` nel PATH. Lo stesso vale dopo ogni merge che cambia `.claude/`.
+   all'avvio. Servono `python3` e Chrome o Chromium. Lo stesso vale dopo ogni merge che cambia `.claude/`.
 5. Ruleset del repository e cancellazione automatica dei branch dopo il merge (`delete_branch_on_merge`):
    - `main`: PR obbligatoria (approvazioni: 0, oppure 1 se due persone del team possono rivedere);
-     niente force push né cancellazione; dal merge di `feat/scaffold`, check `check` obbligatorio.
+     niente force push né cancellazione; check `check` obbligatorio.
    - `deploy`: PR obbligatoria con 1 approvazione di una persona diversa dall'autore (le PR aperte da
      un agente risultano dell'utente che lo usa, quindi approva qualcun altro); merge consentito solo
-     con merge commit; niente force push né cancellazione; dal merge di `feat/scaffold`, check
-     obbligatorio `release-source`, un job di `check.yml` che sulle PR verso `deploy` fallisce se
+     con merge commit; niente force push né cancellazione; check `check` obbligatorio; dal merge di
+     `feat/scaffold`, anche `release-source`, un job di `check.yml` che sulle PR verso `deploy` fallisce se
      `github.head_ref` non è `main` (unica eccezione: i branch di rollback `fix/revert-<slug>`).
 6. Dopo la prima release `main` → `deploy`: togliere `main` dalle regole dell'environment
    `github-pages`, che oggi accetta `deploy` e `main`.
@@ -154,7 +161,8 @@ Ancora aperto, tutto **[team]**:
   cambiare porta in silenzio.
 - `html-validate` e `linkinator` come devDependencies, bloccati da `package-lock.json` alle versioni già
   fissate in `scripts/check.sh`, che da quel momento li chiama con `npx --no-install`.
-- Workflow `check.yml` (job `check` e `release-source`) e `pages.yml` (inattivo fino al Giorno 3).
+- In `check.yml` (già presente con il job `check`): `npm ci` prima di `scripts/check.sh` e il nuovo
+  job `release-source`. Workflow `pages.yml` (inattivo fino al Giorno 3).
 - Porting delle pagine attuali in `src/` senza cambiare testi né URL.
 
 File toccati: `package.json`, `package-lock.json`, `eleventy.config.js`, `.gitignore`, `src/`,
@@ -168,8 +176,8 @@ File toccati: `package.json`, `package-lock.json`, `eleventy.config.js`, `.gitig
 | `content/data` | content-editor | solo valori, con le chiavi definite da `feat/scaffold`; dati estratti dalle pagine attuali: `site.yml`, `editions.yml` (tutte le edizioni, compresi v1.0 Lucca e v1.X Vienna; campi sconosciuti `null` = TBA), `programs/2024-rome.yml`, `programs/2025-lucca.yml`; elenco dei testi da tenere, eliminare o verificare | `src/_data/` |
 
 Ordine dei merge: `feat/scaffold`, poi `design/tokens` e `content/data`. Dal merge di `feat/scaffold`
-parte il freeze delle release e **[team]** aggiunge i check obbligatori (`check` su `main`,
-`release-source` su `deploy`). Verifica: `scripts/check.sh` passa sul sito portato, nessuna differenza
+parte il freeze delle release e **[team]** aggiunge il check obbligatorio `release-source` su
+`deploy`. Verifica: `scripts/check.sh` passa sul sito portato, nessuna differenza
 di contenuto visibile.
 
 ## Giorno 2: pagine
@@ -210,7 +218,8 @@ Ogni branch passa da `qa-reviewer` prima della PR.
       oppure `gh api -X PUT repos/FosteringResearchSynergies/FosteringResearchSynergies.github.io/pages -f build_type=workflow`).
       Resta online la versione attuale: `deploy` non ha ancora `pages.yml`, quindi nulla viene
       ripubblicato fino al merge.
-   2. `scripts/check.sh` passa su `origin/main`; PR di release `main` → `deploy` aperta e approvata.
+   2. Test web e mobile (`scripts/check.sh`) passati su `origin/main` e screenshot rivisti (skill
+      `release`, punto 3); PR di release `main` → `deploy` aperta, con `check` verde, e approvata.
    3. Merge con merge commit; finisce il freeze.
    4. Verifica: il run di `pages.yml` per lo sha del merge (`gh run list --branch deploy --commit <sha>`,
       poi `gh run watch <id> --exit-status`); `curl -sI https://fosteringresearchsynergies.github.io/`
@@ -227,8 +236,8 @@ Ogni branch passa da `qa-reviewer` prima della PR.
 - Il sito live è su github.io in HTTPS e viene da `deploy` tramite `pages.yml`; i vecchi URL redirigono.
 - Nessun testo inventato, nessun dato personale, nessun form o link finto; ogni contenuto mancante è un
   placeholder visibile e contato da `scripts/check.sh`.
-- `scripts/check.sh` passa con tutte le regole HTML a `error`; nessuno scroll orizzontale a 320px;
-  contrasti AA.
+- `scripts/check.sh` passa con tutte le regole HTML a `error`, test web e mobile compresi (nessuno
+  scroll orizzontale a 320px); contrasti AA.
 - Ogni edizione, data e contatto sta in un solo file di dati.
 - Ruleset attivi su `main` e `deploy`; dominio IMT verificato nell'organizzazione.
 - `.claude/` contiene solo regole condivise; niente file locali nel repository.

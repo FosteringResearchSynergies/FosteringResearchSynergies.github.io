@@ -18,6 +18,18 @@ Rules (see CLAUDE.md and the skills start-task and release):
   treated as if it ran in the main checkout: read-only git, fetch, worktree add/remove, branch -d
   and merge --ff-only origin/main pass; anything else is refused with a request for a literal path.
 
+- Nothing goes live untested. Refused unless scripts/check.sh (HTML, links, web and mobile tests) passed
+  on the commit that would go live, or on one with exactly the same files:
+  - `gh pr create --base deploy` (release or revert PR): origin/<head>, head from --head or the
+    current branch;
+  - `gh pr merge` of a PR into deploy: the PR head (`--auto` refused);
+  - `gh run rerun` of a run on deploy: the run's commit;
+  - `gh workflow run` and `gh api` writes to this repository's /pages endpoints: origin/deploy.
+  PR and run details come from `gh pr view` / `gh run view`: no answer = refused. Moving a PR onto
+  deploy with `gh pr edit --base deploy` is always refused. check.sh appends "<commit> <tree> <time>"
+  to <git common dir>/frs-check-passed after a passing run on a clean tree. Local origin/* refs are
+  used, so fetch before testing (skill release does).
+
 Shell commands from the Bash and PowerShell tools are tokenized with shlex (quotes and heredoc
 bodies are respected) and the wrappers env, command, exec, nohup, time, eval and
 `sh|bash -c STRING` are followed.
@@ -66,6 +78,13 @@ POWERSHELLS = {"pwsh", "powershell"}
 HEREDOC = re.compile(r"(?<![<\\])<<(?!<)-?[ \t]*(['\"]?)([A-Za-z0-9_.-]+)\1")
 ASSIGNMENT = re.compile(r"[A-Za-z_][A-Za-z0-9_]*=.*", re.S)
 NOT_LITERAL = "the path is not literal: $VAR, backticks, cd - or popd"
+STAMP = "frs-check-passed"  # scripts/check.sh appends "<sha> <time>" here after a passing run
+GH_API_VALUE_OPTS = ("-X", "--method", "-H", "--header", "-f", "--raw-field", "-F", "--field", "--input",
+                     "-q", "--jq", "-t", "--template", "--hostname", "--cache", "-p", "--preview")
+GH_API_BODY_OPTS = ("-f", "--raw-field", "-F", "--field", "--input")
+GH_MERGE_VALUE_OPTS = ("-b", "--body", "-F", "--body-file", "-t", "--subject", "-R", "--repo",
+                       "-A", "--author-email", "--match-head-commit")
+GH_RERUN_VALUE_OPTS = ("-j", "--job", "-R", "--repo")
 
 
 # --------------------------------------------------------------------------------------------
@@ -321,7 +340,9 @@ def shell_string(words):
 
 
 def git_invocations(command, base, powershell=False, depth=0):
-    """Yield (directory, args) for each git command in a shell command line, following cd.
+    """Yield (directory, argv) for each git or gh command in a shell command line, following cd.
+
+    argv starts with "git" or "gh", followed by the subcommand and its arguments.
 
     `directory` is None when it cannot be known here ($VAR or backticks in cd / -C / env -C).
     """
@@ -374,6 +395,10 @@ def simple_command(words, base, powershell, depth):
     if name == "eval":
         yield from git_invocations(" ".join(words[1:]), here, powershell, depth + 1)
         return base
+    if name == "gh":
+        if len(words) > 1:
+            yield here, ["gh"] + words[1:]
+        return base
     if name != "git":
         return base
     if names & {"GIT_DIR", "GIT_WORK_TREE"}:
@@ -392,7 +417,7 @@ def simple_command(words, base, powershell, depth):
         else:
             args = args[1:]
     if args:
-        yield here, args
+        yield here, ["git"] + args
     return base
 
 
@@ -686,12 +711,120 @@ def check_git(directory, args):
     return f"'git {sub}' refused: the checkout on protected branch '{detail}' is read-only."
 
 
+def tested(ref):
+    """True if scripts/check.sh passed on the commit `ref` (a ref or a full sha) points to, or on a
+    commit with the same tree: a release merge commit has the files of the main it merges (see STAMP)."""
+    common = project_common_dir()
+    if common is None:
+        return True  # outside this project: nothing to enforce
+    sha = git(common, "rev-parse", "--verify", "--quiet", ref + "^{commit}")
+    tree = git(common, "rev-parse", "--verify", "--quiet", ref + "^{tree}")
+    if not sha or not tree:
+        return False
+    try:
+        with open(os.path.join(common, STAMP)) as stamps:
+            return any(line.split()[:1] == [sha] or line.split()[1:2] == [tree] for line in stamps)
+    except OSError:
+        return False
+
+
+def option_value(args, short, long):
+    """Value of an option written `-X v`, `-Xv`, `--long v` or `--long=v`; None if absent."""
+    for k, arg in enumerate(args):
+        if arg in (short, long):
+            return args[k + 1] if k + 1 < len(args) else ""
+        if arg.startswith(long + "="):
+            return arg[len(long) + 1:]
+        if not arg.startswith("--") and arg.startswith(short) and len(arg) > len(short):
+            return arg[len(short):]
+    return None
+
+
+def gh_fields(directory, command):
+    """Whitespace-separated output of a read-only gh command, or None if gh cannot answer."""
+    try:
+        out = subprocess.run(command, capture_output=True, text=True, check=True, timeout=7,
+                             cwd=directory if directory and os.path.isdir(directory) else None)
+    except (OSError, subprocess.SubprocessError):
+        return None
+    return out.stdout.split()
+
+
+def untested(what):
+    return (f"publishing refused: scripts/check.sh (HTML, links, web and mobile tests) has not passed on "
+            f"{what}. Fetch, run it on a clean checkout of that commit (skill release, step 3), then retry.")
+
+
+def check_gh(directory, args):
+    """Return a refusal message when a gh command publishes something untested, or None."""
+    repo = option_value(args[2:], "-R", "--repo")
+    repo_args = ["--repo", repo] if repo else []
+    if args[:2] == ["pr", "edit"]:
+        if short_branch(option_value(args, "-B", "--base") or "") == "deploy":
+            return ("'gh pr edit --base deploy' refused: only a release PR from main (skill release) or a "
+                    "revert PR goes into deploy, opened with gh pr create after the tests.")
+        return None
+    if args[:2] == ["pr", "create"]:
+        if short_branch(option_value(args, "-B", "--base") or "") != "deploy":
+            return None
+        head = option_value(args, "-H", "--head") or (current_branch(directory) if directory else "")
+        head = short_branch(head.split(":", 1)[-1])
+        if not head:
+            return "'gh pr create --base deploy' refused: cannot tell the head branch. Pass --head <branch>."
+        return None if tested("refs/remotes/origin/" + head) else untested(f"origin/{head}")
+    if args[:2] == ["pr", "merge"]:
+        _, positionals = split_args(args[2:], value_opts=GH_MERGE_VALUE_OPTS)
+        fields = gh_fields(directory, ["gh", "pr", "view"] + positionals[:1] + repo_args
+                           + ["--json", "baseRefName,headRefOid", "--jq", '.baseRefName + " " + .headRefOid'])
+        if not fields or len(fields) != 2:
+            return ("'gh pr merge' refused: cannot tell (via gh pr view) whether the PR goes into deploy, "
+                    "the live site. Check the PR with gh pr view, then retry.")
+        base, head = fields
+        if short_branch(base) != "deploy":
+            return None
+        if "--auto" in args:
+            return ("'gh pr merge --auto' into deploy refused: a later commit could go live untested. "
+                    "Test the PR head, then merge it directly.")
+        return None if tested(head) else untested(f"{head[:12]}, the head of this PR into deploy")
+    if args[:2] == ["run", "rerun"]:
+        _, positionals = split_args(args[2:], value_opts=GH_RERUN_VALUE_OPTS)
+        if not positionals:
+            return "'gh run rerun' refused without a run id: pass it, so the guard can check what it deploys."
+        fields = gh_fields(directory, ["gh", "run", "view", positionals[0]] + repo_args
+                           + ["--json", "headBranch,headSha", "--jq", '.headBranch + " " + .headSha'])
+        if not fields or len(fields) != 2:
+            return ("'gh run rerun' refused: cannot tell (via gh run view) whether the run deploys the live "
+                    "site. Check the run with gh run view, then retry.")
+        branch, sha = fields
+        if branch != "deploy":
+            return None
+        return None if tested(sha) else untested(f"{sha[:12]}, the commit of this run on deploy")
+    if args[:2] == ["workflow", "run"]:
+        return None if tested("refs/remotes/origin/deploy") else untested("origin/deploy")
+    if args[:1] == ["api"]:
+        options, positionals = split_args(args[1:], value_opts=GH_API_VALUE_OPTS)
+        method = (option_value(args, "-X", "--method") or "").upper()
+        if not method:
+            body = any(o in GH_API_BODY_OPTS or o.startswith(("--raw-field=", "--field=", "--input="))
+                       for o in options)
+            method = "POST" if body else "GET"
+        endpoint = positionals[0].lower() if positionals else ""
+        if method == "GET" or not re.search(r"(^|/)pages(/|$)", endpoint):
+            return None
+        ours = ("fosteringresearchsynergies.github.io" in endpoint
+                or ("{repo}" in endpoint and classify(directory)[0] != "outside"))
+        if not ours:
+            return None  # another repository (e.g. frs-workshop-redirect)
+        return None if tested("refs/remotes/origin/deploy") else untested("origin/deploy")
+    return None
+
+
 # --------------------------------------------------------------------------------------------
 # Entry points
 # --------------------------------------------------------------------------------------------
 
-def block(message):
-    print(f"[guard] {message}\n{HINT}", file=sys.stderr)
+def block(message, hint=True):
+    print(f"[guard] {message}" + (f"\n{HINT}" if hint else ""), file=sys.stderr)
     return 2
 
 
@@ -712,10 +845,15 @@ def check_edit(tool_input):
 
 def check_shell(tool_input, session_cwd, powershell):
     command = tool_input.get("command") or ""
-    for directory, args in git_invocations(command, session_cwd or os.getcwd(), powershell):
-        problem = check_git(directory, args)
-        if problem:
-            return block(problem)
+    for directory, argv in git_invocations(command, session_cwd or os.getcwd(), powershell):
+        if argv[0] == "gh":
+            problem = check_gh(directory, argv[1:])
+            if problem:
+                return block(problem, hint=False)
+        else:
+            problem = check_git(directory, argv[1:])
+            if problem:
+                return block(problem)
     return 0
 
 

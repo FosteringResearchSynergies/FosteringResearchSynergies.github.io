@@ -14,7 +14,8 @@ Sito: <https://fosteringresearchsynergies.github.io/> · Contatto: frscrefimt@gm
 | --- | --- |
 | `*.html`, `events/`, `pictures/`, `styles.css`, `navbar.js` | il sito attuale (HTML statico) |
 | `docs/` | piano (`ROADMAP.md`), inventario dei problemi (`AUDIT.md`), direzione visiva (`DESIGN.md`) |
-| `scripts/` | `check.sh` (controlli prima di ogni PR), `preview.sh` (anteprima locale) |
+| `scripts/` | `check.sh` (controlli e test web e mobile prima di ogni PR e di ogni pubblicazione), `viewports.mjs` (i test in Chrome, usato da `check.sh`), `preview.sh` (anteprima locale) |
+| `.github/workflows/` | `check.yml`: gli stessi controlli su ogni PR verso `main` e `deploy` |
 | `CLAUDE.md`, `.claude/` | regole condivise per gli agenti di Claude Code: agenti, skill, hook, permessi |
 
 I file interni (`README.md`, `CLAUDE.md`, `docs/`, `scripts/`, `.claude/`) non vengono pubblicati.
@@ -33,13 +34,18 @@ I file interni (`README.md`, `CLAUDE.md`, `docs/`, `scripts/`, `.claude/`) non v
 - `main`: integrazione. Si modifica solo tramite pull request.
 - `deploy`: ciò che è online. Ci si arriva solo con una PR di release da `main` (o, per un rollback, con
   una PR di revert), unita con un merge commit (niente squash o rebase).
+- Niente va online senza test: i test locali, web e mobile (`scripts/check.sh`), devono passare sul
+  commit da pubblicare, e una PR verso `deploy` si unisce solo con il controllo `check` verde.
+  Le modifiche unite in `main` non vanno online da sole: serve una release.
 - Un branch per ogni modifica (`content/...`, `fix/...`, `feat/...`, `design/...`, `docs/...`, `chore/...`).
 
 ## Modificare il sito
 
 1. Crea un branch (dall'interfaccia web: modifica il file e scegli "Create a new branch").
 2. Apri una pull request verso `main` e descrivi cosa cambia.
-3. Dopo il merge, chi gestisce le release apre la PR `main` → `deploy`.
+3. Su ogni PR il controllo `check` esegue i test (HTML, link, resa su telefono, tablet e computer);
+   gli screenshot di ogni pagina sono tra gli artifact della run.
+4. Dopo il merge, chi gestisce le release apre la PR `main` → `deploy`.
 
 Regole sui contenuti: niente informazioni inventate. Dove manca qualcosa si usa un placeholder visibile:
 lorem ipsum per i testi, `TBA` per date e altri dati, un box "Not developed yet" per le funzioni che
@@ -47,13 +53,17 @@ non esistono ancora. I dettagli sono in [`CLAUDE.md`](CLAUDE.md).
 
 ## Anteprima e controlli in locale
 
-Servono `bash`, `python3` e Node.js (per `npx`, che scarica `html-validate` e `linkinator`).
-Su Windows usa Git Bash, con `python3` nel PATH.
+Servono `bash`, `python3`, Node.js (per `npx`, che scarica `html-validate` e `linkinator`) e Google
+Chrome o Chromium (se non è nel PATH: `CHROME=/percorso/di/chrome`). Su Windows usa Git Bash, con
+`python3` nel PATH.
 
 ```bash
 scripts/preview.sh   # avvia un server locale e stampa l'URL (Ctrl+C per fermarlo)
-scripts/check.sh     # HTML valido, link interni, link finti, dati personali, placeholder rimasti
+scripts/check.sh     # HTML valido, link, link finti, dati personali, test web e mobile, placeholder rimasti
 ```
+
+`scripts/check.sh` apre ogni pagina in Chrome headless a 320, 375 e 768px (come su telefono e tablet) e a
+1280px, e salva gli screenshot in `_screenshots/` (non va nel repository): guardali prima di pubblicare.
 
 ## Lavorare con Claude Code
 
