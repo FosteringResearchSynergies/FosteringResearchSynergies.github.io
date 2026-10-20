@@ -1,0 +1,230 @@
+/* Layout: container, 12-column grid, coloured surfaces, header and navigation, sections with numbered
+   heads, footer. Class names are new on purpose: /styles.css (old pages, until Giorno 2) uses
+   .container, .hero, .content, .grid, .card, .navbar. */
+
+/* ---------- Container and grid ---------- */
+.wrap {
+    max-width: var(--max);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+}
+
+/* 12 columns from 64rem; children place themselves with grid-column */
+@media (min-width: 64rem) {
+    .grid-12 {
+        display: grid;
+        grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+        column-gap: var(--gap);
+    }
+}
+
+/* ---------- Surfaces: the blue field and the black footer ---------- */
+.surface-accent {
+    --focus-color: var(--color-on-accent);
+    --section-num-color: var(--color-on-accent);
+    --rule-color: var(--color-on-accent);
+    --rule-color-soft: var(--color-rule-on-accent);
+    --secondary-color: var(--color-on-accent-2);
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+}
+
+.surface-ink {
+    --focus-color: var(--color-on-ink);
+    --section-num-color: var(--color-on-ink);
+    --rule-color: var(--color-on-ink);
+    --rule-color-soft: var(--color-rule-on-ink);
+    --secondary-color: var(--color-on-ink-2);
+    background: var(--color-ink);
+    color: var(--color-on-ink);
+}
+
+.surface-accent a:hover,
+.surface-ink a:hover {
+    color: inherit;
+}
+
+/* ---------- Header and navigation ---------- */
+.site-header {
+    border-bottom: var(--rule) solid var(--color-rule);
+}
+
+.site-header-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: var(--gap);
+    row-gap: var(--space-3);
+    padding-block: var(--space-4-5);
+}
+
+.brand {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    font-family: var(--font-display);
+    text-decoration: none;
+}
+
+.brand:hover {
+    color: var(--color-ink);
+}
+
+.brand-mark {
+    font-size: var(--size-brand);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+}
+
+.brand-name {
+    padding-left: var(--space-3);
+    border-left: var(--rule) solid var(--color-rule);
+    font-size: var(--size-small);
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    line-height: 1;
+}
+
+.site-nav ul {
+    display: flex;
+    gap: var(--space-fluid-s);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.site-nav a {
+    display: inline-block;
+    padding-block: var(--space-1);
+    border-bottom: var(--rule-strong) solid transparent;
+    font-family: var(--font-display);
+    font-size: var(--size-ui);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.site-nav a:hover {
+    color: var(--color-ink);
+    border-bottom-color: var(--color-accent);
+}
+
+.site-nav a[aria-current] {
+    border-bottom-color: var(--color-ink);
+}
+
+@media (max-width: 47.99rem) {
+    .site-nav {
+        flex-basis: 100%;
+        padding-top: var(--space-3);
+        border-top: var(--rule) solid var(--color-rule-soft);
+    }
+
+    .site-nav ul {
+        justify-content: space-between;
+    }
+}
+
+/* ---------- Sections and numbered heads ---------- */
+.section {
+    padding-block: var(--section);
+}
+
+.section-flush-top {
+    padding-top: 0;
+}
+
+/* <div class="section-head"><span class="section-num" aria-hidden="true">02</span>
+   <h2 class="section-title">Editions</h2></div>; the number is optional */
+.section-head {
+    display: grid;
+    grid-template-columns: var(--num-column) minmax(0, 1fr);
+    align-items: baseline;
+    column-gap: var(--gap);
+    margin-bottom: var(--space-fluid-l);
+    padding-top: var(--space-3-5);
+    border-top: var(--rule) solid currentColor;
+}
+
+.section-num,
+.section-title {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 600;
+}
+
+.section-num {
+    color: var(--section-num-color, var(--color-accent));
+    letter-spacing: -0.01em;
+}
+
+.section-title {
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+}
+
+.section-title:only-child {
+    grid-column: 1 / -1;
+}
+
+@media (min-width: 64rem) {
+    .section-head {
+        grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+    }
+
+    .section-num {
+        grid-column: 1;
+    }
+
+    .section-title {
+        grid-column: 2 / -1;
+    }
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+    padding-top: var(--section);
+}
+
+.footer-email {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: var(--step-email);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1;
+    text-decoration-thickness: 0.04em;
+    text-underline-offset: 0.14em;
+    overflow-wrap: anywhere;
+}
+
+.footer-email:hover {
+    text-decoration-color: var(--color-accent);
+    text-decoration-thickness: 0.06em;
+}
+
+.footer-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-6);
+    margin-top: var(--space-fluid-3xl);
+    padding-block: var(--space-5) var(--space-7);
+    border-top: var(--rule) solid var(--rule-color-soft, var(--color-rule-soft));
+    color: var(--secondary-color, var(--color-ink-2));
+    font-size: var(--size-small);
+}
+
+.footer-text {
+    display: grid;
+    gap: var(--space-1);
+}
+
+.footer-mark {
+    color: var(--color-on-ink);
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
