@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Fostering Research Synergies</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="navbar.js"></script>
-</head>
-<body>
-
+---
+layout: page.njk
+title: Contact - Fostering Research Synergies
+permalink: /contact.html
+stylesheets:
+  - /styles.css
+---
+{% from "placeholder.njk" import placeholder %}
     <header class="hero">
         <div class="container">
             <h2>Get in Touch</h2>
@@ -35,16 +32,13 @@
 
                     <div style="margin-top: 2rem;">
                         <h4 style="color: #2c3e50; margin-bottom: 1rem;">📬 Mailing List</h4>
-                        <div data-placeholder="unbuilt" role="note"><strong>Not developed yet:</strong> mailing list.</div>
+                        {{ placeholder("unbuilt", "mailing list.") }}
                     </div>
                 </div>
 
                 <div>
                     <h3>Send Us a Message</h3>
-                    <div data-placeholder="unbuilt" role="note">
-                        <strong>Not developed yet:</strong> contact form. Please write to
-                        <a href="mailto:frscrefimt@gmail.com">frscrefimt@gmail.com</a>.
-                    </div>
+                    {% call placeholder("unbuilt") %}contact form. Please write to <a href="mailto:frscrefimt@gmail.com">frscrefimt@gmail.com</a>.{% endcall %}
                 </div>
             </div>
 
@@ -56,11 +50,3 @@
             </div>
         </div>
     </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Fostering Research Synergies. All rights reserved.</p>
-        </div>
-    </footer>
-</body>
-</html>

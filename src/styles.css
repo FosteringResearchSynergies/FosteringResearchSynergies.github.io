@@ -323,6 +323,12 @@ footer {
     margin-top: 3rem;
 }
 
+/* Second footer line (footer.note in the page data), until now an inline style of the Rome 2024 page */
+.footer-note {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
 /* Program Tabs */
 .program-tabs {
     display: flex;

@@ -1,0 +1,77 @@
+/* Page-specific styles of /events/lucca.html, moved unchanged from its <style> block.
+   They go away when the page moves to the edition layout (docs/ROADMAP.md, Giorno 2). */
+/* Mobile optimizations for Lucca event page */
+@media (max-width: 768px) {
+    .event-detail-header {
+        padding: 2rem 0 !important;
+    }
+
+    .event-detail-title {
+        font-size: 1.8rem !important;
+    }
+
+    .event-info {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+
+    .event-info-item {
+        font-size: 0.9rem;
+    }
+
+    /* Make grid stack vertically on mobile */
+    .content .grid[style*="grid-template-columns: 2fr 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Reorder sidebar boxes to appear after main content */
+    .content .grid > div:last-child {
+        order: 2;
+    }
+
+    .content .grid > div:first-child {
+        order: 1;
+    }
+
+    /* Better spacing for registration boxes on mobile */
+    .registration-box {
+        margin-top: 1.5rem !important;
+    }
+
+    /* Improve program tabs on mobile */
+    .program-tabs {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+
+    .tab-button {
+        width: 100%;
+        padding: 0.6rem 1rem !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* Better schedule items on mobile */
+    .schedule-item {
+        padding: 1rem !important;
+    }
+
+    .schedule-time {
+        font-size: 0.9rem;
+    }
+
+    .schedule-title {
+        font-size: 1rem !important;
+    }
+
+    /* Make acknowledgment text smaller on mobile */
+    .content p[style*="font-size: 0.85rem"] {
+        font-size: 0.75rem !important;
+        padding: 0 0.5rem;
+    }
+
+    /* Ensure banner scales properly */
+    .content img[alt="EFC Banner"] {
+        width: 100%;
+        height: auto;
+    }
+}
