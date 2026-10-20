@@ -1,1 +1,21 @@
-/* Entry point of the design system (docs/DESIGN.md), linked by every page: filled in by design/tokens. */
+/* Entry point of the design system (docs/DESIGN.md, D3 "Motifs"), linked by every page through the
+   `head` include. Order matters: tokens, then base, then components, then the page-level files,
+   so that each layer can override the one before it. */
+
+@import url("fonts.css");
+@import url("tokens.css");
+@import url("base.css");
+
+@import url("components/motif.css");
+@import url("components/chip.css");
+@import url("components/button.css");
+@import url("components/placeholder.css");
+@import url("components/edition-card.css");
+@import url("components/timeline.css");
+@import url("components/schedule.css");
+@import url("components/funding-band.css");
+
+/* Filled on Giorno 2 (docs/ROADMAP.md) by design/edition-layout, feat/archive and feat/core-pages. */
+@import url("edition.css");
+@import url("archive.css");
+@import url("pages.css");
