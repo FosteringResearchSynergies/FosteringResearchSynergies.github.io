@@ -1,0 +1,285 @@
+# Program of FRS 2024 · Rome (v2.0), copied from src/events/frs2024-winter.njk. Keys: see _example.yml.
+# Left out on purpose: the joke captions under the slots, the emoji and the day nicknames
+# (docs/AUDIT.md, content-62 and content-64). Session titles are in title case (all caps on the page).
+# TODO(team): verificare titoli e affiliazioni dei talk senior (docs/AUDIT.md, content-63).
+days:
+  - date: "2024-11-20"
+    title: null
+    slots:
+      - start: "09:15"
+        end: "09:30"
+        type: other
+        title: "Opening Session"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "09:30"
+        end: "10:00"
+        type: talk
+        title: "The Laplacian Renormalization Groups"
+        theme: null
+        speakers:
+          - name: "Andrea Gabrielli"
+            affiliation: "CREF"
+        talks: []
+        note: null
+      - start: "10:00"
+        end: "10:30"
+        type: talk
+        title: "Economic Complexity is moving forward"
+        theme: null
+        speakers:
+          - name: "Dario Mazzilli"
+            affiliation: "CREF"
+        talks: []
+        note: null
+      - start: "10:30"
+        end: "11:00"
+        type: talk
+        title: "Complexity and Urban Accessibility"
+        theme: null
+        speakers:
+          - name: "Matteo Bruno"
+            affiliation: "CREF"
+        talks: []
+        note: null
+      - start: "11:00"
+        end: "11:30"
+        type: break
+        title: "Coffee Break"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "11:30"
+        end: "13:00"
+        type: session
+        title: "Network Theory Session"
+        theme: null
+        speakers: []
+        talks:
+          - speaker: "Giulio Iannelli"
+            title: "Topological Symmetry Breaking in signed networks"
+          - speaker: "Lorenzo Grimaldi"
+            title: "Heat capacity and spectral dimension of networks"
+          - speaker: "Alessio Catanzaro"
+            title: "Renormalization as a reconstruction tool"
+          - speaker: "Francesca Giuffrida"
+            title: "E-values for Maximum Entropy Models"
+          - speaker: "Mattia Marzi"
+            title: "Solving non-linear Exponential Random Graphs"
+          - speaker: "Lorenzo Lucarini"
+            title: "Critical Properties of Small-World Networks"
+          - speaker: "Margherita Bertè"
+            title: "Fibration Symmetries with Higher-Order Interactions"
+        note: null
+      - start: "13:00"
+        end: "14:15"
+        type: break
+        title: "Lunch Break"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "14:15"
+        end: "15:45"
+        type: session
+        title: "Network Applications Session"
+        theme: null
+        speakers: []
+        talks:
+          - speaker: "Giovanni Palermo"
+            title: "Network topology effects on social circle polls"
+          - speaker: "Riccardo Basilone"
+            title: "Using road width to plan realistic protected lanes"
+          - speaker: "Emanuele Calò"
+            title: "Multidimensional Territorial Attractiveness"
+          - speaker: "Gabriele Poidomani"
+            title: "Renormalizing the human connectome"
+          - speaker: "Liber Dorizzi"
+            title: "Multi-Scale Structural Analysis of Ego Networks"
+          - speaker: "Francesca Santucci"
+            title: "Diffusion processes for edge classification"
+          - speaker: "Nicola Alborè"
+            title: "Multi resolution hierarchical reservoir computing"
+          - speaker: "Lavinia Rossi Mori"
+            title: "Unequal Cities and service accessibility"
+          - speaker: "Arianna Armanetti"
+            title: "Hide and seek with variables in psychometrics"
+          - speaker: "Federica Fanelli"
+            title: "Core-Periphery Structure through Urban Mobility"
+          - speaker: "Andrea Vismara"
+            title: "Climate change and migrations via ML"
+        note: null
+      - start: "15:45"
+        end: "16:15"
+        type: break
+        title: "Coffee Break"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "16:15"
+        end: "17:00"
+        type: other
+        title: "Complexity Quiz"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+
+  - date: "2024-11-21"
+    title: null
+    slots:
+      - start: "09:15"
+        end: "10:00"
+        type: other
+        title: "Opening Session - Day 2"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "10:00"
+        end: "10:30"
+        type: talk
+        title: "Maximum entropy null models and echo chambers"
+        theme: null
+        speakers:
+          - name: "Fabio Saracco"
+            affiliation: "CREF"
+        talks: []
+        note: null
+      - start: "10:30"
+        end: "11:00"
+        type: talk
+        title: "Fibration Symmetry-Breaking in Brain Networks"
+        theme: null
+        speakers:
+          - name: "Tommaso Gili"
+            affiliation: "IMT"
+        talks: []
+        note: null
+      - start: "11:00"
+        end: "11:30"
+        type: break
+        title: "Coffee Break"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "11:30"
+        end: "13:00"
+        type: session
+        title: "Economics Networks Session"
+        theme: null
+        speakers: []
+        talks:
+          - speaker: "Leonardo Ialongo"
+            title: "Challenges in network reconstruction for economic systems"
+          - speaker: "Giacomo Zelbi"
+            title: "Mitigating systemic risk in production networks"
+          - speaker: "Massimiliano Fessina"
+            title: "The trophic structure of products' I/O network"
+          - speaker: "Maddalena Mula"
+            title: "How product complexity explains firm growth"
+          - speaker: "Enrico Fenoaltea"
+            title: "Following the money: AI exposure across sectors"
+          - speaker: "Valeria Secchini"
+            title: "Incoherence between trade and corporate structures"
+          - speaker: "Matteo Straccamore"
+            title: "Geographic Proximity and Network Similarity"
+          - speaker: "Lorenzo Buffa"
+            title: "Optimal Transport to measure suboptimality"
+        note: null
+      - start: "13:00"
+        end: "14:15"
+        type: break
+        title: "Lunch Break"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "14:15"
+        end: "15:45"
+        type: session
+        title: "Social and Innovation Dynamics Session"
+        theme: null
+        speakers: []
+        talks:
+          - speaker: "Daniele Cirulli"
+            title: "Evolution of Reddit-Verse in Political Discourse"
+          - speaker: "Giordano De Marzo"
+            title: "Simulating LLMs Societies"
+          - speaker: "Gabriele Braghelli"
+            title: "Polya's urns, innovation & obsolescence"
+          - speaker: "Alessandro Bellina"
+            title: "Discovery processes: modelling and applications"
+          - speaker: "Filippo Santoro"
+            title: "Avalanches Size Statistics in Innovation Processes"
+          - speaker: "Gabriele Di Bona"
+            title: "Measuring Scientific Novelty in Research Outputs"
+        note: null
+      - start: "15:45"
+        end: "16:15"
+        type: break
+        title: "Coffee Break"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      # TODO(team): il panel aveva un tema o dei relatori? (docs/AUDIT.md, content-64)
+      - start: "16:15"
+        end: "17:00"
+        type: other
+        title: "Panel Discussion"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      # TODO(team): verificare l'orario; la pagina indica anche 20:45 (docs/AUDIT.md, critic-12).
+      - start: "21:00"
+        end: null
+        type: social
+        title: "Social Dinner at Osteria A Piedi Pari"
+        theme: null
+        speakers: []
+        talks: []
+        note: "San Lorenzo neighborhood"
+
+  - date: "2024-11-22"
+    title: null
+    slots:
+      - start: "09:30"
+        end: "10:00"
+        type: other
+        title: "Opening Session - Final Day"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      # TODO(team): la pagina dice anche che la visita al museo è stata rinviata (docs/AUDIT.md, content-66).
+      - start: "10:00"
+        end: "10:30"
+        type: other
+        title: "MUSEO CREF 1"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "10:30"
+        end: "11:00"
+        type: other
+        title: "MUSEO CREF 2"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "11:00"
+        end: "11:30"
+        type: other
+        title: "Closing Remarks"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
