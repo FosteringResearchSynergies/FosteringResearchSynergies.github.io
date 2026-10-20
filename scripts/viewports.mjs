@@ -61,6 +61,18 @@ function findChrome() {
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
+// True if `promise` resolves within `ms`, false if time runs out first. The timer is always cleared, so a
+// time limit never fires later in the run.
+async function within(promise, ms) {
+    let timer;
+    const expired = new Promise(resolve => { timer = setTimeout(() => resolve(false), ms); });
+    try {
+        return await Promise.race([promise.then(() => true), expired]);
+    } finally {
+        clearTimeout(timer);
+    }
+}
+
 // Minimal DevTools protocol client: JSON messages separated by NUL on fds 3 (in) and 4 (out).
 class Browser {
     constructor(binary) {
@@ -74,8 +86,18 @@ class Browser {
         this.next = 0;
         this.pending = new Map();
         this.listeners = new Set();
-        this.closed = new Promise(resolve => this.proc.on('exit', resolve));
-        this.proc.on('error', err => fail(`${binary}: ${err.message}`));
+        this.exited = false;
+        this.closed = new Promise(resolve => { this.proc.on('exit', resolve); this.proc.on('error', resolve); });
+        // Chrome gone (did not start, crashed, closed): every pending and later call fails with the reason.
+        const gone = err => {
+            this.exited = true;
+            for (const waiter of this.pending.values()) waiter.reject(err);
+            this.pending.clear();
+        };
+        this.proc.on('exit', code => gone(new Error(`${binary} exited (code ${code})`)));
+        this.proc.on('error', err => gone(new Error(`${binary}: ${err.message}`)));
+        this.proc.stdio[3].on('error', () => {}); // writing after Chrome exited: reported by 'exit'
+        this.proc.stdio[4].on('error', () => {});
         this.proc.stderr.resume();
         let buffer = '';
         this.proc.stdio[4].setEncoding('utf8');
@@ -97,15 +119,17 @@ class Browser {
     }
 
     send(method, params = {}, sessionId) {
+        if (this.exited) return Promise.reject(new Error('Chrome is not running'));
         const id = ++this.next;
+        const reply = new Promise((resolve, reject) => this.pending.set(id, { resolve, reject }));
         this.proc.stdio[3].write(JSON.stringify({ id, method, params, sessionId }) + '\0');
-        return new Promise((resolve, reject) => this.pending.set(id, { resolve, reject }));
+        return reply;
     }
 
     async close() {
-        try { await Promise.race([this.send('Browser.close'), sleep(3000)]); } catch { /* already gone */ }
+        try { await within(this.send('Browser.close'), 3000); } catch { /* already gone */ }
         if (this.proc.exitCode === null) this.proc.kill();
-        await Promise.race([this.closed, sleep(3000)]);
+        await within(this.closed, 3000);
         // Chrome helper processes can write a little after the main process exits: retry for a few seconds.
         for (let i = 0; i < 20 && existsSync(this.profile); i++) {
             try { rmSync(this.profile, { recursive: true, force: true }); } catch { /* still in use */ }
@@ -156,8 +180,7 @@ async function checkPage(browser, url, viewport, shotPath) {
             problems.push(`does not load (${nav.errorText})`);
             return problems;
         }
-        const timedOut = await Promise.race([load.then(() => false), sleep(LOAD_TIMEOUT_MS).then(() => true)]);
-        if (timedOut) problems.push(`load event not fired within ${LOAD_TIMEOUT_MS / 1000}s`);
+        if (!await within(load, LOAD_TIMEOUT_MS)) problems.push(`load event not fired within ${LOAD_TIMEOUT_MS / 1000}s`);
         await sleep(SETTLE_MS);
         const { result } = await page('Runtime.evaluate', { expression: MEASURE, returnByValue: true });
         const m = result.value;
@@ -189,8 +212,9 @@ async function main() {
     const browser = new Browser(binary);
     let failures = 0;
     try {
-        await Promise.race([browser.send('Browser.getVersion'),
-            sleep(20000).then(() => fail(`${binary} did not answer on the DevTools pipe`))]);
+        if (!await within(browser.send('Browser.getVersion'), 20000)) {
+            throw new Error(`${binary} did not answer on the DevTools pipe`);
+        }
         for (const viewport of VIEWPORTS) {
             let bad = 0;
             for (const pagePath of pages) {
