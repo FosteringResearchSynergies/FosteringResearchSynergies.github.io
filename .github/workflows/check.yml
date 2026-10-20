@@ -26,6 +26,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: npm ci
+        run: npm ci --no-audit --no-fund
       - name: scripts/check.sh
         run: scripts/check.sh
       - name: Screenshots
@@ -36,3 +38,33 @@ jobs:
           path: _screenshots/
           retention-days: 14
           if-no-files-found: ignore
+
+  # deploy takes only release PRs from main and rollback PRs from fix/revert-<slug> (docs/ROADMAP.md,
+  # "Modello di pubblicazione"), both from this repository. Required on deploy by the ruleset; on other
+  # PRs it passes without checking anything.
+  release-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Source branch of a PR into deploy
+        env:
+          BASE_REF: ${{ github.base_ref }}
+          HEAD_REF: ${{ github.head_ref }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          REPO: ${{ github.repository }}
+        run: |
+          if [[ "$BASE_REF" != deploy ]]; then
+            echo "Not a pull request into deploy: nothing to check."
+            exit 0
+          fi
+          if [[ "$HEAD_REPO" != "$REPO" ]]; then
+            echo "::error::Pull requests into deploy come only from branches of $REPO, not from $HEAD_REPO."
+            exit 1
+          fi
+          case "$HEAD_REF" in
+            main | fix/revert-?*)
+              echo "Pull request into deploy from $HEAD_REF: allowed." ;;
+            *)
+              echo "::error::Pull requests into deploy come only from main (release) or fix/revert-<slug> (rollback), not from $HEAD_REF."
+              exit 1 ;;
+          esac
