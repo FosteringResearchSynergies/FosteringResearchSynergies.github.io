@@ -1,0 +1,111 @@
+---
+layout: base.njk
+eleventyComputed:
+  footer:
+    # The footer closes the numbering of the sections: About 01, Program 02 when shown (same condition
+    # as showProgram below), then Contact.
+    number: "{{ '03' if (edition.program or edition.status == 'upcoming') else '02' }}"
+---
+{#- Page of one edition: its entry of src/_data/editions.yml, passed as "edition" by the template
+    src/editions/edition.njk, and its program in src/_data/programs/. Styles: src/assets/css/edition.css.
+    Always shown: the head (status, version, the label as a poster: name or "FRS <year>", then the city
+    across the page) with the dates (TBA while unknown), and About (the summary, or a lorem placeholder
+    until the team writes it). Shown when there are data: host, venue and participants in the head; the
+    program ("Program TBA" for the next edition until it exists); the funding band, which carries the
+    funder's wording and logos unchanged. The next edition stands on the blue field, past ones on paper. -#}
+{%- from "placeholder.njk" import placeholder -%}
+{%- from "section-head.njk" import sectionHead -%}
+{%- from "program.njk" import programDays -%}
+{%- if not edition.slug %}{{ "edition: an entry of editions.yml has no slug" | fail }}{% endif -%}
+{%- if not (edition.status in ["upcoming", "past"]) %}{{ ('edition "' + edition.slug + '": status must be upcoming or past') | fail }}{% endif -%}
+{%- set isNext = edition.status == "upcoming" -%}
+{%- set program = programs[edition.program] if edition.program else null -%}
+{%- if edition.program and not program %}{{ ('edition "' + edition.slug + '": no program "' + edition.program + '" in src/_data/programs/') | fail }}{% endif -%}
+{%- set showProgram = program or isNext -%}
+{%- set funding = edition.funding -%}
+{%- if funding and funding.image and not (funding.image_width and funding.image_height and funding.image_alt) %}{{ ('edition "' + edition.slug + '": the funding image needs image_width, image_height and image_alt') | fail }}{% endif -%}
+{%- set num = 0 %}
+<header class="edition-hero{% if isNext %} surface-accent{% endif %}">
+    <div class="wrap">
+        <p class="edition-hero-meta">
+            <span class="label">{{ "Next edition" if isNext else "Past edition" }}</span>
+            {%- if edition.version %}
+            <span class="edition-hero-version">{{ edition.version }}</span>
+            {%- endif %}
+        </p>
+        {#- The poster of the blue band of the home (next-edition.css), on paper for a past edition #}
+        <h1 class="next-band-poster edition-hero-title" id="page-title">
+            <span class="next-band-kicker">{% if edition.name %}{{ edition.name }}{% else %}{{ site.short_name }} {{ edition.year or placeholder("tba") }}{% endif %}</span>
+            <span class="next-band-city chars-{{ edition.city | fitChars }}">{{ edition.city or placeholder("tba") }}</span>
+        </h1>
+        <dl class="edition-facts">
+            <div class="edition-fact">
+                <dt class="label">Dates</dt>
+                <dd>{% if edition.dates.start %}{{ edition.dates.start | dateRange(edition.dates.end) }}{% else %}{{ placeholder("tba") }}{% endif %}</dd>
+            </div>
+            {%- if edition.host %}
+            <div class="edition-fact">
+                <dt class="label">Host</dt>
+                <dd>{{ edition.host }}</dd>
+            </div>
+            {%- endif %}
+            {%- if edition.venue.name or edition.venue.address %}
+            <div class="edition-fact is-wide">
+                <dt class="label">Venue</dt>
+                <dd>{{ edition.venue.name }}{% if edition.venue.address %} <span class="edition-fact-detail">{{ edition.venue.address }}</span>{% endif %}</dd>
+            </div>
+            {%- endif %}
+            {%- if edition.participants %}
+            <div class="edition-fact">
+                <dt class="label">Participants</dt>
+                <dd>{{ edition.participants }}</dd>
+            </div>
+            {%- endif %}
+        </dl>
+    </div>
+</header>
+{%- set num = num + 1 %}
+
+<section id="about" class="section" aria-labelledby="about-title">
+    <div class="wrap">
+        {{ sectionHead("About", "about-title", "0" ~ num) }}
+        <div class="edition-body">
+            {%- if edition.summary %}
+            <p class="edition-summary">{{ edition.summary }}</p>
+            {%- else %}
+            {{ placeholder("lorem", null, "edition-summary") }}
+            {%- endif %}
+        </div>
+    </div>
+</section>
+{%- if showProgram %}
+{%- set num = num + 1 %}
+
+<section id="program" class="section section-flush-top" aria-labelledby="program-title">
+    <div class="wrap">
+        {{ sectionHead("Program", "program-title", "0" ~ num) }}
+        <div class="edition-body">
+            {%- if program %}
+            {{ programDays(program) }}
+            {%- else %}
+            <p class="edition-program-tba">{{ placeholder("tba", "Program", "tba-hollow") }}</p>
+            {%- endif %}
+        </div>
+    </div>
+</section>
+{%- endif %}
+{#- Body of the template, if any (src/editions/edition.njk has none): before the funding band, which closes the page #}
+{{ content | safe }}
+{%- if funding %}
+
+<section class="funding-band" aria-label="Funding">
+    <div class="wrap">
+        {%- if funding.text %}
+        <p class="funding-band-text">{{ funding.text }}</p>
+        {%- endif %}
+        {%- if funding.image %}
+        <img class="funding-band-logos" src="{{ funding.image | replace(' ', '%20') }}" width="{{ funding.image_width }}" height="{{ funding.image_height }}" alt="{{ funding.image_alt }}" loading="lazy" decoding="async">
+        {%- endif %}
+    </div>
+</section>
+{%- endif %}

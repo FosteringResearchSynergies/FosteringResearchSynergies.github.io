@@ -1,0 +1,15 @@
+---
+layout: edition.njk
+pagination:
+  data: editions
+  size: 1
+  alias: edition
+  # every page in collections.all, so that each edition is in the sitemap (only the first one otherwise)
+  addAllPagesToCollections: true
+permalink: "/editions/{{ edition.slug }}/index.html"
+eleventyComputed:
+  title: "{{ edition | editionLabel(site.short_name) }} - {{ site.name }}"
+---
+{#- One page per entry of src/_data/editions.yml, at /editions/<slug>/: the sections are in the layout
+    "edition". No description: there is no text of the team for the editions yet, so the page has no
+    description tags (CLAUDE.md, metadata). -#}
