@@ -2,7 +2,9 @@
 layout: base.njk
 title: Fostering Research Synergies
 permalink: /index.html
+structured_data: true
 eleventyComputed:
+  description: "{{ site.description }}"
   footer:
     # The footer is the last numbered section of the home: 04, or 03 when no edition is upcoming.
     number: "{{ '04' if (editions | where('status', 'upcoming') | length) else '03' }}"
@@ -21,7 +23,7 @@ eleventyComputed:
             {%- endfor %}
         </h1>
         <div class="masthead-side">
-            <p class="masthead-lede">An informal association of PhD students and postdoctoral researchers fostering collaboration and knowledge exchange through workshops and conferences.</p>
+            <p class="masthead-lede">{{ site.description }}</p>
             {%- if next %}
             {%- set nextLabel = next.name or (site.short_name + (" " + next.year if next.year else "") + " · " + (next.city or "TBA")) %}
             {%- set labelWords = nextLabel.split(" ") %}
