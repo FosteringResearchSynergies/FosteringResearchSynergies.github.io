@@ -1,6 +1,7 @@
 # Program of FRS 2025 · Lucca, copied from src/events/lucca.njk. Keys: see _example.yml.
-# Keynote talk titles and the talk lists of the sessions are not on the page: they stay out
-# (docs/ROADMAP.md, domanda 12; docs/AUDIT.md, critic-13).
+# Keynote titles and affiliations from the team's email to participants of 10 December 2025.
+# The talk lists of the sessions are not on the page: they stay out (docs/ROADMAP.md, domanda 12;
+# docs/AUDIT.md, critic-13).
 days:
   - date: "2025-12-18"
     title: null
@@ -24,11 +25,11 @@ days:
       - start: "10:30"
         end: "11:00"
         type: keynote
-        title: "Keynote Presentation"
+        title: "The future of Cryptoassets: Beyond the Hype"
         theme: null
         speakers:
           - name: "Pietro Saggese"
-            affiliation: null
+            affiliation: "IMT Lucca"
         talks: []
         note: null
       - start: "11:00"
@@ -126,11 +127,11 @@ days:
       - start: "14:30"
         end: "15:00"
         type: keynote
-        title: "Keynote Presentation"
+        title: "A Complex Systems Perspective on Success in Academic Careers"
         theme: null
         speakers:
           - name: "Giacomo Livan"
-            affiliation: null
+            affiliation: "University of Pavia"
         talks: []
         note: null
       - start: "15:00"
