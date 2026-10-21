@@ -17,7 +17,6 @@ export default function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy("src/assets");
     eleventyConfig.addPassthroughCopy("src/pictures");
     eleventyConfig.addPassthroughCopy("src/styles.css");
-    eleventyConfig.addPassthroughCopy("src/events/*.css");
 
     // Stops the build with a message, for templates that receive invalid arguments:
     // {{ "what went wrong" | fail }}

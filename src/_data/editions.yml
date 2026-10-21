@@ -6,8 +6,9 @@
 # Replace [] with the entries. The commented entry below lists every key.
 # Sources: the pages in src/ (src/events.njk, src/events/frs2024-winter.njk, src/events/lucca.njk); versions,
 # month and year of v1.X Vienna, and the FRSummer edition in Lipari, from the organizer (20 October 2026);
-# the organizers' final report of v1.0 Lucca (PDF from the team, read on 21 October 2026); the team's emails
-# to participants (frscrefimt@gmail.com, read on 21 October 2026) for Rome 2024, Lipari 2025 and Lucca 2025.
+# the organizers' final report of v1.0 Lucca and their emails to participants of October and November 2023
+# (from the team, read on 21 October 2026); the team's emails to participants (frscrefimt@gmail.com, read on
+# 21 October 2026) for Rome 2024, Lipari 2025 and Lucca 2025.
 # TODO(team): verificare le versioni e il mese di v1.X Vienna (febbraio 2024), indicati a memoria; completare
 # giorni, sede ed ente ospitante di Vienna e sede ed ente ospitante di Lucca 2023 (docs/ROADMAP.md, domanda 6).
 - slug: "2023-lucca"
@@ -30,6 +31,9 @@
   # Introduction of the final report, without the workshop name and the expansion of IMT.
   summary: "The workshop took place over two days in Lucca, bringing together doctoral candidates from the Networks research unit at IMT and doctoral candidates from the Enrico Fermi Research Center in Rome. The workshop aimed to facilitate collaboration and knowledge exchange among the participants."
   program: "2023-lucca"
+  # Conclusion of the final report, verbatim.
+  report:
+    - "The IMT-CREF PhD Workshop successfully achieved its objective of fostering research synergies among doctoral candidates. The diverse format, combining talks, discussions, and social events, created an environment that favored collaboration and knowledge exchange. The workshop showcased the participants' individual research efforts and laid the groundwork for future collaborative initiatives between the Networks research unit at IMT and the Enrico Fermi Research Center."
   milestones: []
   links:
     call: null
@@ -53,6 +57,7 @@
   participants: null
   summary: null
   program: null
+  report: null
   milestones: []
   links:
     call: null
@@ -79,6 +84,7 @@
   # TODO(team): verificare. Testo di src/events.njk senza "50+" ed "epic" (docs/AUDIT.md, content-28).
   summary: "The second edition of FRS brought together young researchers from CREF, IMT Lucca, and CSH Vienna for three days of network theory, economic complexity, social dynamics, and informal scientific exchange. Features included 5 senior talks, 30+ presentations, a complexity quiz, and a social dinner in San Lorenzo."
   program: "2024-rome"
+  report: null
   milestones: []
   links:
     call: null
@@ -104,6 +110,7 @@
   participants: null
   summary: null
   program: null
+  report: null
   milestones: []
   links:
     call: null
@@ -130,6 +137,7 @@
   participants: null
   summary: null
   program: "2025-lucca"
+  report: null
   milestones: []
   links:
     call: null
@@ -161,6 +169,7 @@
   participants: null
   summary: null
   program: null
+  report: null
   milestones: []
   links:
     call: null
@@ -184,6 +193,8 @@
 #   participants: null            # number given by the team; null if unknown
 #   summary: null                 # one or two sentences for cards and timeline; null = lorem placeholder
 #   program: null                 # file in src/_data/programs/ without ".yml"; null = "Program TBA"
+#   report: null                  # final report of a past edition: list of paragraphs written by the
+#                                 # team, verbatim; null = no Report section
 #   milestones: []                # key dates in order; the state is set by hand (no build-time "today")
 #   # - label: null               # e.g. abstract deadline, registration deadline
 #   #   date: null                # "YYYY-MM-DD", quoted; null = TBA

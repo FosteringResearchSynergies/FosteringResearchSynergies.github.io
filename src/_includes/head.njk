@@ -2,12 +2,16 @@
     the page has no description tags, see CLAUDE.md); structured_data (optional, the home only: the site
     and the organization in JSON-LD, from site.yml); stylesheets (optional list of extra stylesheet URLs,
     loaded after main.css: the layout "page" adds /styles.css for the pages ported from the old static
-    site). The font of the titles is preloaded: the home title is set in it and is the largest element
+    site); redirect_to (optional, the layout "redirect": the new address of a page that moved). The font of the titles is preloaded: the home title is set in it and is the largest element
     of the page. -#}
-{%- set canonicalUrl = page.url | canonical(site.url) %}
+{%- set canonicalUrl = (redirect_to or page.url) | canonical(site.url) %}
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{ title }}</title>
+{%- if redirect_to %}
+<meta http-equiv="refresh" content="0; url={{ redirect_to }}">
+<meta name="robots" content="noindex">
+{%- endif %}
 {%- if description %}
 <meta name="description" content="{{ description }}">
 {%- endif %}
