@@ -54,7 +54,7 @@
     font-size: var(--step-city);
     font-weight: 700;
     line-height: 0.9;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.03em;   /* tighter and the r of Parma touches the m */
 }
 
 .edition-city {

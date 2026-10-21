@@ -40,7 +40,7 @@
     font-size: min(100cqi / (var(--chars, 5) * var(--letter-width)), var(--step-poster-max));
     font-weight: 700;
     line-height: 0.8;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.03em;   /* tighter and the r of Parma touches the m */
     overflow-wrap: anywhere;
 }
 

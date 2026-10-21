@@ -45,7 +45,7 @@
     --step-hero: clamp(3.5rem, 0.6rem + 17vw, 14.5rem);         /* the site name on the home */
     --step-hero-wide: min(13.4vw, 12.75rem);                    /* same, next to the side column */
     --step-poster-max: 30rem;                                   /* cap of the city on the blue field */
-    --letter-width: 0.548;            /* average advance of a letter of a city name, in em (see .chars-N) */
+    --letter-width: 0.568;            /* average advance of a letter of a city name, in em (see .chars-N) */
 
     /* Spacing: fixed steps on a 4px base, fluid steps for blocks and sections */
     --space-1: 0.25rem;
