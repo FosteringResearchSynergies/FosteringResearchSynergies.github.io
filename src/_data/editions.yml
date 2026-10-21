@@ -129,7 +129,7 @@
 
 - slug: "2025-lucca"
   name: null
-  version: null
+  version: "v3.0"
   year: 2025
   city: "Lucca"
   status: past
@@ -166,7 +166,7 @@
 
 - slug: "2026-parma"
   name: null
-  version: null
+  version: "v4.0"
   year: 2026
   city: "Parma"
   status: upcoming
