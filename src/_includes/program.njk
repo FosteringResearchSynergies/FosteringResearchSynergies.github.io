@@ -1,0 +1,59 @@
+{#-
+  Program of an edition, from a file of src/_data/programs/ (keys: see _example.yml), with the component
+  src/assets/css/components/program.css: one table per day, every day visible, an id for each day and
+  each slot ("day-2025-12-18", "day-2025-12-18-1130") so that both can be linked.
+
+    {% from "program.njk" import programDays %}
+    {{ programDays(programs[edition.program]) }}
+
+  Day headings are h3: the macro goes under the h2 of a Program section. Values are printed as
+  published; a missing time or title is a TBA placeholder. The type of a keynote is written out
+  ("Keynote"), not only shown by the colour.
+-#}
+{%- macro programDays(program) -%}
+{%- from "placeholder.njk" import placeholder -%}
+{%- for day in program.days %}
+{%- set dayId = "day-" ~ (day.date or loop.index) %}
+<section class="program-table-day" id="{{ dayId }}" aria-labelledby="{{ dayId }}-title">
+    <h3 class="program-table-heading" id="{{ dayId }}-title">{% if day.date %}<time datetime="{{ day.date }}">{{ day.date | dayDate }}</time>{% else %}Day {{ loop.index }}{% endif %}{% if day.title %} · {{ day.title }}{% endif %}</h3>
+    <table class="program-table">
+        <thead>
+            <tr><th scope="col">Time</th><th scope="col">Session</th></tr>
+        </thead>
+        <tbody>
+            {%- for slot in day.slots %}
+            {#- id from the start time; the position is added when there is no time or two slots start together #}
+            {%- set previous = day.slots[loop.index0 - 1] if loop.index0 > 0 else null %}
+            {%- set slotId = dayId ~ "-" ~ (slot.start | replace(":", "") if slot.start else "slot") %}
+            {%- if not slot.start or (previous and previous.start == slot.start) %}{% set slotId = slotId ~ "-" ~ loop.index %}{% endif %}
+            <tr id="{{ slotId }}" data-type="{{ slot.type or 'other' }}">
+                <th scope="row" class="program-table-time">{% if slot.start %}<time>{{ slot.start }}</time>{% if slot.end %}–<time>{{ slot.end }}</time>{% endif %}{% else %}{{ placeholder("tba") }}{% endif %}</th>
+                <td>
+                    {%- if slot.type == "keynote" %}
+                    <p class="label">Keynote</p>
+                    {%- endif %}
+                    <p class="program-table-title">{{ slot.title or placeholder("tba") }}</p>
+                    {%- if slot.theme %}
+                    <p class="program-table-theme">{{ slot.theme }}</p>
+                    {%- endif %}
+                    {%- for speaker in slot.speakers %}
+                    <p><span class="program-table-speaker">{{ speaker.name or placeholder("tba", "Speaker") }}</span>{% if speaker.affiliation %}, {{ speaker.affiliation }}{% endif %}</p>
+                    {%- endfor %}
+                    {%- if slot.talks and slot.talks.length %}
+                    <ol class="program-table-talks">
+                        {%- for talk in slot.talks %}
+                        <li>{% if talk.speaker %}<span class="program-table-speaker">{{ talk.speaker }}</span>{% if talk.title %} – {% endif %}{% endif %}{{ talk.title }}</li>
+                        {%- endfor %}
+                    </ol>
+                    {%- endif %}
+                    {%- if slot.note %}
+                    <p class="program-table-note">{{ slot.note }}</p>
+                    {%- endif %}
+                </td>
+            </tr>
+            {%- endfor %}
+        </tbody>
+    </table>
+</section>
+{%- endfor %}
+{%- endmacro -%}

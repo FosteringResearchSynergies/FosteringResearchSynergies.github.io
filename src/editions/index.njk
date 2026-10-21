@@ -1,0 +1,19 @@
+---
+layout: base.njk
+title: Editions - Fostering Research Synergies
+permalink: /editions/index.html
+---
+{#- Archive of the editions, from src/_data/editions.yml: the list of the home (include
+    edition-list.njk), each city a link to the page of its edition. -#}
+{%- from "edition-list.njk" import editionList -%}
+<div class="page-head">
+    <div class="wrap">
+        <h1 class="page-title" id="page-title">Editions</h1>
+    </div>
+</div>
+
+<section class="section section-flush-top" aria-labelledby="page-title">
+    <div class="wrap">
+        {{ editionList(editions, 2) }}
+    </div>
+</section>

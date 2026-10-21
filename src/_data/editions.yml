@@ -4,27 +4,32 @@
 # Unknown value: null. Templates show null as a TBA placeholder or hide the section; never guess.
 #
 # Replace [] with the entries. The commented entry below lists every key.
-# Sources: the pages in src/ (src/events.njk, src/events/frs2024-winter.njk, src/events/lucca.njk); month and
-# year of v1.0 Lucca and v1.X Vienna, and the FRSummer edition in Lipari, from the organizer (20 October 2026).
-# TODO(team): verificare i mesi di v1.0 Lucca (novembre 2023) e v1.X Vienna (febbraio 2024), indicati a memoria,
-# e completare giorni, sede ed ente ospitante delle due edizioni e di FRSummer 2025 (docs/ROADMAP.md, domanda 6).
+# Sources: the pages in src/ (src/events.njk, src/events/frs2024-winter.njk, src/events/lucca.njk); versions,
+# month and year of v1.X Vienna, and the FRSummer edition in Lipari, from the organizer (20 October 2026);
+# the organizers' final report of v1.0 Lucca (PDF from the team, read on 21 October 2026); the team's emails
+# to participants (frscrefimt@gmail.com, read on 21 October 2026) for Rome 2024, Lipari 2025 and Lucca 2025.
+# TODO(team): verificare le versioni e il mese di v1.X Vienna (febbraio 2024), indicati a memoria; completare
+# giorni, sede ed ente ospitante di Vienna e sede ed ente ospitante di Lucca 2023 (docs/ROADMAP.md, domanda 6).
 - slug: "2023-lucca"
+  # Final report: "Report on "Fostering Research Synergies: The IMT-CREF PhD Workshop"", two days in Lucca,
+  # Monday 13 and Tuesday 14 November. It does not name the venue or the host institution.
+  # TODO(team): usare "The IMT-CREF PhD Workshop" come nome dell'edizione?
   name: null
   version: "v1.0"
   year: 2023
   city: "Lucca"
   status: past
-  # TODO(team): mese indicativo, da confermare; giorni da aggiungere.
   dates:
-    start: "2023-11"
-    end: "2023-11"
+    start: "2023-11-13"
+    end: "2023-11-14"
   host: null
   venue:
     name: null
     address: null
   participants: null
-  summary: null
-  program: null
+  # Introduction of the final report, without the workshop name and the expansion of IMT.
+  summary: "The workshop took place over two days in Lucca, bringing together doctoral candidates from the Networks research unit at IMT and doctoral candidates from the Enrico Fermi Research Center in Rome. The workshop aimed to facilitate collaboration and knowledge exchange among the participants."
+  program: "2023-lucca"
   milestones: []
   links:
     call: null
@@ -65,9 +70,10 @@
     end: "2024-11-22"
   host: "CREF"
   venue:
-    name: "CREF, inside the Ministry of Interior"
-    # TODO(team): verificare. Sulla pagina è il punto d'incontro all'ingresso, non l'indirizzo di CREF.
-    address: "Piazza del Viminale 1, Rome"
+    # Team email of 12 November 2024: "the historical Palazzina di Via Panisperna, which is located inside
+    # the Ministry of Interior complex in Piazza del Viminale, 1 - 00184 Roma".
+    name: "CREF, Palazzina di Via Panisperna, inside the Ministry of the Interior complex"
+    address: "Piazza del Viminale 1, 00184 Rome"
   # TODO(team): verificare il numero di partecipanti (la pagina dice "50+ young researchers").
   participants: null
   # TODO(team): verificare. Testo di src/events.njk senza "50+" ed "epic" (docs/AUDIT.md, content-28).
@@ -85,13 +91,15 @@
   year: 2025
   city: "Lipari"
   status: past
-  # TODO(team): verificare nome e versione; aggiungere date, sede ed ente ospitante.
+  # Team email of 14 March 2025: an FRS joint workshop hosted by the Lipari School on Complex Systems "at the
+  # end of the conference week"; the school ran from 27 July to 2 August 2025 at the hotel "Giardino sul Mare".
+  # TODO(team): verificare nome e versione e indicare i giorni esatti del workshop FRS.
   dates:
-    start: null
-    end: null
-  host: null
+    start: "2025-07"
+    end: "2025-08"
+  host: "Lipari School on Complex Systems"
   venue:
-    name: null
+    name: "Hotel Giardino sul Mare"
     address: null
   participants: null
   summary: null
@@ -108,6 +116,9 @@
   year: 2025
   city: "Lucca"
   status: past
+  # TODO(team): le email ai partecipanti (30 ottobre, 25 novembre e 10 dicembre 2025) e la pagina di IMT
+  # danno il workshop il 18 e 19 dicembre, con check-out il 20; il programma del sito ha un'attività
+  # di gruppo e il pranzo il 20. Decidere se le date sono 18–19 o 18–20.
   dates:
     start: "2025-12-18"
     end: "2025-12-20"

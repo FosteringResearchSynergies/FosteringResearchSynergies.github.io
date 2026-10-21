@@ -1,6 +1,7 @@
 # Program of FRS 2025 · Lucca, copied from src/events/lucca.njk. Keys: see _example.yml.
-# Keynote talk titles and the talk lists of the sessions are not on the page: they stay out
-# (docs/ROADMAP.md, domanda 12; docs/AUDIT.md, critic-13).
+# Keynote titles and affiliations from the team's email to participants of 10 December 2025; talks of the
+# five sessions from its attachment "FRS_sessions_details.pdf" (read on 21 October 2026). Session times in
+# the attachment match the page.
 days:
   - date: "2025-12-18"
     title: null
@@ -24,11 +25,11 @@ days:
       - start: "10:30"
         end: "11:00"
         type: keynote
-        title: "Keynote Presentation"
+        title: "The future of Cryptoassets: Beyond the Hype"
         theme: null
         speakers:
           - name: "Pietro Saggese"
-            affiliation: null
+            affiliation: "IMT Lucca"
         talks: []
         note: null
       - start: "11:00"
@@ -45,7 +46,19 @@ days:
         title: "Session 1"
         theme: "Network Theory and Structure"
         speakers: []
-        talks: []
+        talks:
+          - speaker: "Anna Gallo"
+            title: "Beyond deterministic balance: A statistical approach for mesoscale detection in signed networks"
+          - speaker: "Margherita Bertè"
+            title: "Fibration Symmetries and Multi-Body Interactions"
+          - speaker: "Liber Dorizzi"
+            title: "A Multiscale Lens for Nested Structure in Networks"
+          - speaker: "Ottavia Falconi"
+            title: "Renormalization and Modularity in Bipartite Networks"
+          - speaker: "Francesca Santucci"
+            title: "Laplacian eigenmodes allow the categorization of edges in complex networks"
+          - speaker: "Mattia Marzi"
+            title: "A Bayesian approach to out-of-sample network reconstruction"
         note: null
       - start: "13:00"
         end: "14:30"
@@ -59,9 +72,22 @@ days:
         end: "16:00"
         type: session
         title: "Session 2"
+        # TODO(team): l'allegato chiama la sessione "Dynamics on Networks & Synchronization".
         theme: "Network Dynamics and Synchronization"
         speakers: []
-        talks: []
+        talks:
+          - speaker: "Luigi Palmieri"
+            title: "Decentralized Federated Learning on Complex Networks"
+          - speaker: "Federico Maria Quetti"
+            title: "Chimera games emerging from coevolutionary dynamics with endogenous feedback"
+          - speaker: "Matteo Nerini"
+            title: "Analog Computing with Linear Microwave Networks"
+          - speaker: "Alessio Baroni"
+            title: "Spectral embedding of sleep-stage dynamics from iEEG: extracting latent dynamics for reservoir computing models"
+          - speaker: "Teo Fantacci"
+            title: "From Spike Trains to Energy Potentials: A Langevin Framework for Decision-making Dynamics"
+          - speaker: "Alessandro Bellina"
+            title: "Fitness centrality"
         note: null
       - start: "16:00"
         end: "16:30"
@@ -97,7 +123,15 @@ days:
         title: "Session 3"
         theme: "Innovation, Evolution and Statistical Laws"
         speakers: []
-        talks: []
+        talks:
+          - speaker: "Gabriele Braghelli"
+            title: "Robin Hood Urn Model (RHUM): Stealing attention to explain obsolescence"
+          - speaker: "Filippo Santoro"
+            title: "Universalities in the Avalanche Dynamics of Novelties and Non-Novelties"
+          - speaker: "Pietro Zgaga"
+            title: "Neutrality and scale in tropical rainforests"
+          - speaker: "Arianna Armanetti"
+            title: "Beyond factor analysis: detecting population heterogeneity in psychometric data through mixture models"
         note: null
       - start: "11:00"
         end: "11:30"
@@ -111,9 +145,22 @@ days:
         end: "13:00"
         type: session
         title: "Session 4"
+        # TODO(team): l'allegato chiama la sessione "Socio-Economic Systems & Urban Dynamics".
         theme: "Socio-Economics and Urban Systems"
         speakers: []
-        talks: []
+        talks:
+          - speaker: "Francesco Marzolla"
+            title: "Sustainable mobility strategies"
+          - speaker: "Lavinia Rossi Mori"
+            title: "Beyond Proximity: How Socioeconomic Status Affects Access to High-Rated Services in the 15-Minute City"
+          - speaker: "Valeria Secchini"
+            title: "The role of sovereign effective tax rate on international trade prices"
+          - speaker: "Alexander Ferraro Sasha"
+            title: "Carbon Trade Network optimal transport approach for new centrality measures"
+          - speaker: "Emanuele Calò"
+            title: "Trade and GDP co-evolution"
+          - speaker: "Edoardo Maggioni"
+            title: "Irish Offshore Wind Energy Communication Network"
         note: null
       - start: "13:00"
         end: "14:30"
@@ -126,11 +173,11 @@ days:
       - start: "14:30"
         end: "15:00"
         type: keynote
-        title: "Keynote Presentation"
+        title: "A Complex Systems Perspective on Success in Academic Careers"
         theme: null
         speakers:
           - name: "Giacomo Livan"
-            affiliation: null
+            affiliation: "University of Pavia"
         talks: []
         note: null
       - start: "15:00"
@@ -139,7 +186,15 @@ days:
         title: "Session 5"
         theme: "Real and Simulated Societies"
         speakers: []
-        talks: []
+        talks:
+          - speaker: "Gabriele di Bona"
+            title: "Language bubbles in online social networks"
+          - speaker: "Giordano De Marzo"
+            title: "Conformity and Majority following in AI Agents"
+          - speaker: "Raffaello Mastromarino"
+            title: "The effect of memory on the consensus of LLM societies"
+          - speaker: "Daniele Cirulli"
+            title: "How Large Language Models play humans in online conversations: a simulated study of the 2016 US politics on Reddit"
         note: null
       - start: "16:00"
         end: "16:30"

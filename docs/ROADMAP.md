@@ -45,7 +45,8 @@ Bloccano i contenuti, non il lavoro tecnico: finché mancano, la pagina usa i pl
 5. **Organizzatori**: chi è nel comitato di Parma e nel team FRS, con consenso a essere elencati?
 6. **Edizioni passate**: v1.0 Lucca (novembre 2023), v1.X Vienna (febbraio 2024) e FRSummer 2025 a Lipari
    (v2.X) vengono dall'organizzatore, a memoria: confermare mesi e versioni, aggiungere giorni, sede e
-   contenuti. Pagine d'archivio o solo voci nella timeline?
+   contenuti. Pagine d'archivio o solo voci nella timeline? Per Lucca 2023 date (13–14 novembre) e
+   programma vengono ora dal report finale degli organizzatori; mancano sede, ente ospitante e relatori.
 7. **Roma 2024**: quali testi di `events/frs2024-winter.html` avete scritto voi? Si possono togliere
    battute, statistiche non verificate e aneddoti?
 8. **Dominio**: `frs-workshop.imtlucca.it` è stato stampato su materiali di Lucca 2025?
@@ -56,7 +57,9 @@ Bloccano i contenuti, non il lavoro tecnico: finché mancano, la pagina usa i pl
 11. **Workflow**: va bene modificare i contenuti via file YAML/Markdown dall'interfaccia web di GitHub
     (con controllo automatico sulla PR) invece che via HTML?
 12. **Keynote di Lucca 2025**: in `main` compaiono solo i nomi; il branch `mfessina-patch-1` contiene
-    anche i titoli dei talk. Vanno aggiunti, o sono stati tolti di proposito?
+    anche i titoli dei talk. Vanno aggiunti, o sono stati tolti di proposito? Risposta parziale: titoli,
+    affiliazioni e talk delle sessioni sono nella mail del team ai partecipanti del 10 dicembre 2025 e ora
+    nei dati (`content/editions-from-mail`); resta da decidere il branch `mfessina-patch-1`.
 
 ## Modello di pubblicazione
 
