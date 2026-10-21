@@ -34,6 +34,13 @@
   # Conclusion of the final report, verbatim.
   report:
     - "The IMT-CREF PhD Workshop successfully achieved its objective of fostering research synergies among doctoral candidates. The diverse format, combining talks, discussions, and social events, created an environment that favored collaboration and knowledge exchange. The workshop showcased the participants' individual research efforts and laid the groundwork for future collaborative initiatives between the Networks research unit at IMT and the Enrico Fermi Research Center."
+  # Closing lines of the report, written by the team (21 October 2026), in Italian; shown in italics.
+  report_closing:
+    lang: "it"
+    lines:
+      - "Se questo workshop avrà portato a qualcosa"
+      - "nessuno può dirlo,"
+      - "Ai Fostering l'ardua sentenza (cit.)"
   milestones: []
   links:
     call: null
@@ -58,6 +65,7 @@
   summary: null
   program: null
   report: null
+  report_closing: null
   milestones: []
   links:
     call: null
@@ -85,6 +93,7 @@
   summary: "The second edition of FRS brought together young researchers from CREF, IMT Lucca, and CSH Vienna for three days of network theory, economic complexity, social dynamics, and informal scientific exchange. Features included 5 senior talks, 30+ presentations, a complexity quiz, and a social dinner in San Lorenzo."
   program: "2024-rome"
   report: null
+  report_closing: null
   milestones: []
   links:
     call: null
@@ -111,6 +120,7 @@
   summary: null
   program: null
   report: null
+  report_closing: null
   milestones: []
   links:
     call: null
@@ -138,6 +148,7 @@
   summary: null
   program: "2025-lucca"
   report: null
+  report_closing: null
   milestones: []
   links:
     call: null
@@ -170,6 +181,7 @@
   summary: null
   program: null
   report: null
+  report_closing: null
   milestones: []
   links:
     call: null
@@ -195,6 +207,10 @@
 #   program: null                 # file in src/_data/programs/ without ".yml"; null = "Program TBA"
 #   report: null                  # final report of a past edition: list of paragraphs written by the
 #                                 # team, verbatim; null = no Report section
+#   report_closing: null          # closing lines at the end of the report, in italics, or null:
+#   # report_closing:
+#   #   lang: null                # language of the lines if not English, e.g. "it"
+#   #   lines: []                 # one string per line
 #   milestones: []                # key dates in order; the state is set by hand (no build-time "today")
 #   # - label: null               # e.g. abstract deadline, registration deadline
 #   #   date: null                # "YYYY-MM-DD", quoted; null = TBA

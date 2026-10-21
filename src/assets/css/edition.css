@@ -141,6 +141,11 @@
     margin-top: var(--space-4);
 }
 
+/* Closing lines at the end of the report (report_closing), one per line */
+.edition-report-closing {
+    font-style: italic;
+}
+
 /* "Program TBA" of the next edition: a large value, with the hollow TBA (placeholder.css) */
 .edition-program-tba {
     font-family: var(--font-display);
