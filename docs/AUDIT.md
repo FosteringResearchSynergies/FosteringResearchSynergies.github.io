@@ -11,7 +11,7 @@ Stato: *risolto nell'hotfix* = già corretto su `deploy` (`388acb1`); *risolto* 
 ## Sintesi
 
 - **180 finding**: 1 critical, 22 high, 76 medium, 81 low.
-- Stato: 49 risolti, 9 in parte, 122 aperti.
+- Stato: 51 risolti, 10 in parte, 119 aperti.
 - Per area: contenuti 78, codice 41, accessibilità 37, pubblicazione 12, revisione critica 12.
 - Azioni sui contenuti: eliminare 29, verifica del team 28, sostituire con lorem ipsum 17, aggiornare (scaduto) 14, tenere 13, marcare come non sviluppato 9.
 
@@ -76,6 +76,7 @@ Critici e alti già risolti: content-01, code-03, deploy-11, code-02, content-08
   - Correzione: Ask mfessina whether the talk titles in 149500d should be kept. If so, cherry-pick only those lines through a PR. Then [OUTWARD] `gh api -X DELETE repos/FosteringResearchSynergies/FosteringResearchSynergies.github.io/git/refs/heads/mfessina-patch-1` and `gh api -X PATCH repos/... -F delete_branch_on_merge=true`.
 - **critic-13** · low · riga 160: Lucca 2025 cannot be archived as-is: no talk list, no keynote titles, no speaker affiliations. Azione: *verifica del team*.
   - Correzione: Ask the organizers for the final talk list, the keynote titles and the affiliations. Until they arrive, show one TBA line per session (data-placeholder="tba", e.g. 'Talk list TBA') in the archive version instead of invented titles.
+  - Stato: **risolto** (`content/editions-from-mail`): titoli e affiliazioni dei keynote e talk delle cinque sessioni in `src/_data/programs/2025-lucca.yml`, dalla mail del team ai partecipanti del 10 dicembre 2025 e dal suo allegato.
 - **code-35** · low · riga 206: Mixed tabs/spaces and trailing whitespace; no formatter, linter or CI to catch regressions.
   - Correzione: Add .editorconfig, Prettier and html-validate (plus stylelint), and a GitHub Action that runs them on every PR. This matters because collaborators edit through the web UI and agents will work in parallel branches.
 - **content-48** · low · riga 234: Day 3 items unchanged since the initial template. Azione: *verifica del team*.

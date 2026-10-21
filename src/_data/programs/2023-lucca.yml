@@ -1,0 +1,117 @@
+# Program of FRS 2023 · Lucca (v1.0), from the organizers' final report "Report on "Fostering Research
+# Synergies: The IMT-CREF PhD Workshop"" (PDF from the team, read on 21 October 2026). Keys: see _example.yml.
+# The report gives the number of talks of each Monday session (12 minutes plus 3 for questions), not their
+# titles or speakers; the three Tuesday talks lasted 30 minutes each, followed by a discussion.
+# TODO(team): relatori dei tre talk di martedì e, se esistono, gli elenchi dei talk di lunedì.
+days:
+  - date: "2023-11-13"
+    title: null
+    slots:
+      - start: "09:15"
+        end: "09:30"
+        type: other
+        title: "Introduction"
+        theme: null
+        speakers: []
+        talks: []
+        note: "Diego Garlaschelli (head of the NETWORKS research unit of IMT) and Luciano Pietronero (president of CREF)"
+      - start: "09:30"
+        end: "11:00"
+        type: session
+        title: "Morning Session"
+        theme: null
+        speakers: []
+        talks: []
+        note: "Five talks"
+      - start: "11:00"
+        end: "11:30"
+        type: break
+        title: "Coffee Break"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "11:30"
+        end: "13:00"
+        type: session
+        title: "Midday Session"
+        theme: null
+        speakers: []
+        talks: []
+        note: "Six talks"
+      - start: "13:00"
+        end: "14:30"
+        type: break
+        title: "Lunch"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "14:30"
+        end: "16:00"
+        type: session
+        title: "Afternoon Session"
+        theme: null
+        speakers: []
+        talks: []
+        note: "Six talks"
+
+  - date: "2023-11-14"
+    title: null
+    slots:
+      - start: "09:30"
+        end: "10:30"
+        type: talk
+        title: "LLM as Chat GPT and Transformers in Neural Networks"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "10:30"
+        end: "11:30"
+        type: talk
+        title: "Renormalization and Community Detection"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "11:30"
+        end: "12:00"
+        type: break
+        title: "Coffee Break"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "12:00"
+        end: "13:00"
+        type: talk
+        title: "Economic Complexity and Supply Chain"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "13:00"
+        end: "14:30"
+        type: break
+        title: "Lunch"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "14:30"
+        end: "17:30"
+        type: other
+        title: "Group Discussion"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "20:00"
+        end: "23:00"
+        type: social
+        title: "Social Dinner"
+        theme: null
+        speakers: []
+        talks: []
+        note: null

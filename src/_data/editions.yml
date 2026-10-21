@@ -4,29 +4,32 @@
 # Unknown value: null. Templates show null as a TBA placeholder or hide the section; never guess.
 #
 # Replace [] with the entries. The commented entry below lists every key.
-# Sources: the pages in src/ (src/events.njk, src/events/frs2024-winter.njk, src/events/lucca.njk); month and
-# year of v1.0 Lucca and v1.X Vienna, and the FRSummer edition in Lipari, from the organizer (20 October 2026);
-# the team's emails to participants (frscrefimt@gmail.com, read on 21 October 2026) for Rome 2024, Lipari 2025
-# and Lucca 2025.
-# TODO(team): verificare i mesi di v1.0 Lucca (novembre 2023) e v1.X Vienna (febbraio 2024), indicati a memoria,
-# e completare giorni, sede ed ente ospitante delle due edizioni e di FRSummer 2025 (docs/ROADMAP.md, domanda 6).
+# Sources: the pages in src/ (src/events.njk, src/events/frs2024-winter.njk, src/events/lucca.njk); versions,
+# month and year of v1.X Vienna, and the FRSummer edition in Lipari, from the organizer (20 October 2026);
+# the organizers' final report of v1.0 Lucca (PDF from the team, read on 21 October 2026); the team's emails
+# to participants (frscrefimt@gmail.com, read on 21 October 2026) for Rome 2024, Lipari 2025 and Lucca 2025.
+# TODO(team): verificare le versioni e il mese di v1.X Vienna (febbraio 2024), indicati a memoria; completare
+# giorni, sede ed ente ospitante di Vienna e sede ed ente ospitante di Lucca 2023 (docs/ROADMAP.md, domanda 6).
 - slug: "2023-lucca"
+  # Final report: "Report on "Fostering Research Synergies: The IMT-CREF PhD Workshop"", two days in Lucca,
+  # Monday 13 and Tuesday 14 November. It does not name the venue or the host institution.
+  # TODO(team): usare "The IMT-CREF PhD Workshop" come nome dell'edizione?
   name: null
   version: "v1.0"
   year: 2023
   city: "Lucca"
   status: past
-  # TODO(team): mese indicativo, da confermare; giorni da aggiungere.
   dates:
-    start: "2023-11"
-    end: "2023-11"
+    start: "2023-11-13"
+    end: "2023-11-14"
   host: null
   venue:
     name: null
     address: null
   participants: null
-  summary: null
-  program: null
+  # Introduction of the final report, without the workshop name and the expansion of IMT.
+  summary: "The workshop took place over two days in Lucca, bringing together doctoral candidates from the Networks research unit at IMT and doctoral candidates from the Enrico Fermi Research Center in Rome. The workshop aimed to facilitate collaboration and knowledge exchange among the participants."
+  program: "2023-lucca"
   milestones: []
   links:
     call: null
