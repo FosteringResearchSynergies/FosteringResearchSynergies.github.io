@@ -1,0 +1,70 @@
+# The same tests as scripts/check.sh on a laptop (HTML, links, personal data, web and mobile in headless
+# Chrome) on every PR into main or deploy, so nothing goes live untested even when a PR is merged from the
+# GitHub interface. Screenshots of every page at every width are attached to the run.
+name: check
+
+on:
+  pull_request:
+    branches: [main, deploy]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: npm ci
+        run: npm ci --no-audit --no-fund
+      - name: scripts/check.sh
+        run: scripts/check.sh
+      - name: Screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: _screenshots/
+          retention-days: 14
+          if-no-files-found: ignore
+
+  # deploy takes only release PRs from main and rollback PRs from fix/revert-<slug> (docs/ROADMAP.md,
+  # "Modello di pubblicazione"), both from this repository. Required on deploy by the ruleset; on other
+  # PRs it passes without checking anything.
+  release-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Source branch of a PR into deploy
+        env:
+          BASE_REF: ${{ github.base_ref }}
+          HEAD_REF: ${{ github.head_ref }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          REPO: ${{ github.repository }}
+        run: |
+          if [[ "$BASE_REF" != deploy ]]; then
+            echo "Not a pull request into deploy: nothing to check."
+            exit 0
+          fi
+          if [[ "$HEAD_REPO" != "$REPO" ]]; then
+            echo "::error::Pull requests into deploy come only from branches of $REPO, not from $HEAD_REPO."
+            exit 1
+          fi
+          case "$HEAD_REF" in
+            main | fix/revert-?*)
+              echo "Pull request into deploy from $HEAD_REF: allowed." ;;
+            *)
+              echo "::error::Pull requests into deploy come only from main (release) or fix/revert-<slug> (rollback), not from $HEAD_REF."
+              exit 1 ;;
+          esac

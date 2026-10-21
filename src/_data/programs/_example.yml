@@ -1,0 +1,22 @@
+# Program of one edition. One file per edition, named after its slug in editions.yml ("<slug>.yml");
+# templates read it as programs["<slug>"]. Keys are set by the frontend; values are copied from the
+# program the team published. Never invent times, titles or speakers; unknown value: null.
+#
+# This file holds no data (templates see programs._example as null): copy it, then uncomment.
+#
+# days:
+#   - date: null                  # "YYYY-MM-DD", quoted
+#     title: null                 # day title shown on the site, null if none
+#     slots:
+#       - start: null             # "HH:MM", quoted
+#         end: null               # "HH:MM", quoted; null if open-ended
+#         type: other             # session | talk | keynote | break | social | other
+#         title: null             # slot title as published
+#         theme: null             # session theme, null if none
+#         speakers: []            # keynotes and single talks
+#         # - name: null
+#         #   affiliation: null
+#         talks: []               # talks inside a session, in order
+#         # - speaker: null
+#         #   title: null
+#         note: null              # one line under the title, as published

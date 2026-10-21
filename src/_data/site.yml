@@ -1,0 +1,8 @@
+# Site-wide values (available in templates as `site`): the only place for the site name and the public
+# contact address. Keys are set by the frontend; values come from the team or from the repository only.
+name: "Fostering Research Synergies"
+short_name: "FRS"
+# Public contact address, already on the site (contact page, Lucca 2025 page). docs/ROADMAP.md, domanda 9.
+email: "frscrefimt@gmail.com"
+# Canonical address of the site, without the final slash (docs/ROADMAP.md, D3).
+url: "https://fosteringresearchsynergies.github.io"

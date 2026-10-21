@@ -1,0 +1,142 @@
+---
+layout: base.njk
+title: Fostering Research Synergies
+permalink: /index.html
+eleventyComputed:
+  footer:
+    # The footer is the last numbered section of the home: 04, or 03 when no edition is upcoming.
+    number: "{{ '04' if (editions | where('status', 'upcoming') | length) else '03' }}"
+---
+{#- Home, generated from src/_data/site.yml and src/_data/editions.yml. The texts of the masthead and
+    of About are the team's, from the previous home page. Missing values become TBA placeholders. -#}
+{%- from "placeholder.njk" import placeholder -%}
+{%- from "section-head.njk" import sectionHead -%}
+{%- set next = editions | where("status", "upcoming") | first -%}
+{%- set num = 0 %}
+<section class="masthead" aria-labelledby="page-title">
+    <div class="wrap masthead-grid">
+        <h1 id="page-title" class="masthead-title">
+            {%- for word in site.name.split(" ") %}
+            <span class="masthead-line"><span class="masthead-initial">{{ word[0] }}</span>{{ word.slice(1) }}</span>
+            {%- endfor %}
+        </h1>
+        <div class="masthead-side">
+            <p class="masthead-lede">An informal association of PhD students and postdoctoral researchers fostering collaboration and knowledge exchange through workshops and conferences.</p>
+            {%- if next %}
+            {%- set nextLabel = next.name or (site.short_name + (" " + next.year if next.year else "") + " · " + (next.city or "TBA")) %}
+            {%- set labelWords = nextLabel.split(" ") %}
+            <a class="arrow-link" href="#next-edition">
+                <span class="label arrow-link-kicker">Next edition</span>
+                <span class="arrow-link-title">{{ labelWords.slice(0, -1).join(" ") }} <span class="nowrap">{{ labelWords | last }}&nbsp;<span class="arrow-link-arrow is-down" aria-hidden="true">↓</span></span></span>
+                <span class="arrow-link-meta">{% if next.dates.start %}{{ next.dates.start | dateRange(next.dates.end) }}{% else %}{{ placeholder("tba", "Dates") }}{% endif %}</span>
+            </a>
+            {%- endif %}
+        </div>
+    </div>
+</section>
+{%- if next %}
+{%- set num = num + 1 %}
+
+<!-- TODO(team): annuncio dell'edizione di Parma 2026 (date, sede, call). -->
+<section id="next-edition" class="section surface-accent next-band" aria-labelledby="next-edition-title">
+    <div class="wrap">
+        {{ sectionHead("Next edition", "next-edition-title", "0" ~ num) }}
+        <h3 class="next-band-poster">
+            <span class="next-band-kicker">{{ site.short_name }} {{ next.year or placeholder("tba") }}</span>
+            <span class="next-band-city chars-{{ next.city | fitChars }}">{{ next.city or placeholder("tba") }}</span>
+        </h3>
+        <dl class="next-band-facts">
+            <div class="next-band-fact">
+                <dt class="label">Dates</dt>
+                <dd>{% if next.dates.start %}{{ next.dates.start | dateRange(next.dates.end) }}{% else %}{{ placeholder("tba") }}{% endif %}</dd>
+            </div>
+            <div class="next-band-fact">
+                <dt class="label">Venue</dt>
+                <dd>{{ next.venue.name or placeholder("tba") }}</dd>
+            </div>
+            <div class="next-band-fact">
+                <dt class="label">Call for abstracts</dt>
+                <dd>{% if next.links.call %}<a href="{{ next.links.call }}">Read the call</a>{% else %}{{ placeholder("tba") }}{% endif %}</dd>
+            </div>
+            <div class="next-band-fact">
+                <dt class="label">Registration</dt>
+                <dd class="is-state">{% if next.links.registration %}<a href="{{ next.links.registration }}">Register</a>{% else %}Not open yet{% endif %}</dd>
+            </div>
+        </dl>
+    </div>
+</section>
+{%- endif %}
+{%- set num = num + 1 %}
+
+<section id="editions" class="section" aria-labelledby="editions-title">
+    <div class="wrap">
+        {{ sectionHead("Editions", "editions-title", "0" ~ num) }}
+        <div class="edition-cols label" aria-hidden="true"><span>Edition</span><span>City</span><span>Details</span><span>Year</span></div>
+        <ol class="edition-list">
+            {%- for edition in editions %}
+            {%- set isNext = edition.status == "upcoming" %}
+            {%- set showDates = edition.dates.start or isNext %}
+            <li class="edition{% if isNext %} is-next{% endif %}">
+                {%- if isNext or edition.version %}
+                <p class="edition-tag">{{ "Next" if isNext else edition.version }}</p>
+                {%- else %}
+                <p class="edition-tag" aria-hidden="true"></p>
+                {%- endif %}
+                <h3 class="edition-city"><span class="edition-city-name chars-{{ edition.city | fitChars }}">{{ edition.city or placeholder("tba") }}</span></h3>
+                {%- if edition.name or showDates or edition.host or edition.venue.name %}
+                <dl class="edition-info">
+                    {%- if edition.name %}
+                    <dt class="label">Name</dt><dd>{{ edition.name }}</dd>
+                    {%- endif %}
+                    {%- if showDates %}
+                    <dt class="label">Dates</dt><dd>{% if edition.dates.start %}{{ edition.dates.start | dateRange(edition.dates.end) }}{% else %}{{ placeholder("tba") }}{% endif %}</dd>
+                    {%- endif %}
+                    {%- if edition.host %}
+                    <dt class="label">Host</dt><dd>{{ edition.host }}</dd>
+                    {%- endif %}
+                    {%- if edition.venue.name %}
+                    <dt class="label">Venue</dt><dd>{{ edition.venue.name }}</dd>
+                    {%- endif %}
+                </dl>
+                {%- endif %}
+                <p class="edition-year"><span class="visually-hidden">Year: </span>{{ edition.year or placeholder("tba") }}</p>
+            </li>
+            {%- endfor %}
+        </ol>
+    </div>
+</section>
+{%- set num = num + 1 %}
+
+<!-- TODO(team): verificare consenso, didascalia ed edizione della foto (la stessa usata da CREF nella notizia sulla quarta edizione, descritta come i partecipanti sulle scale del CREF). -->
+<div class="wrap photo-band">
+    <figure class="photo">
+        <img src="/assets/images/cref-steps-group-photo-1920.jpg" srcset="/assets/images/cref-steps-group-photo-960.jpg 960w, /assets/images/cref-steps-group-photo-1920.jpg 1920w" sizes="(min-width: 90rem) 84rem, 100vw" width="1920" height="1080" alt="Group photo of the participants on the steps of CREF" loading="lazy" decoding="async">
+        <figcaption>On the steps of CREF, Rome.</figcaption>
+    </figure>
+</div>
+
+<section id="about" class="section section-flush-top" aria-labelledby="about-title">
+    <div class="wrap">
+        {{ sectionHead("About", "about-title", "0" ~ num) }}
+        <!-- TODO(team): verificare consenso, didascalia e testo alternativo della foto di gruppo (docs/AUDIT.md, content-55). -->
+        <div class="split">
+            <figure class="photo">
+                <img src="/pictures/cover.png" width="641" height="486" alt="Group photo" loading="lazy" decoding="async">
+            </figure>
+            <ul class="point-list">
+                <li class="point">
+                    <h3 class="point-title">Who we are</h3>
+                    <p class="point-text">We are an informal association of PhD students and postdoctoral researchers committed to advancing research through collaboration and networking.</p>
+                </li>
+                <li class="point">
+                    <h3 class="point-title">What we do</h3>
+                    <p class="point-text">We organize small workshops and conferences <span class="nowrap">1-2</span> times per year, bringing together early-career researchers to share ideas and foster connections.</p>
+                </li>
+                <li class="point">
+                    <h3 class="point-title">Join us</h3>
+                    <p class="point-text">Whether you're a PhD student or postdoc, you're welcome to participate in our events and become part of our growing community.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

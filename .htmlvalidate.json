@@ -1,0 +1,10 @@
+{
+  "root": true,
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "no-implicit-button-type": "warn",
+    "no-inline-style": "warn",
+    "no-raw-characters": "warn",
+    "no-trailing-whitespace": "off"
+  }
+}

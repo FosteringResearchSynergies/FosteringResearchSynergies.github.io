@@ -1,0 +1,144 @@
+/* Base: reset, text, links, focus, skip link and the few utilities shared by every component. */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-text);
+    font-size: var(--step-0);
+    line-height: 1.55;
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+dl,
+dd,
+figure,
+blockquote {
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+}
+
+/* Lists with a class are components: no bullets, no indent. Lists in running text keep both. */
+:where(ul, ol)[class] {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+abbr[title] {
+    text-decoration: none;
+}
+
+a {
+    color: inherit;
+    text-decoration-thickness: var(--rule);
+    text-underline-offset: 0.2em;
+}
+
+a:hover {
+    color: var(--color-accent);
+    text-decoration-thickness: var(--rule-strong);
+}
+
+:focus-visible {
+    outline: var(--focus-width) solid var(--focus-color);
+    outline-offset: var(--focus-offset);
+    border-radius: var(--radius-focus);
+}
+
+/* Skip link: first focusable element of every page, visible only when focused */
+.skip-link {
+    position: absolute;
+    top: var(--space-3);
+    left: var(--gutter);
+    z-index: 10;
+    padding: var(--space-2) var(--space-3-5);
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-weight: 600;
+    text-decoration: none;
+    transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+    transform: none;
+    color: var(--color-paper);
+}
+
+/* Small grotesk capitals: section numbers, column heads, dt, status labels */
+.label {
+    font-family: var(--font-display);
+    font-size: var(--size-label);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    line-height: 1.3;
+    text-transform: uppercase;
+}
+
+/* Read by screen readers, not shown */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+/* Number of letters of a city set to fill its column (.next-band-city, .edition-city-name): the
+   template writes chars-{{ city | fitChars }}, from 4 to 12. The size is the width of the container
+   divided by chars × --letter-width, so the name fills the line without overflowing; longer names
+   use chars-12 and may wrap. */
+.chars-4 { --chars: 4; }
+.chars-5 { --chars: 5; }
+.chars-6 { --chars: 6; }
+.chars-7 { --chars: 7; }
+.chars-8 { --chars: 8; }
+.chars-9 { --chars: 9; }
+.chars-10 { --chars: 10; }
+.chars-11 { --chars: 11; }
+.chars-12 { --chars: 12; }

@@ -1,0 +1,11 @@
+---
+layout: base.njk
+stylesheets:
+  - /styles.css
+---
+{#- Layout of the pages ported from the old static site (about, contact, events and the two edition
+    pages). It adds /styles.css, which styles their old classes with the tokens of the design system;
+    the Giorno 2 tasks move these pages to the new layouts and delete it (docs/ROADMAP.md).
+    A page that needs one more stylesheet lists it in its own front matter "stylesheets": Eleventy
+    merges the two lists, this one first. -#}
+{{ content | safe }}

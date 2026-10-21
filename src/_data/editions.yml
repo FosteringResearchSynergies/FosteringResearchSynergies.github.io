@@ -1,0 +1,189 @@
+# FRS editions: the only place for name, dates, place and status of each edition (CLAUDE.md: every
+# repeated fact in one data file). Templates read it as `editions`, a list in chronological order
+# (oldest first). Keys are set by the frontend; values come from the team or from the repository only.
+# Unknown value: null. Templates show null as a TBA placeholder or hide the section; never guess.
+#
+# Replace [] with the entries. The commented entry below lists every key.
+# Sources: the pages in src/ (src/events.njk, src/events/frs2024-winter.njk, src/events/lucca.njk); month and
+# year of v1.0 Lucca and v1.X Vienna, and the FRSummer edition in Lipari, from the organizer (20 October 2026).
+# TODO(team): verificare i mesi di v1.0 Lucca (novembre 2023) e v1.X Vienna (febbraio 2024), indicati a memoria,
+# e completare giorni, sede ed ente ospitante delle due edizioni e di FRSummer 2025 (docs/ROADMAP.md, domanda 6).
+- slug: "2023-lucca"
+  name: null
+  version: "v1.0"
+  year: 2023
+  city: "Lucca"
+  status: past
+  # TODO(team): mese indicativo, da confermare; giorni da aggiungere.
+  dates:
+    start: "2023-11"
+    end: "2023-11"
+  host: null
+  venue:
+    name: null
+    address: null
+  participants: null
+  summary: null
+  program: null
+  milestones: []
+  links:
+    call: null
+    registration: null
+  funding: null
+
+- slug: "2024-vienna"
+  name: null
+  version: "v1.X"
+  year: 2024
+  city: "Vienna"
+  status: past
+  # TODO(team): mese indicativo, da confermare; giorni da aggiungere.
+  dates:
+    start: "2024-02"
+    end: "2024-02"
+  host: null
+  venue:
+    name: null
+    address: null
+  participants: null
+  summary: null
+  program: null
+  milestones: []
+  links:
+    call: null
+    registration: null
+  funding: null
+
+- slug: "2024-rome"
+  name: null
+  version: "v2.0"
+  year: 2024
+  city: "Rome"
+  status: past
+  dates:
+    start: "2024-11-20"
+    end: "2024-11-22"
+  host: "CREF"
+  venue:
+    name: "CREF, inside the Ministry of Interior"
+    # TODO(team): verificare. Sulla pagina è il punto d'incontro all'ingresso, non l'indirizzo di CREF.
+    address: "Piazza del Viminale 1, Rome"
+  # TODO(team): verificare il numero di partecipanti (la pagina dice "50+ young researchers").
+  participants: null
+  # TODO(team): verificare. Testo di src/events.njk senza "50+" ed "epic" (docs/AUDIT.md, content-28).
+  summary: "The second edition of FRS brought together young researchers from CREF, IMT Lucca, and CSH Vienna for three days of network theory, economic complexity, social dynamics, and informal scientific exchange. Features included 5 senior talks, 30+ presentations, a complexity quiz, and a social dinner in San Lorenzo."
+  program: "2024-rome"
+  milestones: []
+  links:
+    call: null
+    registration: null
+  funding: null
+
+- slug: "2025-lipari"
+  name: "FRSummer"
+  version: "v2.X"
+  year: 2025
+  city: "Lipari"
+  status: past
+  # TODO(team): verificare nome e versione; aggiungere date, sede ed ente ospitante.
+  dates:
+    start: null
+    end: null
+  host: null
+  venue:
+    name: null
+    address: null
+  participants: null
+  summary: null
+  program: null
+  milestones: []
+  links:
+    call: null
+    registration: null
+  funding: null
+
+- slug: "2025-lucca"
+  name: null
+  version: null
+  year: 2025
+  city: "Lucca"
+  status: past
+  dates:
+    start: "2025-12-18"
+    end: "2025-12-20"
+  host: "IMT Lucca"
+  venue:
+    name: "Sagrestia, San Francesco building, IMT"
+    address: "Piazza San Francesco 17, Lucca"
+  # TODO(team): verificare il numero di partecipanti (la pagina dice "30 participants expected").
+  participants: null
+  summary: null
+  program: "2025-lucca"
+  milestones: []
+  links:
+    call: null
+    registration: null
+  funding:
+    # Verbatim from src/events/lucca.njk. TODO(team): verificare se l'ultima frase fa parte della
+    # dicitura richiesta da EFC (docs/AUDIT.md, content-52).
+    text: "Scuola IMT Alti Studi Lucca is a member of the EFC network: IMT PhD students and scholars have the opportunity to participate in joint activities and are encouraged to engage with partner institutions to foster academic and research collaborations. Fostering Research Synergies 2025 aligns with EFC's objective of creating a network of PhD students and young scholars across institutions, contributing to the education of a new generation of citizens facing an increasingly complex society. This workshop brings together researchers from diverse fields to explore interdisciplinary approaches to understanding complex systems and their real-world applications."
+    # Current file; it is not under /assets/ yet and its name has spaces (docs/AUDIT.md, code-24).
+    image: "/pictures/EFC  Fascia Loghi (1260 x 145 px).png"
+    # Alt text proposed in docs/AUDIT.md (content-53); the page still uses "EFC Banner".
+    image_alt: "Funded by the EU NextGenerationEU, MUR, Italiadomani, EFC, IMT"
+    image_width: 1260
+    image_height: 145
+
+- slug: "2026-parma"
+  name: null
+  version: null
+  year: 2026
+  city: "Parma"
+  status: upcoming
+  dates:
+    start: null
+    end: null
+  host: null
+  venue:
+    name: null
+    address: null
+  participants: null
+  summary: null
+  program: null
+  milestones: []
+  links:
+    call: null
+    registration: null
+  funding: null
+
+# - slug: null                    # URL /editions/<slug>/: "<year>-<city>" in lower case; the city alone
+#                                 # while the year is unknown
+#   name: null                    # only if the label differs from "FRS <year> · <City>"
+#   version: null                 # the team's version tag (the "v2.0" style), null if none
+#   year: null                    # four digits
+#   city: null
+#   status: upcoming              # upcoming | past
+#   dates:
+#     start: null                 # "YYYY-MM-DD", quoted; "YYYY-MM" while only the month is known
+#     end: null                   # same format as start; same as start for a one-day edition
+#   host: null                    # host institution(s), as the team writes them
+#   venue:
+#     name: null                  # building and room
+#     address: null               # address of the venue (never a private address)
+#   participants: null            # number given by the team; null if unknown
+#   summary: null                 # one or two sentences for cards and timeline; null = lorem placeholder
+#   program: null                 # file in src/_data/programs/ without ".yml"; null = "Program TBA"
+#   milestones: []                # key dates in order; the state is set by hand (no build-time "today")
+#   # - label: null               # e.g. abstract deadline, registration deadline
+#   #   date: null                # "YYYY-MM-DD", quoted; null = TBA
+#   #   state: upcoming           # upcoming | open | closed
+#   links:                        # real URLs only: without a URL there is no button
+#     call: null
+#     registration: null
+#   funding: null                 # mandatory funding acknowledgement, or null if there is none:
+#   # funding:
+#   #   text: null                # wording required by the funder, verbatim
+#   #   image: null               # path of the logo strip under /assets/
+#   #   image_alt: null           # alt text naming the funders
+#   #   image_width: null         # pixels
+#   #   image_height: null

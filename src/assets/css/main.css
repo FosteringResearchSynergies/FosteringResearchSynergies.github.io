@@ -1,0 +1,22 @@
+/* Entry point of the design system, "Swiss editorial" (docs/DESIGN.md), linked by every page.
+   Order: fonts, tokens, base, layout, components, then one file per area of the site, so that tasks
+   working in parallel each edit their own file. */
+
+@import url("fonts.css");
+@import url("tokens.css");
+@import url("base.css");
+@import url("layout.css");
+
+@import url("components/masthead.css");
+@import url("components/arrow-link.css");
+@import url("components/next-edition.css");
+@import url("components/edition-list.css");
+@import url("components/point-list.css");
+@import url("components/photo.css");
+@import url("components/placeholder.css");
+@import url("components/funding-band.css");
+@import url("components/program.css");
+
+@import url("edition.css");
+@import url("archive.css");
+@import url("pages.css");

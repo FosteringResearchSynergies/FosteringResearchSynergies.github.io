@@ -1,0 +1,123 @@
+/* Program of an edition (data: src/_data/programs/<slug>.yml): one table per day, every day visible,
+   every slot linkable through its id. Class names start with program-table- because /styles.css (old
+   pages, until Giorno 2) already uses .program-day, .program-tabs and .schedule-*.
+
+   <section class="program-table-day" id="day-2025-12-18" aria-labelledby="day-2025-12-18-title">
+     <h3 class="program-table-heading" id="day-2025-12-18-title">Thursday 18 December</h3>
+     <table class="program-table">
+       <thead><tr><th scope="col">Time</th><th scope="col">Session</th></tr></thead>
+       <tbody>
+         <tr id="day-2025-12-18-1130" data-type="session">      data-type: session | talk | keynote | break | social | other
+           <th scope="row" class="program-table-time"><time>11:30</time>–<time>13:00</time></th>
+           <td>
+             <p class="program-table-title">Session 1</p>
+             <p class="program-table-theme">Network Theory and Structure</p>
+             <ol class="program-table-talks"><li><span class="program-table-speaker">Name</span> Title</li></ol>
+             <p class="program-table-note">...</p>
+           </td>
+         </tr>
+       </tbody>
+     </table>
+   </section> */
+
+.program-table-day {
+    --time-column: 4.5rem;
+    margin-top: var(--space-fluid-m);
+}
+
+.program-table-day:first-child {
+    margin-top: 0;
+}
+
+.program-table-heading {
+    margin-bottom: var(--space-4);
+    font-size: var(--step-2);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+}
+
+.program-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--step-0);
+    line-height: 1.45;
+}
+
+.program-table th,
+.program-table td {
+    padding-block: var(--space-3-5);
+    text-align: left;
+    vertical-align: top;
+}
+
+.program-table thead th {
+    padding-block: 0 var(--space-3);
+    border-bottom: var(--rule) solid var(--color-rule);
+    color: var(--color-ink-2);
+    font-family: var(--font-display);
+    font-size: var(--size-label);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.program-table tbody tr + tr {
+    border-top: var(--rule) solid var(--color-rule-soft);
+}
+
+.program-table tbody tr:target {
+    outline: var(--rule-strong) solid var(--color-accent);
+    outline-offset: var(--space-1);
+}
+
+.program-table-time {
+    width: var(--time-column);
+    padding-right: var(--gap);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.program-table-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+}
+
+.program-table-theme,
+.program-table-note {
+    color: var(--color-ink-2);
+}
+
+.program-table-talks {
+    display: grid;
+    gap: var(--space-1);
+    margin-top: var(--space-2);
+}
+
+.program-table-speaker {
+    font-weight: 600;
+}
+
+.program-table tr[data-type="keynote"] .program-table-title {
+    color: var(--color-accent);
+}
+
+.program-table tr[data-type="break"],
+.program-table tr[data-type="social"] {
+    color: var(--color-ink-2);
+}
+
+.program-table tr[data-type="break"] .program-table-title,
+.program-table tr[data-type="social"] .program-table-title {
+    font-weight: 500;
+}
+
+@media (min-width: 48rem) {
+    .program-table-day {
+        --time-column: 9rem;
+    }
+
+    .program-table-time {
+        white-space: nowrap;
+    }
+}
