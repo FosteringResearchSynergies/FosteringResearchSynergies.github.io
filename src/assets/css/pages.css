@@ -1,3 +1,33 @@
 /* Core pages: home, about, contact, 404 (docs/ROADMAP.md Giorno 2: feat/core-pages).
    Empty for now: only that task writes here, so parallel tasks never edit the same file.
    Build on the tokens and components imported before this file by main.css. */
+
+/* Head of an inner page: the h1 set large, like the site name on the home but smaller.
+   <div class="page-head"><div class="wrap"><h1 class="page-title">In the press</h1></div></div> */
+.page-head {
+    padding-block: var(--space-fluid-xl) var(--space-fluid-l);
+}
+
+.page-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--step-page);
+    font-weight: 700;
+    line-height: 0.92;
+    letter-spacing: -0.042em;
+}
+
+/* In the press: one arrow link per page, two columns from 64rem */
+.press-list {
+    display: grid;
+    gap: var(--space-fluid-m) var(--gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+@media (min-width: 64rem) {
+    .press-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

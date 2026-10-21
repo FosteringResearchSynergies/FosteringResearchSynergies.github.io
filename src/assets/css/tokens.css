@@ -43,6 +43,7 @@
     --step-city: clamp(2.75rem, 1.2rem + 6.4vw, 6.5rem);        /* city names in the editions list */
     --step-email: clamp(1.625rem, 0.3rem + 7vw, 6.5rem);        /* the address in the footer */
     --step-hero: clamp(3.5rem, 0.6rem + 17vw, 14.5rem);         /* the site name on the home */
+    --step-page: clamp(2.5rem, 1rem + 7.5vw, 8rem);             /* the h1 of an inner page */
     --step-hero-wide: min(13.4vw, 12.75rem);                    /* same, next to the side column */
     --step-poster-max: 30rem;                                   /* cap of the city on the blue field */
     --letter-width: 0.568;            /* average advance of a letter of a city name, in em (see .chars-N) */
