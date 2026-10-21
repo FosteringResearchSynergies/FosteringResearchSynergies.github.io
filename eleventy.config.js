@@ -57,6 +57,11 @@ export default function (eleventyConfig) {
         return `${a.d} ${a.m} ${a.y}`;
     });
 
+    // Public address of a page, the one search engines should list: the site URL plus the page path,
+    // without a final "index.html" ("/index.html" -> ".../", "/press/index.html" -> ".../press/").
+    // {{ page.url | canonical(site.url) }}
+    eleventyConfig.addFilter("canonical", (url, base) => base + String(url).replace(/index\.html$/, ""));
+
     // scripts/preview.sh prints the URL before the server starts: the port must be the one asked for.
     eleventyConfig.setServerOptions({ portReassignmentRetryCount: 0 });
 }

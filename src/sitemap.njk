@@ -1,0 +1,11 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+{#- Every page of the site at its canonical address, for search engines (listed in robots.txt). -#}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- for item in collections.all | sort(false, false, "url") %}
+    <url><loc>{{ item.url | canonical(site.url) }}</loc></url>
+{%- endfor %}
+</urlset>
