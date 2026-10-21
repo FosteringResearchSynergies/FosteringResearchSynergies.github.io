@@ -1,4 +1,4 @@
-/* Edition pages (layout "edition", src/_includes/layouts/edition.njk): head, About, Program. The poster
+/* Edition pages (layout "edition", src/_includes/layouts/edition.njk): head, About, Program, Report. The poster
    (label and city across the page) is the one of the blue band of the home (next-edition.css), the
    program is the component program.css, the funding band funding-band.css.
 
@@ -130,6 +130,15 @@
     font-weight: 500;
     line-height: 1.35;
     letter-spacing: -0.01em;
+}
+
+/* Report of a past edition: the team's paragraphs, at reading size */
+.edition-report {
+    max-width: var(--measure);
+}
+
+.edition-report > p + p {
+    margin-top: var(--space-4);
 }
 
 /* "Program TBA" of the next edition: a large value, with the hollow TBA (placeholder.css) */
