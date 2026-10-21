@@ -1,3 +1,19 @@
-/* Archive of the editions (/editions/, docs/ROADMAP.md Giorno 2: feat/archive).
-   Empty for now: only that task writes here, so parallel tasks never edit the same file.
-   Build on the tokens and components imported before this file by main.css. */
+/* Archive of the editions (/editions/, src/editions/index.njk) and the list of the editions it shares
+   with the home (include edition-list.njk, component edition-list.css).
+
+   Each city is a link to the page of its edition:
+   <h3 class="edition-city"><a class="edition-link" href="/editions/2024-rome/"><span class="edition-city-name chars-4">Rome</span><span class="visually-hidden"> 2024</span></a></h3>
+
+   The link fills the city column: the whole cell is the target and the focus ring frames it. The name
+   keeps its colour (ink, the accent for the next edition) and is underlined on hover. */
+
+.edition-link {
+    display: block;
+    text-decoration: none;
+}
+
+.edition-link:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 0.04em;
+    text-underline-offset: 0.08em;
+}

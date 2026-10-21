@@ -2,6 +2,9 @@
 # contact address. Keys are set by the frontend; values come from the team or from the repository only.
 name: "Fostering Research Synergies"
 short_name: "FRS"
+# The team's one-line description, from the previous home page: the home masthead, and the meta and
+# Open Graph description of the home.
+description: "An informal association of PhD students and postdoctoral researchers fostering collaboration and knowledge exchange through workshops and conferences."
 # Public contact address, already on the site (contact page, Lucca 2025 page). docs/ROADMAP.md, domanda 9.
 email: "frscrefimt@gmail.com"
 # Canonical address of the site, without the final slash (docs/ROADMAP.md, D3).

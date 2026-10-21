@@ -1,10 +1,10 @@
 {#- Main navigation, rendered in the HTML (no JavaScript). Five short items: at 320px they fit on one
     line under the brand. An item is the current page (aria-current="page") on its own URL and, with
-    "section", the current section (aria-current="true") on every page under that path.
-    Editions points to /events.html until the archive /editions/ exists (docs/ROADMAP.md, Giorno 2). -#}
+    "section", the current section (aria-current="true") on every page under that path: Editions is
+    the page on the archive /editions/ and the section on the page of each edition. -#}
 {%- set navItems = [
     { label: "Home", href: "/" },
-    { label: "Editions", href: "/events.html", section: "/events/" },
+    { label: "Editions", href: "/editions/", section: "/editions/" },
     { label: "About", href: "/about.html" },
     { label: "Press", href: "/press/" },
     { label: "Contact", href: "/contact.html" }

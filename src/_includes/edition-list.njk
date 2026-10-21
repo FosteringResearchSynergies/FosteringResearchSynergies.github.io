@@ -1,0 +1,47 @@
+{#-
+  Editions as a typographic list (component: src/assets/css/components/edition-list.css), on the home
+  and on the archive /editions/. Each city is a link to the page of its edition, /editions/<slug>/
+  (src/assets/css/archive.css); the year, hidden, tells apart two editions in the same city.
+
+    {% from "edition-list.njk" import editionList %}
+    {{ editionList(editions) }}       city headings h3, under the h2 of a section (home)
+    {{ editionList(editions, 2) }}    city headings h2, right under the h1 of the page (archive)
+
+  Details shown when known: name, dates (TBA for the next edition), host, venue.
+-#}
+{%- macro editionList(editions, level) -%}
+{%- from "placeholder.njk" import placeholder -%}
+{%- set h = "h" ~ (level or 3) %}
+<div class="edition-cols label" aria-hidden="true"><span>Edition</span><span>City</span><span>Details</span><span>Year</span></div>
+<ol class="edition-list">
+    {%- for edition in editions %}
+    {%- set isNext = edition.status == "upcoming" %}
+    {%- set showDates = edition.dates.start or isNext %}
+    <li class="edition{% if isNext %} is-next{% endif %}">
+        {%- if isNext or edition.version %}
+        <p class="edition-tag">{{ "Next" if isNext else edition.version }}</p>
+        {%- else %}
+        <p class="edition-tag" aria-hidden="true"></p>
+        {%- endif %}
+        <{{ h }} class="edition-city"><a class="edition-link" href="/editions/{{ edition.slug }}/"><span class="edition-city-name chars-{{ edition.city | fitChars }}">{{ edition.city or placeholder("tba") }}</span>{% if edition.year %}<span class="visually-hidden"> {{ edition.year }}</span>{% endif %}</a></{{ h }}>
+        {%- if edition.name or showDates or edition.host or edition.venue.name %}
+        <dl class="edition-info">
+            {%- if edition.name %}
+            <dt class="label">Name</dt><dd>{{ edition.name }}</dd>
+            {%- endif %}
+            {%- if showDates %}
+            <dt class="label">Dates</dt><dd>{% if edition.dates.start %}{{ edition.dates.start | dateRange(edition.dates.end) }}{% else %}{{ placeholder("tba") }}{% endif %}</dd>
+            {%- endif %}
+            {%- if edition.host %}
+            <dt class="label">Host</dt><dd>{{ edition.host }}</dd>
+            {%- endif %}
+            {%- if edition.venue.name %}
+            <dt class="label">Venue</dt><dd>{{ edition.venue.name }}</dd>
+            {%- endif %}
+        </dl>
+        {%- endif %}
+        <p class="edition-year"><span class="visually-hidden">Year: </span>{{ edition.year or placeholder("tba") }}</p>
+    </li>
+    {%- endfor %}
+</ol>
+{%- endmacro -%}

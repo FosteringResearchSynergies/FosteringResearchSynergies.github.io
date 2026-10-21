@@ -2,15 +2,19 @@
 layout: base.njk
 title: Fostering Research Synergies
 permalink: /index.html
+structured_data: true
 eleventyComputed:
+  description: "{{ site.description }}"
   footer:
     # The footer is the last numbered section of the home: 04, or 03 when no edition is upcoming.
     number: "{{ '04' if (editions | where('status', 'upcoming') | length) else '03' }}"
 ---
 {#- Home, generated from src/_data/site.yml and src/_data/editions.yml. The texts of the masthead and
-    of About are the team's, from the previous home page. Missing values become TBA placeholders. -#}
+    of About are the team's, from the previous home page. Missing values become TBA placeholders.
+    The list of the editions is the include edition-list.njk, shared with the archive /editions/. -#}
 {%- from "placeholder.njk" import placeholder -%}
 {%- from "section-head.njk" import sectionHead -%}
+{%- from "edition-list.njk" import editionList -%}
 {%- set next = editions | where("status", "upcoming") | first -%}
 {%- set num = 0 %}
 <section class="masthead" aria-labelledby="page-title">
@@ -21,9 +25,9 @@ eleventyComputed:
             {%- endfor %}
         </h1>
         <div class="masthead-side">
-            <p class="masthead-lede">An informal association of PhD students and postdoctoral researchers fostering collaboration and knowledge exchange through workshops and conferences.</p>
+            <p class="masthead-lede">{{ site.description }}</p>
             {%- if next %}
-            {%- set nextLabel = next.name or (site.short_name + (" " + next.year if next.year else "") + " · " + (next.city or "TBA")) %}
+            {%- set nextLabel = next | editionLabel(site.short_name) %}
             {%- set labelWords = nextLabel.split(" ") %}
             <a class="arrow-link" href="#next-edition">
                 <span class="label arrow-link-kicker">Next edition</span>
@@ -71,38 +75,7 @@ eleventyComputed:
 <section id="editions" class="section" aria-labelledby="editions-title">
     <div class="wrap">
         {{ sectionHead("Editions", "editions-title", "0" ~ num) }}
-        <div class="edition-cols label" aria-hidden="true"><span>Edition</span><span>City</span><span>Details</span><span>Year</span></div>
-        <ol class="edition-list">
-            {%- for edition in editions %}
-            {%- set isNext = edition.status == "upcoming" %}
-            {%- set showDates = edition.dates.start or isNext %}
-            <li class="edition{% if isNext %} is-next{% endif %}">
-                {%- if isNext or edition.version %}
-                <p class="edition-tag">{{ "Next" if isNext else edition.version }}</p>
-                {%- else %}
-                <p class="edition-tag" aria-hidden="true"></p>
-                {%- endif %}
-                <h3 class="edition-city"><span class="edition-city-name chars-{{ edition.city | fitChars }}">{{ edition.city or placeholder("tba") }}</span></h3>
-                {%- if edition.name or showDates or edition.host or edition.venue.name %}
-                <dl class="edition-info">
-                    {%- if edition.name %}
-                    <dt class="label">Name</dt><dd>{{ edition.name }}</dd>
-                    {%- endif %}
-                    {%- if showDates %}
-                    <dt class="label">Dates</dt><dd>{% if edition.dates.start %}{{ edition.dates.start | dateRange(edition.dates.end) }}{% else %}{{ placeholder("tba") }}{% endif %}</dd>
-                    {%- endif %}
-                    {%- if edition.host %}
-                    <dt class="label">Host</dt><dd>{{ edition.host }}</dd>
-                    {%- endif %}
-                    {%- if edition.venue.name %}
-                    <dt class="label">Venue</dt><dd>{{ edition.venue.name }}</dd>
-                    {%- endif %}
-                </dl>
-                {%- endif %}
-                <p class="edition-year"><span class="visually-hidden">Year: </span>{{ edition.year or placeholder("tba") }}</p>
-            </li>
-            {%- endfor %}
-        </ol>
+        {{ editionList(editions) }}
     </div>
 </section>
 {%- set num = num + 1 %}

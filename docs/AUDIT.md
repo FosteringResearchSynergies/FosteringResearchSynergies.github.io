@@ -11,7 +11,7 @@ Stato: *risolto nell'hotfix* = già corretto su `deploy` (`388acb1`); *risolto* 
 ## Sintesi
 
 - **180 finding**: 1 critical, 22 high, 76 medium, 81 low.
-- Stato: 49 risolti, 9 in parte, 122 aperti.
+- Stato: 51 risolti, 10 in parte, 119 aperti.
 - Per area: contenuti 78, codice 41, accessibilità 37, pubblicazione 12, revisione critica 12.
 - Azioni sui contenuti: eliminare 29, verifica del team 28, sostituire con lorem ipsum 17, aggiornare (scaduto) 14, tenere 13, marcare come non sviluppato 9.
 
@@ -76,6 +76,7 @@ Critici e alti già risolti: content-01, code-03, deploy-11, code-02, content-08
   - Correzione: Ask mfessina whether the talk titles in 149500d should be kept. If so, cherry-pick only those lines through a PR. Then [OUTWARD] `gh api -X DELETE repos/FosteringResearchSynergies/FosteringResearchSynergies.github.io/git/refs/heads/mfessina-patch-1` and `gh api -X PATCH repos/... -F delete_branch_on_merge=true`.
 - **critic-13** · low · riga 160: Lucca 2025 cannot be archived as-is: no talk list, no keynote titles, no speaker affiliations. Azione: *verifica del team*.
   - Correzione: Ask the organizers for the final talk list, the keynote titles and the affiliations. Until they arrive, show one TBA line per session (data-placeholder="tba", e.g. 'Talk list TBA') in the archive version instead of invented titles.
+  - Stato: **risolto** (`content/editions-from-mail`): titoli e affiliazioni dei keynote e talk delle cinque sessioni in `src/_data/programs/2025-lucca.yml`, dalla mail del team ai partecipanti del 10 dicembre 2025 e dal suo allegato.
 - **code-35** · low · riga 206: Mixed tabs/spaces and trailing whitespace; no formatter, linter or CI to catch regressions.
   - Correzione: Add .editorconfig, Prettier and html-validate (plus stylelint), and a GitHub Action that runs them on every PR. This matters because collaborators edit through the web UI and agents will work in parallel branches.
 - **content-48** · low · riga 234: Day 3 items unchanged since the initial template. Azione: *verifica del team*.
@@ -300,13 +301,15 @@ Critici e alti già risolti: content-01, code-03, deploy-11, code-02, content-08
 - **code-32** · low · riga 5: No meta description, Open Graph/Twitter tags or favicon on any page.
   - Correzione: Add per-page description and og:title/og:image plus a favicon set. This matters for sharing the Parma page in chats and mailing lists. Metadata rule (CLAUDE.md): only team-written text or facts already in the repository; if the real text is missing, leave the tag out (no lorem, no invented text).
 - **seo-01** · high · riga 6: No meta description, Open Graph or Twitter Card tags on any page: WhatsApp/Slack/LinkedIn previews show a bare title with no image.
+  - Stato: **in parte** (`feat/seo`): `head.njk` dà a ogni pagina og:site_name, og:title, og:type e og:url; description e og:description solo dove c'è testo del team (oggi la home, con la frase di `site.yml`). Mancano og:image (serve un'immagine con il consenso del team) e le descrizioni delle altre pagine.
   - Evidenza: grep -E 'name="description"\|og:\|twitter:' over all *.html -> 0 matches. index.html:3-9 <head> contains only charset, viewport, `<title>Fostering Research Synergies</title>`, styles.css and navbar.js. index.html has no <img> at all (hero is a CSS background), so scrapers have no image to pick.
   - Correzione: Add one shared head include to every page with a per-page meta description, og:title/og:description/og:url/og:type and og:image. og:image must be an absolute https URL on fosteringresearchsynergies.github.io, 1200x630, JPEG under about 300 KB (WhatsApp often drops larger images). Also add twitter:card=summary_large_image and og:locale. Give the Parma page its own og:image and description. Metadata rule (CLAUDE.md): only team-written text or facts already in the repository; if the real text is missing, leave the tag out (no lorem, no invented text).
 - **seo-04** · medium · riga 6: No canonical links, robots.txt or sitemap.xml.
+  - Stato: **risolto** (`feat/seo`): link canonico su ogni pagina, `sitemap.xml` generata da tutte le pagine e `robots.txt` che la indica. Resta l'invio della sitemap in Google Search Console (passo del team).
   - Evidenza: Live GET /robots.txt -> 404, /sitemap.xml -> 404. grep 'rel="canonical"' in repo *.html -> 0 matches.
   - Correzione: Add rel=canonical on every page pointing to its https github.io URL. Add a sitemap.xml listing only the real pages (home, events, about, contact, each edition including Parma) and a robots.txt that points to it. Submit the sitemap in Google Search Console after the domain move.
 - **deploy-19** · medium · riga 6: Old URLs will break after the move: no redirect plan, canonical URLs, sitemap, robots.txt or custom 404.
-  - Stato: **in parte**: il vecchio dominio redirige ogni percorso su github.io; mancano 404, robots.txt, sitemap e link canonici.
+  - Stato: **in parte**: il vecchio dominio redirige ogni percorso su github.io; robots.txt, sitemap e link canonici aggiunti in `feat/seo`; manca la 404.
   - Evidenza: Pages `"custom_404":false`; `/nonexistent` -> `<title>Page not found &middot; GitHub Pages`; `/robots.txt` 404, `/sitemap.xml` 404; no `canonical`, `og:` or meta description in any page (grep is empty); org `"blog":null`, repo `"homepage":null`
   - Correzione: The old domain already redirects every path to github.io (repository frs-workshop-redirect). Still to do: 404.html, robots.txt and sitemap.xml in the build output, canonical links and OG tags in the restyled head, and redirects from the old paths (/events.html, /events/lucca.html, ...) when the URLs change. [OUTWARD] `gh api -X PATCH orgs/FosteringResearchSynergies -f blog=https://fosteringresearchsynergies.github.io/`. Ask IMT and EFC to update any news pages that link to the old host.
 - **seo-06** · low · riga 7: No favicon, apple-touch-icon, theme-color or manifest.

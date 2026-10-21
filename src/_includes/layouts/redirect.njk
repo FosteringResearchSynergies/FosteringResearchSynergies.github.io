@@ -1,0 +1,18 @@
+---
+layout: base.njk
+eleventyExcludeFromCollections: true
+---
+{#- Old address of a page that moved (front matter: title, permalink, redirect_to). head.njk sends the
+    browser on to redirect_to at once and gives search engines its canonical link and noindex; the body
+    is for a browser that does not follow the refresh. Out of the sitemap. -#}
+<div class="page-head">
+    <div class="wrap">
+        <h1 class="page-title" id="page-title">{{ heading }}</h1>
+    </div>
+</div>
+
+<section class="section section-flush-top" aria-labelledby="page-title">
+    <div class="wrap">
+        <p>This page has moved to <a href="{{ redirect_to }}">{{ redirect_to | canonical(site.url) }}</a>.</p>
+    </div>
+</section>

@@ -3,6 +3,10 @@
 //   npm run dev -- --port=N     # local preview; a busy port is an error, never a silent switch
 import yaml from "js-yaml";
 
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September",
+    "October", "November", "December"];
+const WEEKDAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
 export default function (eleventyConfig) {
     // Data files in YAML (src/_data/*.yml). An empty or comment-only file is null. Unquoted dates
     // become JavaScript dates: the data files quote them ("2026-05-12").
@@ -13,7 +17,6 @@ export default function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy("src/assets");
     eleventyConfig.addPassthroughCopy("src/pictures");
     eleventyConfig.addPassthroughCopy("src/styles.css");
-    eleventyConfig.addPassthroughCopy("src/events/*.css");
 
     // Stops the build with a message, for templates that receive invalid arguments:
     // {{ "what went wrong" | fail }}
@@ -37,12 +40,10 @@ export default function (eleventyConfig) {
     // Returns "" when start is null: the template shows the TBA placeholder instead.
     eleventyConfig.addFilter("dateRange", (start, end) => {
         if (!start) return "";
-        const months = ["January", "February", "March", "April", "May", "June", "July", "August",
-            "September", "October", "November", "December"];
         const parse = (value) => {
             const match = /^(\d{4})-(\d{2})(?:-(\d{2}))?$/.exec(String(value));
             if (!match) throw new Error(`dateRange: "${value}" is not a quoted "YYYY-MM-DD" or "YYYY-MM" date`);
-            return { y: match[1], m: months[Number(match[2]) - 1], d: match[3] ? String(Number(match[3])) : null };
+            return { y: match[1], m: MONTHS[Number(match[2]) - 1], d: match[3] ? String(Number(match[3])) : null };
         };
         const a = parse(start);
         const b = end ? parse(end) : a;
@@ -56,6 +57,27 @@ export default function (eleventyConfig) {
         if (a.d !== b.d) return `${a.d}–${b.d} ${b.m} ${b.y}`;
         return `${a.d} ${a.m} ${a.y}`;
     });
+
+    // Day of a program, for its heading: "Thursday 18 December", from a quoted "YYYY-MM-DD" value. The
+    // year is left out: the dates of the edition give it. {{ day.date | dayDate }}
+    eleventyConfig.addFilter("dayDate", (value) => {
+        const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value));
+        if (!match) throw new Error(`dayDate: "${value}" is not a quoted "YYYY-MM-DD" date`);
+        const date = new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])));
+        return `${WEEKDAYS[date.getUTCDay()]} ${date.getUTCDate()} ${MONTHS[date.getUTCMonth()]}`;
+    });
+
+    // Label of an edition, the same in page titles and on the home: its name if it has one, otherwise
+    // "FRS <year> · <City>" (no year while it is unknown, "TBA" for a missing city).
+    // {{ edition | editionLabel(site.short_name) }}
+    eleventyConfig.addFilter("editionLabel", (edition, shortName) =>
+        edition.name || `${shortName}${edition.year ? " " + edition.year : ""} · ${edition.city || "TBA"}`,
+    );
+
+    // Public address of a page, the one search engines should list: the site URL plus the page path,
+    // without a final "index.html" ("/index.html" -> ".../", "/press/index.html" -> ".../press/").
+    // {{ page.url | canonical(site.url) }}
+    eleventyConfig.addFilter("canonical", (url, base) => base + String(url).replace(/index\.html$/, ""));
 
     // scripts/preview.sh prints the URL before the server starts: the port must be the one asked for.
     eleventyConfig.setServerOptions({ portReassignmentRetryCount: 0 });
