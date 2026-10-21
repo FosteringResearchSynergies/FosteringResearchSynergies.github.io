@@ -1,113 +1,89 @@
 # Direzione visiva e struttura del sito
 
-Proposta prodotta durante l'audit del 20 ottobre 2026. **In attesa di decisione del team**: la direzione raccomandata è D3 "Motifs". Le altre due restano come alternative. Testi nella lingua originale della proposta (inglese); stati e note aggiunti dopo sono in italiano.
+Direzione decisa dal team il 20 ottobre 2026: **Swiss editorial**, scelta dopo il confronto di tre prototipi. Sostituisce le tre proposte dell'audit (Field Notes, Phase Space, Motifs); "Motifs" (PR #7, branch `design/tokens`) è stata scartata. La mappa del sito e la tabella delle sezioni vengono dalla proposta dell'audit e restano nella lingua originale (inglese); stati e note aggiunti dopo sono in italiano.
 
 Plugin e sintassi Jekyll citati qui (`_layouts`, `{% include %}`, `redirect_from`, `jekyll-sitemap`, `jekyll-seo-tag`) valgono solo se D1 = Jekyll. Con Eleventy (raccomandato in `docs/ROADMAP.md`) si usano gli equivalenti: `src/_includes`, `src/_data`, pagine di redirect statiche. Per i placeholder vale `CLAUDE.md`.
 
-## Direzione raccomandata
+## Direzione decisa: Swiss editorial
 
-I recommend D3 "Motifs", with D1's typographic restraint for long-form text (body at 17-18px IBM Plex Sans, max 68ch, no color in paragraphs). Why it fits:  1. The IA becomes edition-centric, and D3 gives every edition its own visual identity from a single CSS variable (`--accent`). The archive and the timeline then read as a series, and Parma 2026 gets an instantly recognizable giallo-Parma identity for the announcement and the OG share image. 2. Network motifs are a pattern language complex-systems researchers will recognize. It replaces the emoji with something credible and avoids the floating-node-plexus cliché. 3. It is a light theme, so the IMT blue logo and the mandatory NextGenerationEU/PNRR banner (background #2A65AF, which becomes a matching funding band) sit naturally. 4. The duotone treatment makes the only real group photo (641x486) usable at large size. 5. The hazard-hatched placeholder style makes lorem ipsum, TBA and 'not developed' boxes clearly look like placeholders, not fake content, which is exactly what the team asked for. 6. It is implementable in pure CSS plus inline SVG: no JS animation, no build-time image tooling.  That fits Jekyll on Pages and the 2-3 day budget. Contrast is verified: ink on giallo is 10.0:1 and brick, blue, green and ochre are all at or above 5.6:1 on canvas.
+Riferimento: il prototipo della home approvato dal team, riprodotto in `src/index.njk`. Il design system è in `src/assets/css/`: `main.css` importa font, token (`tokens.css`), base, layout e un file per componente (`components/`).
 
-## D1 · Field Notes (editorial, warm paper)
+### Principi
 
-The site as a well-edited research notebook and proceedings volume: calm, typographic, generous whitespace, serif headlines. The FRS story is drawn as one small hand-tuned graph: the editions as a path through cities (Lucca, Vienna, Rome, Lucca, Parma).
+- Pagina bianca, inchiostro quasi nero e un solo accento per tutto il sito: il blu elettrico. Nessun colore per edizione.
+- La gerarchia la fanno la tipografia e i filetti: titoli molto grandi, etichette piccole in maiuscolo spaziato, filetti da 1px sopra sezioni e righe. Niente ombre, card, gradienti, pattern, icone o emoji.
+- Sezioni numerate (01, 02, ...): filetto, numero in blu, titolo. Nella home il footer chiude la numerazione.
+- Griglia a 12 colonne da 64rem (1024px), una colonna sotto. Breakpoint: 48rem e 64rem.
+- Due sole superfici piene: la banda blu della prossima edizione (una per pagina) e il footer nero.
+- Foto in bianco e nero, mai più larghe del file e mai ritagliate.
+- Mobile first: nessuno scroll orizzontale a 320px; i titoli grandi usano `clamp()` o si adattano alla larghezza della colonna.
 
-**Palette**
+### Palette e contrasti
 
-- #F5F1E8 paper: page background
-- #16181D ink: body text (15.8:1 on paper)
-- #5E5A52 graphite: secondary text, captions (6.1:1)
-- #D9D2C3 rule: hairlines, table and card borders
-- #B4462B terracotta: primary accent, links, CTA fills (4.8:1, AA)
-- #0E5C61 deep teal: secondary accent, graph edges, 'past' states (6.8:1)
-- #F2D8A7 proof yellow: background of 'galley proof' placeholder blocks
+| Token | Valore | Uso | Contrasto (WCAG 2.2) |
+| --- | --- | --- | --- |
+| `--color-paper` | #FFFFFF | sfondo | |
+| `--color-ink` | #0A0A0B | testo, filetti, footer | 19.8:1 su bianco |
+| `--color-ink-2` | #55555C | testo secondario, etichette | 7.4:1 su bianco |
+| `--color-accent` | #1F3BFF | iniziali, numeri di sezione, prossima edizione, link con freccia, focus; fondo della banda blu | 6.7:1 su bianco |
+| `--color-on-accent` | #FFFFFF | testo sul blu | 6.7:1 |
+| `--color-on-accent-2` | #D9DEFF | etichette sul blu | 5.1:1 |
+| `--color-on-ink` | #FFFFFF | testo sul nero | 19.8:1 |
+| `--color-on-ink-2` | #A3A3AB | testo secondario sul nero | 7.9:1 |
+| `--color-rule-soft` | #DCDCE0 | separatori leggeri | decorativo |
 
-**Tipografia**: Newsreader (Google Fonts, optical sizes; display 600 + long-form 400) + Inter (UI, nav, buttons) + IBM Plex Mono (dates, times, labels)
+Il blu sul nero (2.9:1) non si usa mai. I separatori leggeri non sono mai l'unico confine di un controllo.
 
-**Elementi distintivi**
+### Tipografia
 
-- Hero SVG 'edition path graph': city nodes linked chronologically, the Parma node drawn as a terracotta ring
-- Program typeset like a proceedings table of contents: dotted leaders, mono times, speaker names in small caps, every day visible
-- Margin sidenotes for logistics on desktop (inline on mobile)
-- Photo plates with caption and credit lines in a warm duotone
-- Placeholders as 'galley proof' boxes: pale-yellow hatch with a proof-reader mark '¶ lorem: to be written'
+- **Inter Tight** per titoli, etichette, numeri e navigazione; **Inter** per il testo. Entrambi variabili (pesi 100-900), licenza OFL, ospitati in `src/assets/fonts/`: woff2 di Fontsource 5.3.0, subset latin e latin-ext, con `OFL.txt`. `font-display: swap` e preload di Inter Tight (latin) nell'include `head`. Nessuna richiesta a Google Fonts o a CDN.
+- Dimensioni fisse per etichette e interfaccia (`--size-*`), passi fluidi con `clamp()` per testo e titoli (`--step-*`). Titoli in peso 600-700 con spaziatura negativa; etichette in maiuscolo, 13px, spaziatura 0.06em.
+- Le frecce dei link sono caratteri del font: ↓ (U+2193) e ↑ (U+2191) sono nel subset, → no.
 
-**Rischi**: Can read as a humanities journal and feel too quiet for an early-career, playful community. Terracotta is AA only, not AAA. Gives weaker per-edition identity, so Parma does not stand out much. Serif body text needs a generous size on low-end phones.
+### Componenti
 
-## D2 · Phase Space (dark, instrument display)
+| File | Componente |
+| --- | --- |
+| `layout.css` | contenitore, griglia a 12 colonne, header con il marchio ("FRS" e il nome per esteso, separati da un filetto; link alla home, non `h1`), navigazione nell'HTML con `aria-current` (sotto 48rem su una riga sotto il marchio), intestazioni di sezione numerate (include `section-head.njk`), footer nero con l'email da `site.yml` in grande |
+| `components/masthead.css` | titolo della home molto grande con le iniziali F, R, S in blu, frase introduttiva, link alla prossima edizione |
+| `components/next-edition.css` | banda blu "Next edition": anno, città da bordo a bordo (classe `chars-N` dal filtro `fitChars`), quattro fatti (Dates, Venue, Call for abstracts, Registration) |
+| `components/edition-list.css` | le edizioni come lista tipografica: versione o "Next", città e anno in grande, dettagli in mezzo; la prossima in blu |
+| `components/point-list.css` | punti brevi con filetto, titolo e paragrafo (About); variante `is-numbered` con 01, 02, ... |
+| `components/arrow-link.css` | link con filetto, etichetta, titolo in blu e freccia; solo verso destinazioni reali |
+| `components/photo.css` | foto in bianco e nero; `.split` affianca foto e testo |
+| `components/funding-band.css` | banda dei finanziamenti: dicitura del finanziatore alla lettera e striscia dei loghi nei colori originali (banner EFC obbligatorio di Lucca 2025) |
+| `components/program.css` | programma di un'edizione: una tabella per giorno, tutti i giorni visibili, un `id` per ogni slot; tipo di sessione in `data-type` (keynote in blu, pause e momenti sociali attenuati), senza icone |
+| `components/placeholder.css` | i tre placeholder (sotto) |
 
-A night-mode 'instrument readout': dark surfaces, perceptually uniform colormap accents (viridis-like, which scientists recognize), and one canonical complex-systems model as the hero: a deterministic Watts-Strogatz ring that rewires from lattice to small-world as you scroll. This replaces the generic floating-particle 'plexus' background.
+`edition.css`, `archive.css` e `pages.css` sono quasi vuoti: li riempiono i task paralleli del Giorno 2, uno per file. `src/styles.css` contiene solo le classi delle pagine portate dal vecchio sito (about, contact, events, Roma 2024, Lucca 2025), ridisegnate con i token; il Giorno 2 lo elimina.
 
-**Palette**
+### Placeholder
 
-- #0B1020 night: page background
-- #131B2E surface: cards and panels
-- #26304A line: borders, graph edges
-- #E6EAF2 text: body (15.7:1)
-- #9AA3B8 muted: secondary text (7.5:1)
-- #2BB3A3 teal: primary accent, links (7.3:1)
-- #C6E04A lime: CTA and highlights (12.8:1)
-- #8E7CF0 violet: secondary accent, past editions (5.7:1)
-- #FFFFFF logo plate: white plates behind the IMT logo and funding banner
+Si scrivono solo con l'include `placeholder` (tipo, testo), che `scripts/check.sh` conta. Ogni tipo ha un'etichetta testuale, non solo un colore:
 
-**Tipografia**: Bricolage Grotesque (display 700) + Inter (body) + JetBrains Mono (data readouts, dates, times)
+- **`tba`**: la sigla "TBA" (`<abbr title="To be announced">`) in Inter Tight 600, al posto e nel corpo del valore che manca. Lettere a contorno nelle misure grandi (da 24px, testo grande per le WCAG: fatti della banda blu, anno nella lista delle edizioni, classe `tba-hollow`), piene sotto. Il contorno prende il colore del testo, quindi ha lo stesso contrasto del testo vero su bianco, sul blu e sul nero.
+- **`lorem`**: testo nel colore secondario con un filetto blu a sinistra e l'etichetta "Placeholder text · " in maiuscolo, generata dal CSS.
+- **`unbuilt`**: box sobrio con filetto da 1px e l'etichetta "Not developed yet:" in maiuscolo blu. Niente righe a pericolo.
 
-**Elementi distintivi**
+Sul blu e sul nero filetti ed etichette prendono il colore del testo.
 
-- Hero canvas or SVG: Watts-Strogatz ring (about 48 nodes, k=4) with rewiring probability tied to scroll; static SVG fallback and prefers-reduced-motion respected
-- Program as a horizontal 'spectrogram' strip per day, colored by session type along the colormap
-- Mono 'readout' metadata rows (dates, venue, status) styled like instrument labels
-- Edition cards as small multiples, each with a tiny network glyph (sized by real participant numbers only when known)
-- Placeholders as dashed 'NO SIGNAL' panels
+### Note di implementazione
 
-**Rischi**: Closest to the network-graph cliché the brief warns about. Dark UIs print badly and can look like a tech start-up or crypto site to institutions. The IMT AVIF logo (blue on transparent) and the PNRR banner need white plates. JS animation adds accessibility and performance work that competes with the 2-3 day budget.
-
-## D3 · Motifs (Italian-Swiss poster series, one color per edition)
-
-Each edition is a poster in a series: strict grid, flat color fields, huge edition numerals, confident wide type. Each edition takes its color from its host city, with giallo Parma for 2026. The icon system replaces emoji with network motifs, the 3-node directed triads from the motif literature (feed-forward loop, cycle, chain...): a domain-literate pattern language rather than a generic node cloud.
-
-**Palette**
-
-- #FAF8F3 canvas: page background
-- #121212 ink: text, rules, glyph strokes (17.6:1 on canvas)
-- #5C5A55 stone: secondary text, captions (6.5:1)
-- #E4DFD3 rule: hairlines, card borders
-- #EDB52F giallo Parma: Parma 2026 accent, fills only (ink on it 10.0:1; never as text, 1.8:1 on canvas)
-- #8A5A00 ochre: yellow-family links and text on canvas (5.6:1)
-- #A63A2B Lucca brick: Lucca editions accent (white on it 6.4:1)
-- #1F4E8C Rome blue: Rome 2024 accent (7.8:1)
-- #2F6B4F Vienna green: Vienna accent (5.9:1)
-- #2A65AF funding band: sampled from the EFC/PNRR banner background so the mandatory banner sits flush
-
-**Tipografia**: Archivo (Google Fonts variable; display at wdth 112-125, wght 800 for numerals and headings) + IBM Plex Sans (body 400/600) + IBM Plex Mono (times, dates, labels, placeholder tags)
-
-**Elementi distintivi**
-
-- Poster hero per edition: giant numeral ('04' or 'v4.0') plus 'PARMA · 2026' in Archivo Expanded on a full-bleed giallo Parma field, with motif glyphs tiling off the right edge
-- Motif icon set as inline SVG (`{% include motif.html id="ffl" %}`), replacing every emoji; it doubles as the program legend: keynote = feed-forward loop, talk session = chain, group games = 3-cycle, social dinner = complete triad
-- Edition timeline as a path graph: one node per edition in its city color with mono dates; the upcoming node is hollow with a dashed incoming edge
-- Duotone photos (ink x edition accent) via CSS blend, which turns the 641x486 group photo into a deliberate graphic
-- Program grid with all days visible, mono times, and every slot linkable (#day2-1430); no tabs needed
-- Honest placeholders as hazard-hatched boxes (ink and yellow stripes) with mono tags rendered by the placeholder include: 'Placeholder text' (lorem), 'TBA' (tba), 'Not developed yet' (unbuilt)
-- Full-bleed #2A65AF funding band carrying the NextGenerationEU / MUR / Italiadomani / EFC / IMT banner on the Lucca 2025 page
-
-**Rischi**: The loud yellow can feel less official, so limit it to the Parma hero, CTAs and chips. Yellow must never be used for text. Per-edition accents need discipline (exactly one `--accent` per page). Big numerals force a decision on edition numbering (where does v1.X fit?). Archivo Expanded headings need clamp() sizing at 320px. A full 13-glyph motif set takes about 2 hours; fallback is 4 glyphs.
-
-## Note di implementazione
-
-- Font (licenza OFL) ospitati nel sito in `woff2`, non caricati da Google Fonts: niente richieste a servizi terzi e nessun problema di privacy.
-- Un solo `--accent` per pagina, ricavato dall'edizione. Il giallo Parma non si usa mai per il testo.
-- I placeholder (`data-placeholder="lorem|tba|unbuilt"`, vedi `CLAUDE.md`) hanno uno stile proprio e ben visibile, con un'etichetta testuale (non solo colore) generata dall'include `placeholder`.
+- Colori, font, dimensioni, spaziature, filetti e focus solo dai token di `tokens.css`. Niente stili inline, `<style>` per pagina o `!important`.
+- Focus visibile ovunque: contorno di 3px, nel blu sul bianco e nel colore del testo sulle superfici piene. Il primo elemento di ogni pagina è lo skip link verso `#main`.
+- Il nome di una città che deve riempire la sua colonna (banda blu, lista delle edizioni) porta la classe `chars-N`, con N = `{{ città | fitChars }}` (da 4 a 12): la dimensione è la larghezza della colonna divisa per il numero di lettere.
+- La foto di gruppo (`pictures/cover.png`, 641x486) ha `width`/`height`, `loading="lazy"` e il filtro `grayscale`; consenso, didascalia e testo alternativo restano da verificare con il team (`docs/AUDIT.md`, content-55).
 
 ## Mappa del sito proposta
 
 - /  (Home: next-edition hero for FRS 2026 Parma, one-line 'what is FRS', edition timeline, group photo, contact strip)
-- /editions/  (Archive: path-graph timeline plus a card per edition; redirect_from /events.html)
+- /editions/  (Archive: typographic list of every edition, as on the home; redirect_from /events.html)
 - /editions/2026-parma/  (NEW: current edition page; sections below)
 - /editions/2025-lucca/  (IMT Lucca, 18-20 Dec 2025: past-tense archive, final program from YAML, mandatory EFC/PNRR funding band; redirect_from /events/lucca.html)
 - /editions/2024-rome/  (v2.0 CREF Rome, 20-22 Nov 2024: real program and talk list, AI filler and phone number removed; redirect_from /events/frs2024-winter.html)
-- /editions/vienna/  (v1.X CSH Vienna: stub with a lorem block (data-placeholder="lorem") and the year as TBA until the team supplies them; slug becomes <year>-vienna once known)
-- /editions/lucca-v1/  (v1.0 Lucca: stub as above; slug becomes <year>-lucca once known)
+- /editions/2025-lipari/  (FRSummer 2025, v2.X Lipari: stub with a lorem block (data-placeholder="lorem") and the dates as TBA until the team supplies them)
+- /editions/2024-vienna/  (v1.X CSH Vienna, February 2024 (month to confirm): stub as above)
+- /editions/2023-lucca/  (v1.0 Lucca, November 2023 (month to confirm): stub as above)
 - /about/  (what FRS is, how editions are self-organized, how to propose or host the next one; team-written text or labelled lorem; redirect_from /about.html)
 - /people/  (NEW: organizers by edition from _data/people.yml, consent-gated)
 - /contact/  (real email only, no fake form or socials; redirect_from /contact.html)
@@ -119,14 +95,14 @@ Each edition is a poster in a series: strict grid, flat color fields, huge editi
 
 | Sezione | Scopo | Dati richiesti al team | Placeholder |
 | --- | --- | --- | --- |
-| Hero / masthead | Identify the edition at a glance: name, number, city, dates, host, status chip, one primary CTA. | Official name and numbering (e.g. 'FRS 2026 · Parma', 'v4.0' or '4th edition'?), exact dates, host institution(s), current status (save-the-date / call open / registration open / program out / closed). | Nulls in editions.yml render as a TBA chip (data-placeholder="tba", e.g. 'Dates TBA'). No stock photo of Parma: the giallo-Parma color field with motif pattern is the design until a licensed photo is supplied with credit. No lorem in the hero. |
+| Hero / masthead | Identify the edition at a glance: name, number, city, dates, host, status chip, one primary CTA. | Official name and numbering (e.g. 'FRS 2026 · Parma', 'v4.0' or '4th edition'?), exact dates, host institution(s), current status (save-the-date / call open / registration open / program out / closed). | Nulls in editions.yml render as a TBA chip (data-placeholder="tba", e.g. 'Dates TBA'). No stock photo of Parma: the blue field with the city name set edge to edge is the design until a licensed photo is supplied with credit. No lorem in the hero. |
 | Status bar / primary CTA | Tell visitors the one thing they can do now (submit, register, read program). | Which phase is active today, and the external URL for it (Google Form or other). | Show the button only when a real URL exists in the data. Otherwise a plain status line such as 'Registration not open yet' (a real status, not a placeholder; no disabled or fake button). Never use href="#". |
 | Key dates timeline | Deadlines in one glance: call opens, abstract deadline, notification, registration deadline, workshop days. | Each milestone date and whether it has passed. | Render from _data with `date: null` shown as TBA (data-placeholder="tba"). Past, open and closed states are set explicitly in YAML (no build-time 'today' logic). Hide the section entirely if no milestone is known. |
 | About this edition | Two short paragraphs: why Parma, who it brings together, what is different this year. | Text written by the organizers (it can reuse the team-written line in lucca.html:113 about CREF and IMT as sister institutions). | Lorem ipsum through the placeholder include (data-placeholder="lorem"; the include renders the visible label), counted by scripts/check.sh. No AI-written stand-in prose. |
 | Topics / scientific scope | Signals fit for the call (networks, economic complexity, social dynamics, etc.). | A list of 4-8 topics confirmed by organizers. | Hidden until the list exists. Topics are factual claims, so lorem would be misleading. |
 | Call for abstracts | Who can submit, format (talk length, poster?), how selection works, deadline, submission link. | Eligibility, talk/poster format, selection criteria, deadline, submission URL. | Explanatory text as a lorem block (data-placeholder="lorem"). Deadline as a TBA chip (data-placeholder="tba"). Submission: real link button, or a plain status line 'Submission not open yet'. If the team plans an on-site submission form that does not exist, an unbuilt box (data-placeholder="unbuilt", 'Not developed yet: abstract submission form') with no fake input fields. |
 | Registration & costs | Fee (free?), what is covered (accommodation, meals, social dinner, travel support), capacity, how to register. | Fee policy, coverage, travel-support rules, capacity, registration URL and deadline. | Coverage and fee facts are TBA (data-placeholder="tba"; never lorem, since they are commitments). The registration button follows the same rule as the CTA. Any on-site form is an unbuilt box (data-placeholder="unbuilt"). |
-| Program | Day-by-day schedule with all days visible and linkable slots, using the motif legend for session types. | _data/programs/2026-parma.yml: days, slots (start, end, type, title, speakers, affiliations), session themes. | Until data exists, one line: 'Program: TBA' (data-placeholder="tba"). Show day columns only if dates are known. Never invent times, session titles or speakers, and never use lorem for names. |
+| Program | Day-by-day schedule with all days visible and linkable slots; session types as text, with no icons. | _data/programs/2026-parma.yml: days, slots (start, end, type, title, speakers, affiliations), session themes. | Until data exists, one line: 'Program: TBA' (data-placeholder="tba"). Show day columns only if dates are known. Never invent times, session titles or speakers, and never use lorem for names. |
 | Keynotes / invited speakers | Credibility and draw: names, affiliations, talk titles, optional photos. | Confirmed speakers with affiliation, title and photo consent. | Hidden until at least one speaker is confirmed. No silhouette avatars or 'Speaker TBA' cards. |
 | Venue & getting to Parma | Where exactly (building, room, address) and how to arrive (train via Bologna/Milan, station-to-venue route). | Venue name, room, address, access instructions (badges, entrances), travel notes the team has verified. | Address shown as 'Venue TBA' (data-placeholder="tba") until confirmed. Travel prose as a lorem block (data-placeholder="lorem") until the team writes or verifies it. Map: a plain OpenStreetMap link once the address is known, with no embedded map widget (if the team later wants one, it is an unbuilt box). |
 | Accommodation | Whether rooms are provided and booked by organizers, check-in/out, or suggestions. | Policy (covered / block booking / self-booked), hotel or residence names, dates, booking procedure. | A TBA status line (data-placeholder="tba") plus a lorem block (data-placeholder="lorem") for the explanatory text. No invented hotel names. |

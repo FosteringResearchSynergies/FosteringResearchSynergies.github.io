@@ -4,24 +4,26 @@
 # Unknown value: null. Templates show null as a TBA placeholder or hide the section; never guess.
 #
 # Replace [] with the entries. The commented entry below lists every key.
-# Sources: the pages in src/ (src/events.njk, src/events/frs2024-winter.njk, src/events/lucca.njk).
-# TODO(team): verificare anno, sede ed ente ospitante di v1.0 Lucca e v1.X Vienna (docs/ROADMAP.md, domanda 6).
-- slug: "lucca"
+# Sources: the pages in src/ (src/events.njk, src/events/frs2024-winter.njk, src/events/lucca.njk); month and
+# year of v1.0 Lucca and v1.X Vienna, and the FRSummer edition in Lipari, from the organizer (20 October 2026).
+# TODO(team): verificare i mesi di v1.0 Lucca (novembre 2023) e v1.X Vienna (febbraio 2024), indicati a memoria,
+# e completare giorni, sede ed ente ospitante delle due edizioni e di FRSummer 2025 (docs/ROADMAP.md, domanda 6).
+- slug: "2023-lucca"
   name: null
   version: "v1.0"
-  year: null
+  year: 2023
   city: "Lucca"
   status: past
+  # TODO(team): mese indicativo, da confermare; giorni da aggiungere.
   dates:
-    start: null
-    end: null
+    start: "2023-11"
+    end: "2023-11"
   host: null
   venue:
     name: null
     address: null
   participants: null
   summary: null
-  accent: lucca
   program: null
   milestones: []
   links:
@@ -29,22 +31,22 @@
     registration: null
   funding: null
 
-- slug: "vienna"
+- slug: "2024-vienna"
   name: null
   version: "v1.X"
-  year: null
+  year: 2024
   city: "Vienna"
   status: past
+  # TODO(team): mese indicativo, da confermare; giorni da aggiungere.
   dates:
-    start: null
-    end: null
+    start: "2024-02"
+    end: "2024-02"
   host: null
   venue:
     name: null
     address: null
   participants: null
   summary: null
-  accent: vienna
   program: null
   milestones: []
   links:
@@ -70,8 +72,30 @@
   participants: null
   # TODO(team): verificare. Testo di src/events.njk senza "50+" ed "epic" (docs/AUDIT.md, content-28).
   summary: "The second edition of FRS brought together young researchers from CREF, IMT Lucca, and CSH Vienna for three days of network theory, economic complexity, social dynamics, and informal scientific exchange. Features included 5 senior talks, 30+ presentations, a complexity quiz, and a social dinner in San Lorenzo."
-  accent: rome
   program: "2024-rome"
+  milestones: []
+  links:
+    call: null
+    registration: null
+  funding: null
+
+- slug: "2025-lipari"
+  name: "FRSummer"
+  version: "v2.X"
+  year: 2025
+  city: "Lipari"
+  status: past
+  # TODO(team): verificare nome e versione; aggiungere date, sede ed ente ospitante.
+  dates:
+    start: null
+    end: null
+  host: null
+  venue:
+    name: null
+    address: null
+  participants: null
+  summary: null
+  program: null
   milestones: []
   links:
     call: null
@@ -94,7 +118,6 @@
   # TODO(team): verificare il numero di partecipanti (la pagina dice "30 participants expected").
   participants: null
   summary: null
-  accent: lucca
   program: "2025-lucca"
   milestones: []
   links:
@@ -126,7 +149,6 @@
     address: null
   participants: null
   summary: null
-  accent: parma
   program: null
   milestones: []
   links:
@@ -142,15 +164,14 @@
 #   city: null
 #   status: upcoming              # upcoming | past
 #   dates:
-#     start: null                 # "YYYY-MM-DD", quoted
-#     end: null                   # "YYYY-MM-DD", quoted; same as start for a one-day edition
+#     start: null                 # "YYYY-MM-DD", quoted; "YYYY-MM" while only the month is known
+#     end: null                   # same format as start; same as start for a one-day edition
 #   host: null                    # host institution(s), as the team writes them
 #   venue:
 #     name: null                  # building and room
 #     address: null               # address of the venue (never a private address)
 #   participants: null            # number given by the team; null if unknown
 #   summary: null                 # one or two sentences for cards and timeline; null = lorem placeholder
-#   accent: null                  # edition colour, the data-accent value of the CSS: parma | lucca | rome | vienna
 #   program: null                 # file in src/_data/programs/ without ".yml"; null = "Program TBA"
 #   milestones: []                # key dates in order; the state is set by hand (no build-time "today")
 #   # - label: null               # e.g. abstract deadline, registration deadline

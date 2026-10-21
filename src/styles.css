@@ -1,366 +1,227 @@
-/* Global Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* Old classes of the pages ported from the static site (about, contact, events and the two edition
+   pages), restyled with the tokens of the design system (src/assets/css/). Loaded after main.css only
+   by the layout "page". Header, navigation, footer and placeholders come from main.css.
+   Giorno 2 (docs/ROADMAP.md) moves these pages to the new layouts and deletes this file. */
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    line-height: 1.6;
-    color: #333;
-}
-
+/* ---------- Containers and page headers ---------- */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    max-width: var(--max);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
 }
 
-/* Navigation */
-.navbar {
-    background-color: #2c3e50;
-    color: white;
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.nav-brand h1 {
-    font-size: 1.5rem;
-    font-weight: 600;
-}
-
-.nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-}
-
-.nav-menu a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-.nav-menu a:hover,
-.nav-menu a.active {
-    color: #3498db;
-}
-
-/* Hero Section */
 .hero {
-    background-image: url('pictures/cover.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: white;
-    padding: 5rem 0;
-    text-align: center;
-    position: relative;
+    padding-block: var(--space-fluid-xl) var(--space-fluid-l);
+    border-bottom: var(--rule) solid var(--color-rule);
 }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1;
-}
-
-.hero .container {
-    position: relative;
-    z-index: 2;
-}
-
-.hero h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+.hero h1,
+.event-detail-title {
+    font-size: var(--step-city);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.045em;
+    overflow-wrap: anywhere;
 }
 
 .hero p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Buttons */
-.btn {
-    display: inline-block;
-    padding: 0.8rem 2rem;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: all 0.3s;
+    max-width: var(--measure-lede);
+    margin-top: var(--space-4);
+    color: var(--color-ink-2);
+    font-family: var(--font-display);
+    font-size: var(--step-lede);
     font-weight: 500;
+    line-height: 1.24;
+    letter-spacing: -0.015em;
 }
 
-.btn-primary {
-    background-color: white;
-    color: #667eea;
-}
-
-.btn-primary:hover {
-    background-color: #f0f0f0;
-    transform: translateY(-2px);
-}
-
-.btn-secondary {
-    background-color: #3498db;
-    color: white;
-}
-
-.btn-secondary:hover {
-    background-color: #2980b9;
-    transform: translateY(-2px);
-}
-
-/* Content Sections */
-.content {
-    padding: 4rem 0;
-}
-
-.bg-light {
-    background-color: #f8f9fa;
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.section-header h3 {
-    font-size: 2rem;
-    color: #2c3e50;
-    margin-bottom: 0.5rem;
-}
-
-/* Grid Layout */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-/* Cards */
-.card {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-}
-
-.card h4 {
-    color: #2c3e50;
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
-}
-
-/* Event Cards */
-.event-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.event-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-}
-
-.event-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    margin-bottom: 1rem;
-}
-
-.event-title {
-    color: #2c3e50;
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-}
-
-.event-badge {
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-}
-
-.badge-upcoming {
-    background-color: #27ae60;
-    color: white;
-}
-
-.badge-past {
-    background-color: #95a5a6;
-    color: white;
-}
-
-.event-date {
-    color: #7f8c8d;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-}
-
-.event-description {
-    color: #555;
-    margin-bottom: 1rem;
-}
-
-/* Event Detail Page */
+/* Page header over a photo (the photo and its dark veil are set in the page) */
 .event-detail-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 3rem 0;
-}
-
-.event-detail-title {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    padding-block: var(--space-fluid-xl);
+    background-color: var(--color-ink);
+    color: var(--color-on-ink);
 }
 
 .event-info {
     display: flex;
-    gap: 2rem;
     flex-wrap: wrap;
-    margin-top: 1rem;
+    gap: var(--space-2) var(--space-8);
+    margin-top: var(--space-6);
+    font-size: var(--step-0);
 }
 
 .event-info-item {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--space-2);
 }
 
-.schedule-item {
-    background: white;
-    padding: 1.5rem;
-    border-left: 4px solid #3498db;
-    margin-bottom: 1rem;
-    border-radius: 4px;
+/* ---------- Content ---------- */
+.content {
+    padding-block: var(--space-fluid-xl);
 }
 
-.schedule-time {
-    font-weight: 600;
-    color: #3498db;
-    margin-bottom: 0.5rem;
+.content p {
+    max-width: var(--measure);
 }
 
-.schedule-title {
-    font-size: 1.2rem;
-    color: #2c3e50;
-    margin-bottom: 0.5rem;
+.content p + p,
+.content p + ul,
+.content ul + p {
+    margin-top: var(--space-4);
 }
 
-.schedule-speaker {
-    color: #7f8c8d;
-    font-style: italic;
+/* Lists of the old pages: a small indent keeps the bullets inside the text column, whether the page
+   sets them inside (inline style) or outside */
+.content ul:not([class]) {
+    padding-left: var(--space-5);
 }
 
-/* Registration Box */
+.content h2 {
+    margin-bottom: var(--space-4);
+    padding-top: var(--space-3-5);
+    border-top: var(--rule) solid var(--color-rule);
+    font-size: var(--step-2);
+    letter-spacing: -0.025em;
+}
+
+.content h3 {
+    margin-bottom: var(--space-3);
+    font-size: var(--step-1);
+}
+
+.content [data-placeholder="unbuilt"] {
+    margin-top: var(--space-4);
+}
+
+.section-header {
+    margin-bottom: var(--space-8);
+}
+
+/* ---------- Columns and blocks ---------- */
+.grid {
+    --column-min: 18rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--column-min)), 1fr));
+    gap: var(--space-8) var(--gap);
+    margin-top: var(--space-8);
+}
+
+.card {
+    padding-top: var(--space-5);
+    border-top: var(--rule) solid var(--color-rule);
+}
+
+.card h2 {
+    margin-bottom: var(--space-2);
+    padding-top: 0;
+    border-top: 0;
+    font-size: var(--step-3);
+    font-weight: 700;
+}
+
 .registration-box {
-    background: #ecf0f1;
-    padding: 2rem;
-    border-radius: 8px;
-    margin-top: 2rem;
+    margin-top: var(--space-8);
+    padding-top: var(--space-5);
+    border-top: var(--rule) solid var(--color-rule);
 }
 
-.registration-box h4 {
-    color: #2c3e50;
-    margin-bottom: 1rem;
+/* ---------- Events list ---------- */
+.event-card {
+    margin-bottom: var(--space-8);
+    padding-top: var(--space-5);
+    border-top: var(--rule) solid var(--color-rule);
 }
 
-/* News Items */
-.news-item {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    margin-bottom: 1.5rem;
+.event-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: space-between;
+    gap: var(--space-3) var(--space-6);
+    margin-bottom: var(--space-4);
 }
 
-.news-item h4 {
-    color: #2c3e50;
-    margin-bottom: 0.5rem;
+.event-header > div {
+    min-width: 0;
 }
 
-.date {
-    color: #7f8c8d;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
+.content .event-title {
+    margin-bottom: var(--space-2);
+    padding-top: 0;
+    border-top: 0;
 }
 
-/* Footer */
-footer {
-    background-color: #2c3e50;
-    color: white;
-    text-align: center;
-    padding: 2rem 0;
-    margin-top: 3rem;
+.event-date,
+.event-description {
+    color: var(--color-ink-2);
 }
 
-/* Second footer line (footer.note in the page data), until now an inline style of the Rome 2024 page */
-.footer-note {
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
+.event-description {
+    margin-bottom: var(--space-4);
 }
 
-/* Program Tabs */
+.event-badge {
+    padding: var(--space-1) var(--space-2);
+    border: var(--rule) solid currentColor;
+    font-family: var(--font-display);
+    font-size: var(--size-label);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.badge-upcoming {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+}
+
+.badge-past {
+    color: var(--color-ink-2);
+}
+
+.btn {
+    display: inline-block;
+    padding-block: var(--space-2);
+    color: var(--color-accent);
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-decoration-thickness: var(--rule-strong);
+}
+
+/* ---------- Program (tabs of the old pages: their script shows one day at a time) ---------- */
 .program-tabs {
     display: flex;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
     flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-block: var(--space-6) var(--space-4);
 }
 
 .tab-button {
-    background-color: #ecf0f1;
-    color: #2c3e50;
-    border: 2px solid transparent;
-    padding: 0.8rem 1.5rem;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
+    padding: var(--space-3) var(--space-4);
+    border: var(--rule) solid var(--color-ink);
+    border-radius: var(--radius);
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: var(--size-ui);
     font-weight: 500;
-    transition: all 0.3s;
+    cursor: pointer;
 }
 
 .tab-button:hover {
-    background-color: #d5dbdb;
+    border-color: var(--color-accent);
+    color: var(--color-accent);
 }
 
 .tab-button.active {
-    background-color: #3498db;
-    color: white;
-    border-color: #3498db;
+    background: var(--color-ink);
+    color: var(--color-paper);
 }
 
 .program-day {
+    --time-column: 9rem;
     display: none;
 }
 
@@ -368,66 +229,36 @@ footer {
     display: block;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .navbar .container {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .nav-menu {
-        gap: 1rem;
-    }
-
-    .hero h2 {
-        font-size: 2rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
-    }
-
-    .event-header {
-        flex-direction: column;
-    }
-
-    .grid {
-        grid-template-columns: 1fr;
-    }
-
-    .program-tabs {
-        flex-direction: column;
-    }
-
-    .tab-button {
-        width: 100%;
-    }
+.schedule-item {
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-4);
+    border-top: var(--rule) solid var(--color-rule-soft);
 }
 
-/* Honest placeholders: missing text (lorem), missing data (tba), features not developed yet (unbuilt) */
-[data-placeholder] {
-    background: #fff8e6;
-    border: 1px dashed #8a5a00;
-    border-radius: 4px;
+.schedule-time {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
 }
 
-[data-placeholder="tba"] {
-    padding: 0 0.3em;
+.schedule-title {
+    font-family: var(--font-display);
     font-weight: 600;
 }
 
-[data-placeholder="lorem"],
-[data-placeholder="unbuilt"] {
-    padding: 0.75rem 1rem;
+.schedule-speaker {
+    color: var(--color-ink-2);
 }
 
-[data-placeholder="lorem"]::before {
-    content: "Placeholder text · ";
-    font-weight: 600;
-    color: #8a5a00;
-}
+@media (min-width: 48rem) {
+    .schedule-item {
+        grid-template-columns: var(--time-column) minmax(0, 1fr);
+        column-gap: var(--gap);
+    }
 
-[data-placeholder="unbuilt"] {
-    border-width: 2px;
-    margin-top: 1rem;
+    .schedule-time {
+        grid-row: 1 / span 2;
+    }
+
 }

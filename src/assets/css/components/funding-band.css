@@ -1,0 +1,35 @@
+/* Funding band: the mandatory acknowledgement of a funder (the EFC / NextGenerationEU banner of
+   Lucca 2025). The wording is the funder's, verbatim; the logo strip keeps its own background and is
+   never recoloured, cropped or placed on the blue field. A filet above, the text, then the strip at the
+   width of the content (never wider than the file).
+
+   <section class="funding-band" aria-label="Funding">
+     <div class="wrap">
+       <p class="funding-band-text">...</p>
+       <img class="funding-band-logos" src="..." width="1260" height="145" alt="...">
+     </div>
+   </section> */
+
+.funding-band {
+    padding-block: var(--space-8) var(--space-12);
+}
+
+.funding-band > .wrap {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: var(--rule) solid var(--color-rule);
+}
+
+.funding-band-text {
+    max-width: var(--measure);
+    color: var(--color-ink-2);
+    font-size: var(--size-small);
+    line-height: 1.6;
+}
+
+/* width and height come from the attributes; max-width: 100% (base) scales the strip down */
+.funding-band-logos {
+    height: auto;
+}

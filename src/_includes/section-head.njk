@@ -1,0 +1,17 @@
+{#-
+  Section head: a filet, an optional number in the accent and the h2 of the section.
+
+    {% from "section-head.njk" import sectionHead %}
+    {{ sectionHead("Editions", "editions-title", "02") }}    title, id of the h2 (for aria-labelledby), number
+    {{ sectionHead("Contact", "footer-title") }}             without number
+
+  The number is decoration (aria-hidden): the order of the sections already says it.
+-#}
+{%- macro sectionHead(title, id, number) -%}
+<div class="section-head">
+    {%- if number %}
+    <span class="section-num" aria-hidden="true">{{ number }}</span>
+    {%- endif %}
+    <h2 class="section-title"{% if id %} id="{{ id }}"{% endif %}>{{ title }}</h2>
+</div>
+{%- endmacro -%}

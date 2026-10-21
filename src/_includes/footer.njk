@@ -1,10 +1,19 @@
-{#- Page data (optional): footer.copyright replaces the text after the copyright sign, footer.note adds
-    a second, smaller line. -#}
-<footer>
-    <div class="container">
-        <p>&copy; {{ footer.copyright or "2025 Fostering Research Synergies. All rights reserved." }}</p>
-        {%- if footer.note %}
-        <p class="footer-note">{{ footer.note }}</p>
-        {%- endif %}
+{#- Site footer: the contact address from site.yml, set large on black.
+    Page data (optional): footer.number is the section number shown in the head (the home numbers its
+    sections); footer.copyright replaces the text after the copyright sign; footer.note adds a second line. -#}
+{%- from "section-head.njk" import sectionHead -%}
+<footer class="site-footer surface-ink" aria-labelledby="footer-title">
+    <div class="wrap">
+        {{ sectionHead("Contact", "footer-title", footer.number) }}
+        <a class="footer-email" href="mailto:{{ site.email }}">{{ site.email }}</a>
+        <div class="footer-bar">
+            <div class="footer-text">
+                <p>&copy; {{ footer.copyright or site.name }}</p>
+                {%- if footer.note %}
+                <p class="footer-note">{{ footer.note }}</p>
+                {%- endif %}
+            </div>
+            <p class="footer-mark" aria-hidden="true">{{ site.short_name }}</p>
+        </div>
     </div>
 </footer>

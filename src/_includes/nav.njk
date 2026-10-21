@@ -1,24 +1,19 @@
-{#- Site navigation, rendered in the HTML (it replaces navbar.js). An item is active on its own page
-    and, with "section", on every page under that path. -#}
+{#- Main navigation, rendered in the HTML (no JavaScript). Four short items: at 320px they fit on one
+    line under the brand. An item is the current page (aria-current="page") on its own URL and, with
+    "section", the current section (aria-current="true") on every page under that path.
+    Editions points to /events.html until the archive /editions/ exists (docs/ROADMAP.md, Giorno 2). -#}
 {%- set navItems = [
-    { label: "Home", href: "/index.html" },
-    { label: "Events", href: "/events.html", section: "/events/" },
+    { label: "Home", href: "/" },
+    { label: "Editions", href: "/events.html", section: "/events/" },
     { label: "About", href: "/about.html" },
     { label: "Contact", href: "/contact.html" }
 ] -%}
-{#- Eleventy gives /index.html as "/" -#}
-{%- set here = "/index.html" if page.url == "/" else page.url -%}
-<nav class="navbar">
-    <div class="container">
-        <div class="nav-brand">
-            <h1>Fostering Research Synergies</h1>
-        </div>
-        <ul class="nav-menu">
-            {%- for item in navItems %}
-            {%- set isCurrent = here == item.href %}
-            {%- set isActive = isCurrent or (item.section and here.startsWith(item.section)) %}
-            <li><a href="{{ item.href }}"{% if isActive %} class="active"{% endif %}{% if isCurrent %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
-            {%- endfor %}
-        </ul>
-    </div>
+<nav class="site-nav" aria-label="Main">
+    <ul>
+        {%- for item in navItems %}
+        {%- set isCurrent = page.url == item.href %}
+        {%- set inSection = item.section and page.url.startsWith(item.section) %}
+        <li><a href="{{ item.href }}"{% if isCurrent %} aria-current="page"{% elif inSection %} aria-current="true"{% endif %}>{{ item.label }}</a></li>
+        {%- endfor %}
+    </ul>
 </nav>

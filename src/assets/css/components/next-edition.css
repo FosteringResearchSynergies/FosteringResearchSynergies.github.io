@@ -1,0 +1,111 @@
+/* "Next edition" band: the one blue field of the site. The city is set edge to edge; four facts below.
+
+   <section class="section surface-accent next-band">
+     <div class="wrap">
+       (section head)
+       <h3 class="next-band-poster">
+         <span class="next-band-kicker">FRS 2026</span>
+         <span class="next-band-city chars-5">Parma</span>
+       </h3>
+       <dl class="next-band-facts">
+         <div class="next-band-fact"><dt class="label">Dates</dt><dd>...</dd></div>
+         <div class="next-band-fact"><dt class="label">Registration</dt><dd class="is-state">Not open yet</dd></div>
+       </dl>
+     </div>
+   </section>
+
+   chars-N (base.css) is the number of letters of the city: the name fills the width of the poster. */
+
+.next-band {
+    --fact-height: 8.5rem;
+}
+
+.next-band-poster {
+    display: grid;
+    gap: var(--space-2);
+    container-type: inline-size;
+}
+
+.next-band-kicker {
+    font-size: var(--step-2);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.01em;
+}
+
+.next-band-city {
+    display: block;
+    margin-left: -0.055em;
+    font-size: var(--step-city);
+    font-size: min(100cqi / (var(--chars, 5) * var(--letter-width)), var(--step-poster-max));
+    font-weight: 700;
+    line-height: 0.8;
+    letter-spacing: -0.03em;   /* tighter and the r of Parma touches the m */
+    overflow-wrap: anywhere;
+}
+
+.next-band-facts {
+    display: grid;
+    margin-top: var(--space-fluid-xl);
+    border-top: var(--rule) solid var(--color-on-accent);
+}
+
+.next-band-fact {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-block: var(--space-3-5);
+    border-bottom: var(--rule) solid var(--color-rule-on-accent);
+}
+
+.next-band-fact dt {
+    color: var(--color-on-accent-2);
+}
+
+.next-band-fact dd {
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-align: right;
+}
+
+.next-band-fact dd.is-state {
+    font-size: var(--step-1);
+    letter-spacing: -0.01em;
+}
+
+@media (min-width: 48rem) {
+    .next-band-facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: var(--gap);
+        row-gap: var(--space-8);
+        border-top: 0;
+    }
+
+    .next-band-fact {
+        display: grid;
+        align-content: space-between;
+        gap: var(--space-10);
+        min-height: var(--fact-height);
+        padding-block: var(--space-3-5) 0;
+        border-top: var(--rule) solid var(--color-on-accent);
+        border-bottom: 0;
+    }
+
+    .next-band-fact dd {
+        text-align: left;
+    }
+
+    .next-band-fact dd.is-state {
+        font-size: var(--step-3);
+    }
+}
+
+@media (min-width: 64rem) {
+    .next-band-facts {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}

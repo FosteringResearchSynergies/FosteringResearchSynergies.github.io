@@ -1,0 +1,30 @@
+/* Photographs in black and white, never wider than the file: the <img> carries width and height, and
+   max-width: 100% (base) scales it down in narrow columns. No upscaling, no cropping.
+
+   <figure class="photo"><img src="..." width="641" height="486" alt="..." loading="lazy"></figure> */
+
+.photo img {
+    filter: grayscale(1) contrast(1.08);
+}
+
+/* Photo (or other media) next to text: stacked, then 6 + 5 of the 12 columns from 64rem */
+.split {
+    display: grid;
+    gap: var(--space-fluid-m);
+}
+
+@media (min-width: 64rem) {
+    .split {
+        grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+        column-gap: var(--gap);
+        align-items: start;
+    }
+
+    .split > :first-child {
+        grid-column: 1 / span 6;
+    }
+
+    .split > :last-child {
+        grid-column: 8 / -1;
+    }
+}

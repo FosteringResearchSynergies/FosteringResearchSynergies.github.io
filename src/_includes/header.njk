@@ -1,0 +1,7 @@
+{#- Site header: brand (a link to the home, not a heading: each page has its own h1) and navigation. -#}
+<header class="site-header">
+    <div class="wrap site-header-inner">
+        <a class="brand" href="/"><span class="brand-mark">{{ site.short_name }}</span> <span class="brand-name">{{ site.name }}</span></a>
+        {% include "nav.njk" %}
+    </div>
+</header>
