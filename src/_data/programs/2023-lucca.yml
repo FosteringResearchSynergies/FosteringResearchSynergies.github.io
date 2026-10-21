@@ -1,12 +1,17 @@
-# Program of FRS 2023 · Lucca (v1.0), from the organizers' final report "Report on "Fostering Research
-# Synergies: The IMT-CREF PhD Workshop"" (PDF from the team, read on 21 October 2026). Keys: see _example.yml.
-# The report gives the number of talks of each Monday session (12 minutes plus 3 for questions), not their
-# titles or speakers; the three Tuesday talks lasted 30 minutes each, followed by a discussion.
-# TODO(team): relatori dei tre talk di martedì e, se esistono, gli elenchi dei talk di lunedì.
+# Program of FRS 2023 · Lucca (v1.0). Keys: see _example.yml. Sources:
+# - the organizers' final report "Report on "Fostering Research Synergies: The IMT-CREF PhD Workshop""
+#   (PDF from the team, read on 21 October 2026): times of the slots, Tuesday talks, group discussion;
+# - the organizers' emails to participants of 16 October, 7 and 9 November and 12 November 2023 (forwarded,
+#   read on 21 October 2026): Monday talks, from the final program of 12 November, the aperitivo and the
+#   restaurant of the social dinner.
+# Monday talks lasted 12 minutes plus 3 for questions; the three Tuesday talks 30 minutes each, followed by a
+# discussion. Where the report and the final program differ, the times are the report's.
+# TODO(team): relatori dei tre talk di martedì.
 days:
   - date: "2023-11-13"
     title: null
     slots:
+      # TODO(team): il programma definitivo del 12 novembre indica 9:00-9:30.
       - start: "09:15"
         end: "09:30"
         type: other
@@ -21,8 +26,18 @@ days:
         title: "Morning Session"
         theme: null
         speakers: []
-        talks: []
-        note: "Five talks"
+        talks:
+          - speaker: "Giulio Iannelli"
+            title: "Rethinking Disorder in light of the Laplacian renormalization group"
+          - speaker: "Anna Gallo"
+            title: "Signed Networks and Balance Theory"
+          - speaker: "Francesca Giuffrida"
+            title: "Model Selection and Statistical Inference for Complex Networks"
+          - speaker: "Alessio Catanzaro"
+            title: "Pizza model for graphs and beyond: Scale-Invariant model for Real-World networks"
+          - speaker: "Andrea Somazzi"
+            title: "Learn your entropy from informative data: an axiom ensuring the consistent identification of generalized entropies"
+        note: null
       - start: "11:00"
         end: "11:30"
         type: break
@@ -37,8 +52,20 @@ days:
         title: "Midday Session"
         theme: null
         speakers: []
-        talks: []
-        note: "Six talks"
+        talks:
+          - speaker: "Emanuele Calò"
+            title: "Monopartite Economic Complexity & Territorial Attractiveness of Regions"
+          - speaker: "Valeria Secchini"
+            title: "Revealing the link between corporate structure and tax avoidance using higher order Markov models"
+          - speaker: "Leonardo Ialongo"
+            title: "A scale-invariant approach to supply-chain reconstruction"
+          - speaker: "Massimiliano Fessina"
+            title: "Reconstructing the Ecuadorian Production Network"
+          - speaker: "Marzio Di Vece"
+            title: "Commodity-specific triads in the Dutch inter-industry production network"
+          - speaker: "Giordano De Marzo"
+            title: "Recommendation Algorithms and Social Dynamics"
+        note: null
       - start: "13:00"
         end: "14:30"
         type: break
@@ -47,14 +74,34 @@ days:
         speakers: []
         talks: []
         note: null
+      # TODO(team): il report parla di sei talk; il programma definitivo ne elenca cinque e lascia libero
+      # lo slot 15:00-15:15.
       - start: "14:30"
         end: "16:00"
         type: session
         title: "Afternoon Session"
         theme: null
         speakers: []
+        talks:
+          - speaker: "Edoardo Maggioni"
+            title: "Modeling Pro-Environmental Behavior: An ABM Approach Bridging Cognitive, Social, and Environmental Dimensions"
+          - speaker: "Alessandro Bellina"
+            title: "Urn Models for Opinion and Innovation Dynamics"
+          - speaker: "Daniele D’Armiento"
+            title: "Graph Neural Networks"
+          - speaker: "Gabriele Di Antonio"
+            title: "Reservoir computing approach for modeling Resting-State fMRI Dynamics"
+          - speaker: "Gabriele Poidomani"
+            title: "Clustering of the human brain electrical activity during sleep"
+        note: null
+      - start: "17:00"
+        end: "19:00"
+        type: social
+        title: "Aperitivo"
+        theme: null
+        speakers: []
         talks: []
-        note: "Six talks"
+        note: "Meeting in Piazza San Francesco"
 
   - date: "2023-11-14"
     title: null
@@ -114,4 +161,4 @@ days:
         theme: null
         speakers: []
         talks: []
-        note: null
+        note: "Antica Macelleria Ciberia Pucci"
