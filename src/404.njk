@@ -20,13 +20,14 @@ noindex: true
             <li>
                 <a class="arrow-link" href="/">
                     <span class="label arrow-link-kicker">Home</span>
-                    <span class="arrow-link-title">{{ site.name }}&nbsp;<span class="arrow-link-arrow is-forward" aria-hidden="true">↑</span></span>
+                    {%- set words = site.name.split(" ") %}
+                    <span class="arrow-link-title">{{ words.slice(0, -1).join(" ") }} <span class="nowrap">{{ words | last }}&nbsp;<span class="arrow-link-arrow is-forward" aria-hidden="true">↑</span></span></span>
                 </a>
             </li>
             <li>
                 <a class="arrow-link" href="/editions/">
                     <span class="label arrow-link-kicker">Archive</span>
-                    <span class="arrow-link-title">All editions&nbsp;<span class="arrow-link-arrow is-forward" aria-hidden="true">↑</span></span>
+                    <span class="arrow-link-title">All <span class="nowrap">editions&nbsp;<span class="arrow-link-arrow is-forward" aria-hidden="true">↑</span></span></span>
                 </a>
             </li>
         </ul>
