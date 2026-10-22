@@ -1,0 +1,35 @@
+---
+layout: base.njk
+title: Page not found - Fostering Research Synergies
+permalink: /404.html
+eleventyExcludeFromCollections: true
+noindex: true
+---
+{#- Served by GitHub Pages for every address that does not exist. Outside the sitemap and not indexed;
+    every link and asset is absolute, so the page works at any depth. -#}
+<div class="page-head">
+    <div class="wrap">
+        <h1 class="page-title" id="page-title">Page not found</h1>
+        <p class="page-lede">There is no page at this address.</p>
+    </div>
+</div>
+
+<section class="section section-flush-top" aria-labelledby="page-title">
+    <div class="wrap">
+        <ul class="press-list">
+            <li>
+                <a class="arrow-link" href="/">
+                    <span class="label arrow-link-kicker">Home</span>
+                    {%- set words = site.name.split(" ") %}
+                    <span class="arrow-link-title">{{ words.slice(0, -1).join(" ") }} <span class="nowrap">{{ words | last }}&nbsp;<span class="arrow-link-arrow is-forward" aria-hidden="true">↑</span></span></span>
+                </a>
+            </li>
+            <li>
+                <a class="arrow-link" href="/editions/">
+                    <span class="label arrow-link-kicker">Archive</span>
+                    <span class="arrow-link-title">All <span class="nowrap">editions&nbsp;<span class="arrow-link-arrow is-forward" aria-hidden="true">↑</span></span></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>

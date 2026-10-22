@@ -1,63 +1,86 @@
 ---
-layout: page.njk
+layout: base.njk
 title: About - Fostering Research Synergies
 permalink: /about.html
+footer:
+  number: "05"
 ---
-    <header class="hero">
-        <div class="container">
-            <h1>About Our Network</h1>
-            <p>Building bridges in early-career research</p>
+{#- About: the team's texts from the old page, unchanged, without the emoji of the three cards and the
+    inline styles. Four numbered sections, then the footer (05). Styles: src/assets/css/pages.css. -#}
+{%- from "section-head.njk" import sectionHead -%}
+<div class="page-head">
+    <div class="wrap">
+        <h1 class="page-title" id="page-title">About Our Network</h1>
+        <p class="page-lede">Building bridges in early-career research</p>
+    </div>
+</div>
+
+<section class="section section-flush-top" aria-labelledby="mission-title">
+    <div class="wrap">
+        {{ sectionHead("Our Mission", "mission-title", "01") }}
+        <div class="page-body">
+            <p class="page-text is-large">Fostering Research Synergies is an informal association dedicated to fostering collaboration, knowledge sharing, and professional development among early-career researchers. We believe that bringing together talented PhD students and postdoctoral researchers creates opportunities for meaningful scientific exchange and lasting professional relationships.</p>
         </div>
-    </header>
+    </div>
+</section>
 
-    <section class="content">
-        <div class="container">
-            <h2>Our Mission</h2>
-            <p>
-                Fostering Research Synergies is an informal association dedicated to fostering collaboration, knowledge sharing, and professional development among early-career researchers. We believe that bringing together talented PhD students and postdoctoral researchers creates opportunities for meaningful scientific exchange and lasting professional relationships.
-            </p>
+<section class="section section-flush-top" aria-labelledby="what-title">
+    <div class="wrap">
+        {{ sectionHead("What We Do", "what-title", "02") }}
+        <div class="page-body">
+            <p class="page-text">We organize small-scale workshops and conferences <span class="nowrap">1-2</span> times per year, carefully designed to:</p>
+            <ul class="point-list page-points">
+                <li class="point">
+                    <h3 class="point-title">Share Research</h3>
+                    <p class="point-text">Provide a supportive environment for presenting research findings and receiving constructive feedback from peers.</p>
+                </li>
+                <li class="point">
+                    <h3 class="point-title">Network &amp; Collaborate</h3>
+                    <p class="point-text">Create opportunities for interdisciplinary connections that can lead to future collaborations.</p>
+                </li>
+                <li class="point">
+                    <h3 class="point-title">Learn &amp; Grow</h3>
+                    <p class="point-text">Offer workshops, keynote talks, and panel discussions on topics relevant to early-career researchers.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
 
-            <h2 style="margin-top: 2rem;">What We Do</h2>
-            <p>
-                We organize small-scale workshops and conferences 1-2 times per year, carefully designed to:
-            </p>
-            <div class="grid" style="margin-top: 2rem;">
-                <div class="card">
-                    <h3>🎤 Share Research</h3>
-                    <p>Provide a supportive environment for presenting research findings and receiving constructive feedback from peers.</p>
-                </div>
-                <div class="card">
-                    <h3>🤝 Network & Collaborate</h3>
-                    <p>Create opportunities for interdisciplinary connections that can lead to future collaborations.</p>
-                </div>
-                <div class="card">
-                    <h3>📚 Learn & Grow</h3>
-                    <p>Offer workshops, keynote talks, and panel discussions on topics relevant to early-career researchers.</p>
-                </div>
-            </div>
+<section class="section section-flush-top" aria-labelledby="community-title">
+    <div class="wrap">
+        {{ sectionHead("Our Community", "community-title", "03") }}
+        <div class="page-body">
+            <p class="page-text">Our network brings together researchers from diverse backgrounds and disciplines. Whether you're working in natural sciences, engineering, social sciences, or humanities, you'll find a welcoming community of peers who share your passion for research and discovery.</p>
+        </div>
+    </div>
+</section>
 
-            <h2 style="margin-top: 3rem;">Our Community</h2>
-            <p>
-                Our network brings together researchers from diverse backgrounds and disciplines. Whether you're working in natural sciences, engineering, social sciences, or humanities, you'll find a welcoming community of peers who share your passion for research and discovery.
-            </p>
-
-            <h2 style="margin-top: 2rem;">Get Involved</h2>
-            <p>
-                There are several ways to participate in our community:
-            </p>
-            <ul style="list-style-position: inside; line-height: 2; margin-top: 1rem;">
+<section class="section section-flush-top" aria-labelledby="involved-title">
+    <div class="wrap">
+        {{ sectionHead("Get Involved", "involved-title", "04") }}
+        <div class="page-body">
+            <p class="page-text">There are several ways to participate in our community:</p>
+            <ul class="page-list">
                 <li>Attend our workshops and conferences</li>
                 <li>Present your research through talks or posters</li>
                 <li>Join our organizing committee</li>
                 <li>Help spread the word about our events</li>
                 <li>Suggest topics or speakers for future events</li>
             </ul>
+        </div>
+    </div>
+</section>
 
-            <div style="margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%); border-radius: 8px; text-align: center; color: white;">
-                <h3 style="margin-bottom: 1rem; color: white;">Join the Fostering Movement!</h3>
-                <p>Interested in future editions? Want to become an organizer? Have ideas to share?</p>
-                <p style="margin-top: 1rem;"><strong>Email:</strong> frscrefimt@gmail.com</p>
-                <p style="margin-top: 0.5rem; font-size: 0.9rem;">Because the best workshops are built by the community, for the community.</p>
+<section class="section surface-accent page-callout" aria-labelledby="join-title">
+    <div class="wrap">
+        <div class="page-body">
+            <div>
+                <h2 class="page-callout-title" id="join-title">Join the Fostering Movement!</h2>
+                <p class="page-text">Interested in future editions? Want to become an organizer? Have ideas to share?</p>
+                <p class="page-callout-email"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+                <p class="page-note">Because the best workshops are built by the community, for the community.</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>

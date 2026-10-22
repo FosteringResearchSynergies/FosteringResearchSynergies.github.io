@@ -1,8 +1,9 @@
 {#- Page data: title (required); description (optional: team text or repository facts only, otherwise
     the page has no description tags, see CLAUDE.md); structured_data (optional, the home only: the site
     and the organization in JSON-LD, from site.yml); stylesheets (optional list of extra stylesheet URLs,
-    loaded after main.css: the layout "page" adds /styles.css for the pages ported from the old static
-    site); redirect_to (optional, the layout "redirect": the new address of a page that moved). The font of the titles is preloaded: the home title is set in it and is the largest element
+    loaded after main.css); redirect_to (optional, the layout "redirect": the new address of a page that
+    moved); noindex (optional: a page kept out of search engines, such as the 404). The icons are in
+    src/assets/icons/, with /favicon.ico for the browsers that ask for it at the root. The font of the titles is preloaded: the home title is set in it and is the largest element
     of the page. -#}
 {%- set canonicalUrl = (redirect_to or page.url) | canonical(site.url) %}
 <meta charset="UTF-8">
@@ -10,6 +11,8 @@
 <title>{{ title }}</title>
 {%- if redirect_to %}
 <meta http-equiv="refresh" content="0; url={{ redirect_to }}">
+{%- endif %}
+{%- if redirect_to or noindex %}
 <meta name="robots" content="noindex">
 {%- endif %}
 {%- if description %}
@@ -35,6 +38,9 @@
 } %}
 <script type="application/ld+json">{{ ld | dump | safe }}</script>
 {%- endif %}
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-tight-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/main.css">
 {%- for href in stylesheets %}

@@ -12,11 +12,11 @@ export default function (eleventyConfig) {
     // become JavaScript dates: the data files quote them ("2026-05-12").
     eleventyConfig.addDataExtension("yml,yaml", (contents) => yaml.load(contents) ?? null);
 
-    // Static files, copied as they are. src/assets/ is served as /assets/; pictures/ and styles.css
-    // belong to the pages ported from the old static site and keep their URLs.
+    // Static files, copied as they are. src/assets/ is served as /assets/; pictures/ comes from the old
+    // static site and keeps its URLs; favicon.ico stays at the root, where browsers ask for it.
     eleventyConfig.addPassthroughCopy("src/assets");
     eleventyConfig.addPassthroughCopy("src/pictures");
-    eleventyConfig.addPassthroughCopy("src/styles.css");
+    eleventyConfig.addPassthroughCopy("src/favicon.ico");
 
     // Stops the build with a message, for templates that receive invalid arguments:
     // {{ "what went wrong" | fail }}

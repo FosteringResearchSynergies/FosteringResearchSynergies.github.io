@@ -1,6 +1,5 @@
 /* Layout: container, 12-column grid, coloured surfaces, header and navigation, sections with numbered
-   heads, footer. Class names are new on purpose: /styles.css (old pages, until Giorno 2) uses
-   .container, .hero, .content, .grid, .card, .navbar. */
+   heads, footer. */
 
 /* ---------- Container and grid ---------- */
 .wrap {
