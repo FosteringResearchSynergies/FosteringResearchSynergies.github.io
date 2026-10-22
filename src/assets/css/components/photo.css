@@ -13,11 +13,6 @@
     font-size: var(--size-small);
 }
 
-/* A photo across the whole text width, between two sections: the space under it is a section's */
-.photo-band {
-    padding-bottom: var(--section);
-}
-
 /* Photo (or other media) next to text: stacked, then 6 + 5 of the 12 columns from 64rem */
 .split {
     display: grid;
