@@ -1,6 +1,5 @@
-/* Core pages: home, about, contact, 404 (docs/ROADMAP.md Giorno 2: feat/core-pages).
-   Empty for now: only that task writes here, so parallel tasks never edit the same file.
-   Build on the tokens and components imported before this file by main.css. */
+/* Inner pages: About, Contact, Press, 404. Built on the tokens and components imported before this
+   file by main.css (section heads, point list, placeholders). */
 
 /* Head of an inner page: the h1 set large, like the site name on the home but smaller.
    <div class="page-head"><div class="wrap"><h1 class="page-title">In the press</h1></div></div> */
@@ -15,6 +14,116 @@
     font-weight: 700;
     line-height: 0.92;
     letter-spacing: -0.042em;
+}
+
+.page-lede {
+    max-width: var(--measure-lede);
+    margin-top: var(--space-fluid-m);
+    color: var(--color-ink-2);
+    font-family: var(--font-display);
+    font-size: var(--step-lede);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+}
+
+/* Body of a section: from 64rem it starts under the section title (column 2), like the edition pages.
+   <div class="page-body"><p class="page-text">...</p></div> */
+.page-body > * + * {
+    margin-top: var(--space-fluid-m);
+}
+
+.page-text {
+    max-width: var(--measure);
+}
+
+/* A lead paragraph at the top of a section */
+.page-text.is-large {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+
+/* Points of About: one under the other, three side by side from 64rem */
+@media (min-width: 64rem) {
+    .page-points {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        column-gap: var(--gap);
+    }
+}
+
+/* A plain list: one item per row, between light filets */
+.page-list {
+    max-width: var(--measure);
+    border-bottom: var(--rule) solid var(--color-rule-soft);
+}
+
+.page-list > li {
+    padding-block: var(--space-3);
+    border-top: var(--rule) solid var(--color-rule-soft);
+}
+
+/* Label and value, one per row (Contact) */
+.page-fact {
+    display: grid;
+    gap: var(--space-2);
+    padding-block: var(--space-3-5) var(--space-6);
+    border-top: var(--rule) solid var(--color-rule);
+}
+
+.page-fact dt {
+    color: var(--color-ink-2);
+}
+
+.page-fact dd {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    overflow-wrap: anywhere;
+}
+
+/* A placeholder inside a value keeps the size of the text */
+.page-fact dd [data-placeholder] {
+    font-family: var(--font-text);
+    font-size: var(--step-0);
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+/* Closing call of About, on the blue field */
+.page-callout-title {
+    font-size: var(--step-3);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+}
+
+.page-callout-email {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    overflow-wrap: anywhere;
+}
+
+.page-note {
+    color: var(--secondary-color, var(--color-ink-2));
+}
+
+@media (min-width: 64rem) {
+    .page-body {
+        display: grid;
+        grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+        column-gap: var(--gap);
+    }
+
+    .page-body > * {
+        grid-column: 2 / -1;
+    }
 }
 
 /* In the press: one arrow link per page, two columns from 64rem */

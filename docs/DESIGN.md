@@ -55,7 +55,7 @@ Il blu sul nero (2.9:1) non si usa mai. I separatori leggeri non sono mai l'unic
 | `components/program.css` | programma di un'edizione: una tabella per giorno, tutti i giorni visibili, un `id` per ogni slot; tipo di sessione in `data-type` (keynote in blu, pause e momenti sociali attenuati), senza icone |
 | `components/placeholder.css` | i tre placeholder (sotto) |
 
-`edition.css`, `archive.css` e `pages.css` sono quasi vuoti: li riempiono i task paralleli del Giorno 2, uno per file. `src/styles.css` contiene solo le classi delle pagine portate dal vecchio sito (about, contact, events, Roma 2024, Lucca 2025), ridisegnate con i token; il Giorno 2 lo elimina.
+`edition.css` ha le pagine delle edizioni, `archive.css` l'archivio, `pages.css` le pagine interne (About, Contact, Press, 404). Il vecchio `src/styles.css` non c'è più: tutte le pagine usano il design system.
 
 ### Placeholder
 
