@@ -2,16 +2,19 @@
 layout: base.njk
 eleventyComputed:
   footer:
-    # The footer closes the numbering of the sections: About 01, Program when shown (same condition
-    # as showProgram below), Report and Photos when there are some, then Contact.
-    number: "{{ '0' ~ (2 + (1 if (edition.program or edition.status == 'upcoming') else 0) + (1 if edition.report else 0) + (1 if edition.photos else 0)) }}"
+    # The footer closes the numbering of the sections: About 01, Key dates when there are some,
+    # Program when shown (same condition as showProgram below), Report and Photos when there are
+    # some, then Contact.
+    number: "{{ '0' ~ (2 + (1 if (edition.milestones | length) else 0) + (1 if (edition.program or edition.status == 'upcoming') else 0) + (1 if edition.report else 0) + (1 if edition.photos else 0)) }}"
 ---
 {#- Page of one edition: its entry of src/_data/editions.yml, passed as "edition" by the template
     src/editions/edition.njk, and its program in src/_data/programs/. Styles: src/assets/css/edition.css.
     Always shown: the head (status, version, the label as a poster: name or "FRS <year>", then the city
     across the page) with the dates (TBA while unknown), and About (the summary, or a lorem placeholder
-    until the team writes it). Shown when there are data: host, venue and participants in the head; the
-    program ("Program TBA" for the next edition until it exists); the final report, paragraphs written by
+    until the team writes it). For the next edition the head also gives the venue (TBA while unknown),
+    the call for abstracts (a link, or TBA) and the registration (a link, or "Not open yet"), as the blue
+    band of the home. Shown when there are data: host, venue and participants in the head; the key
+    dates (milestones), with their state set by hand; the program ("Program TBA" for the next edition until it exists); the final report, paragraphs written by
     the team; the photos, in src/_data/photos/; the funding band, which carries the
     funder's wording and logos unchanged. The next edition stands on the blue field, past ones on paper. -#}
 {%- from "placeholder.njk" import placeholder -%}
@@ -26,6 +29,8 @@ eleventyComputed:
 {%- set gallery = photos[edition.photos] if edition.photos else null -%}
 {%- if edition.photos and not gallery %}{{ ('edition "' + edition.slug + '": no photos "' + edition.photos + '" in src/_data/photos/') | fail }}{% endif -%}
 {%- for photo in (gallery.items if gallery else []) %}{% if not (photo.name and photo.width and photo.height and photo.alt) %}{{ ('edition "' + edition.slug + '": every photo needs name, width, height and alt') | fail }}{% endif %}{% endfor -%}
+{%- set milestones = edition.milestones or [] -%}
+{%- for milestone in milestones %}{% if not milestone.label %}{{ ('edition "' + edition.slug + '": every milestone needs a label') | fail }}{% endif %}{% if not (milestone.state in ["upcoming", "open", "closed"]) %}{{ ('edition "' + edition.slug + '": the state of a milestone must be upcoming, open or closed') | fail }}{% endif %}{% endfor -%}
 {%- set funding = edition.funding -%}
 {%- if funding and funding.image and not (funding.image_width and funding.image_height and funding.image_alt) %}{{ ('edition "' + edition.slug + '": the funding image needs image_width, image_height and image_alt') | fail }}{% endif -%}
 {%- set num = 0 %}
@@ -58,11 +63,26 @@ eleventyComputed:
                 <dt class="label">Venue</dt>
                 <dd>{{ edition.venue.name }}{% if edition.venue.address %} <span class="edition-fact-detail">{{ edition.venue.address }}</span>{% endif %}</dd>
             </div>
+            {%- elif isNext %}
+            <div class="edition-fact">
+                <dt class="label">Venue</dt>
+                <dd>{{ placeholder("tba") }}</dd>
+            </div>
             {%- endif %}
             {%- if edition.participants %}
             <div class="edition-fact">
                 <dt class="label">Participants</dt>
                 <dd>{{ edition.participants }}</dd>
+            </div>
+            {%- endif %}
+            {%- if isNext %}
+            <div class="edition-fact">
+                <dt class="label">Call for abstracts</dt>
+                <dd>{% if edition.links.call %}<a href="{{ edition.links.call }}">Read the call</a>{% else %}{{ placeholder("tba") }}{% endif %}</dd>
+            </div>
+            <div class="edition-fact">
+                <dt class="label">Registration</dt>
+                <dd>{% if edition.links.registration %}<a href="{{ edition.links.registration }}">Register</a>{% else %}Not open yet{% endif %}</dd>
             </div>
             {%- endif %}
         </dl>
@@ -82,6 +102,26 @@ eleventyComputed:
         </div>
     </div>
 </section>
+{%- if milestones | length %}
+{%- set num = num + 1 %}
+
+<section id="key-dates" class="section section-flush-top" aria-labelledby="key-dates-title">
+    <div class="wrap">
+        {{ sectionHead("Key dates", "key-dates-title", "0" ~ num) }}
+        <div class="edition-body">
+            <ol class="edition-milestones">
+                {%- for milestone in milestones %}
+                <li class="edition-milestone" data-state="{{ milestone.state }}">
+                    <span class="edition-milestone-date">{% if milestone.date %}<time datetime="{{ milestone.date }}">{{ milestone.date | dateRange }}</time>{% else %}{{ placeholder("tba") }}{% endif %}</span>
+                    <span class="edition-milestone-label">{{ milestone.label }}</span>
+                    <span class="label edition-milestone-state">{{ milestone.state | capitalize }}</span>
+                </li>
+                {%- endfor %}
+            </ol>
+        </div>
+    </div>
+</section>
+{%- endif %}
 {%- if showProgram %}
 {%- set num = num + 1 %}
 

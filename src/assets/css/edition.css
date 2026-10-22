@@ -1,6 +1,6 @@
-/* Edition pages (layout "edition", src/_includes/layouts/edition.njk): head, About, Program, Report. The poster
-   (label and city across the page) is the one of the blue band of the home (next-edition.css), the
-   program is the component program.css, the funding band funding-band.css.
+/* Edition pages (layout "edition", src/_includes/layouts/edition.njk): head, About, Key dates, Program,
+   Report. The poster (label and city across the page) is the one of the blue band of the home
+   (next-edition.css), the program is the component program.css, the funding band funding-band.css.
 
    <header class="edition-hero [surface-accent]">       the blue field only for the next edition
      <div class="wrap">
@@ -144,6 +144,55 @@
 /* Closing lines at the end of the report (report_closing), one per line */
 .edition-report-closing {
     font-style: italic;
+}
+
+/* Key dates (milestones): one row per date, a filet between rows; from 48rem date, label and state on one
+   line, the dates in a column as the times of the program (program.css). An open milestone has its state
+   in the accent, a closed one is set in the secondary colour.
+
+   <ol class="edition-milestones">
+     <li class="edition-milestone" data-state="open">       data-state: upcoming | open | closed
+       <span class="edition-milestone-date"><time datetime="2026-11-15">15 November 2026</time></span>
+       <span class="edition-milestone-label">Abstract deadline</span>
+       <span class="label edition-milestone-state">Open</span>
+     </li>
+   </ol> */
+.edition-milestones {
+    --date-column: 11rem;
+    border-top: var(--rule) solid var(--color-rule);
+}
+
+.edition-milestone {
+    display: grid;
+    gap: var(--space-1);
+    padding-block: var(--space-3-5);
+    border-bottom: var(--rule) solid var(--color-rule-soft);
+}
+
+.edition-milestone-date {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+.edition-milestone-state {
+    color: var(--color-ink-2);
+}
+
+.edition-milestone[data-state="open"] .edition-milestone-state {
+    color: var(--color-accent);
+}
+
+.edition-milestone[data-state="closed"] {
+    color: var(--color-ink-2);
+}
+
+@media (min-width: 48rem) {
+    .edition-milestone {
+        grid-template-columns: var(--date-column) minmax(0, 1fr) auto;
+        align-items: baseline;
+        column-gap: var(--gap);
+    }
 }
 
 /* "Program TBA" of the next edition: a large value, with the hollow TBA (placeholder.css) */
