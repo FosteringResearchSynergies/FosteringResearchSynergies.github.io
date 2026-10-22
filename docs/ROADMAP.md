@@ -35,8 +35,8 @@ richiedono `addDataExtension` e un pacchetto YAML.
 
 Bloccano i contenuti, non il lavoro tecnico: finché mancano, la pagina usa i placeholder.
 
-1. **Parma 2026**: date, ente ospitante, sede (edificio, sala, indirizzo), nome e numerazione ufficiale
-   ("FRS 2026", "v4.0", "4th edition"? v1.X Vienna conta?).
+1. **Parma 2026**: ente ospitante, sede (edificio, sala, indirizzo), nome ufficiale ("FRS 2026"?).
+   Risposta parziale (22 ottobre 2026): date 16–18 dicembre 2026, versione v4.0.
 2. **Call e iscrizione**: la call è già uscita? Scadenze (abstract, notifica, iscrizione) e link esterni
    (Google Form o altro).
 3. **Costi e fondi**: partecipazione gratuita? Cosa è coperto (alloggio, pasti, cena sociale, viaggio)?
@@ -52,8 +52,9 @@ Bloccano i contenuti, non il lavoro tecnico: finché mancano, la pagina usa i pl
 8. **Dominio**: `frs-workshop.imtlucca.it` è stato stampato su materiali di Lucca 2025?
 9. **Contatti**: `frscrefimt@gmail.com` resta l'unico contatto pubblico? Esistono account social o una
    mailing list reali?
-10. **Foto**: consenso per la foto di gruppo e originale ad alta risoluzione? Foto con licenza di Parma
-    o della sede?
+10. **Foto**: foto con licenza di Parma o della sede? Risposta parziale (22 ottobre 2026): le foto
+    originali di Roma 2024 (talk e foto di gruppo) sono nella pagina dell'edizione e la foto di gruppo in
+    home; la versione Canva di CREF, alterata dall'AI, è stata tolta.
 11. **Workflow**: va bene modificare i contenuti via file YAML/Markdown dall'interfaccia web di GitHub
     (con controllo automatico sulla PR) invece che via HTML?
 12. **Keynote di Lucca 2025**: in `main` compaiono solo i nomi; il branch `mfessina-patch-1` contiene
