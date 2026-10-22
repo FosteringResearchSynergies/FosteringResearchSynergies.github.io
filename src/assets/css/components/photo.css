@@ -18,6 +18,35 @@
     padding-bottom: var(--section);
 }
 
+/* Photos of an edition (Photos section, src/_data/photos/): one column, two from 48rem, three from
+   64rem; each links to its larger file. Columns of text rather than a grid, so that a portrait photo
+   does not leave gaps next to it: the photos run down each column.
+   <ul class="photo-grid"><li class="photo"><a href="...-1920.jpg"><img ...></a></li></ul> */
+.photo-grid {
+    column-gap: var(--gap);
+}
+
+.photo-grid > li {
+    margin-bottom: var(--gap);
+    break-inside: avoid;
+}
+
+.photo-grid a {
+    display: block;
+}
+
+@media (min-width: 48rem) {
+    .photo-grid {
+        columns: 2;
+    }
+}
+
+@media (min-width: 64rem) {
+    .photo-grid {
+        columns: 3;
+    }
+}
+
 /* Photo (or other media) next to text: stacked, then 6 + 5 of the 12 columns from 64rem */
 .split {
     display: grid;

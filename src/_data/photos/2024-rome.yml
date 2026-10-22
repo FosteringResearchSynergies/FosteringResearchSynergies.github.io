@@ -1,0 +1,63 @@
+# Photos of FRS 2024 · Rome, taken on 21 November 2024 (date in the files' metadata), from the photo
+# folder shared by the team on 22 October 2026 (originals IMG_5042 to IMG_5055, HEIC). Each photo is in
+# src/assets/images/editions/2024-rome/ at 960 and 1920 px wide (<name>-960.jpg, <name>-1920.jpg), in
+# sRGB and without metadata. width and height are those of the 960 px file.
+# TODO(team): verificare i testi alternativi.
+dir: "/assets/images/editions/2024-rome/"
+items:
+  - name: "talk-01"  # IMG_5042
+    width: 960
+    height: 720
+    alt: "A talk at FRS 2024 in Rome"
+  - name: "talk-02"  # IMG_5043
+    width: 960
+    height: 1280
+    alt: "A talk at FRS 2024 in Rome"
+  - name: "talk-03"  # IMG_5044
+    width: 960
+    height: 720
+    alt: "A talk at FRS 2024 in Rome"
+  - name: "talk-04"  # IMG_5045
+    width: 960
+    height: 720
+    alt: "A talk at FRS 2024 in Rome"
+  - name: "talk-05"  # IMG_5046
+    width: 960
+    height: 720
+    alt: "A talk at FRS 2024 in Rome"
+  - name: "talk-06"  # IMG_5047
+    width: 960
+    height: 720
+    alt: "A talk at FRS 2024 in Rome"
+  - name: "group-01"  # IMG_5048
+    width: 960
+    height: 720
+    alt: "Group photo of the participants on the steps of CREF"
+  - name: "group-02"  # IMG_5049
+    width: 960
+    height: 720
+    alt: "Group photo of the participants on the steps of CREF"
+  - name: "group-03"  # IMG_5050
+    width: 960
+    height: 720
+    alt: "Group photo of the participants on the steps of CREF"
+  - name: "group-04"  # IMG_5051
+    width: 960
+    height: 720
+    alt: "Group photo of the participants on the steps of CREF"
+  - name: "group-05"  # IMG_5052
+    width: 960
+    height: 720
+    alt: "Group photo of the participants on the steps of CREF"
+  - name: "group-06"  # IMG_5053
+    width: 960
+    height: 720
+    alt: "Group photo of the participants on the steps of CREF"
+  - name: "group-07"  # IMG_5054
+    width: 960
+    height: 720
+    alt: "Group photo of the participants on the steps of CREF"
+  - name: "group-08"  # IMG_5055
+    width: 960
+    height: 720
+    alt: "Group photo of the participants on the steps of CREF"
