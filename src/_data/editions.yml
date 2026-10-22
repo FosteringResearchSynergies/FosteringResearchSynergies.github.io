@@ -41,6 +41,7 @@
       - "Se questo workshop avrà portato a qualcosa"
       - "nessuno può dirlo,"
       - "Ai Fostering l'ardua sentenza (cit.)"
+  photos: null
   milestones: []
   links:
     call: null
@@ -66,6 +67,7 @@
   program: null
   report: null
   report_closing: null
+  photos: null
   milestones: []
   links:
     call: null
@@ -94,6 +96,7 @@
   program: "2024-rome"
   report: null
   report_closing: null
+  photos: "2024-rome"
   milestones: []
   links:
     call: null
@@ -121,6 +124,7 @@
   program: null
   report: null
   report_closing: null
+  photos: null
   milestones: []
   links:
     call: null
@@ -149,6 +153,7 @@
   program: "2025-lucca"
   report: null
   report_closing: null
+  photos: null
   milestones: []
   links:
     call: null
@@ -182,6 +187,7 @@
   program: null
   report: null
   report_closing: null
+  photos: null
   milestones: []
   links:
     call: null
@@ -211,6 +217,7 @@
 #   # report_closing:
 #   #   lang: null                # language of the lines if not English, e.g. "it"
 #   #   lines: []                 # one string per line
+#   photos: null                  # file in src/_data/photos/ without ".yml"; null = no Photos section
 #   milestones: []                # key dates in order; the state is set by hand (no build-time "today")
 #   # - label: null               # e.g. abstract deadline, registration deadline
 #   #   date: null                # "YYYY-MM-DD", quoted; null = TBA
