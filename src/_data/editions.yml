@@ -175,9 +175,10 @@
   year: 2026
   city: "Parma"
   status: upcoming
+  # Dates given by the organizer on 22 October 2026.
   dates:
-    start: null
-    end: null
+    start: "2026-12-16"
+    end: "2026-12-18"
   host: null
   venue:
     name: null
