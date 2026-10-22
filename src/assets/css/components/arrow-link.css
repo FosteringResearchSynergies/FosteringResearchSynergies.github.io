@@ -10,7 +10,8 @@
    The last word and the arrow never part. The title shrinks in narrow columns so that a label as long
    as "FRS 2026 · Parma ↓" (about 8.5em) stays on one line; longer labels wrap. The arrow is a
    character of the text font: ↓ (U+2193) and ↑ (U+2191) are in the hosted subset. A link to another
-   site uses ↑ turned to ↗ (class is-external): U+2197 is not in the subset. */
+   site uses ↑ turned to ↗ (class is-external): U+2197 is not in the subset; a link to another page of
+   the site uses ↑ turned to → (class is-forward). */
 
 .arrow-link {
     --arrow-shift: translateX(0.12em);
@@ -64,6 +65,11 @@
 .arrow-link-arrow.is-external {
     --arrow-shift: translateY(-0.12em);   /* applied before the rotation: it moves along the arrow */
     rotate: 45deg;
+}
+
+.arrow-link-arrow.is-forward {
+    --arrow-shift: translateY(-0.12em);
+    rotate: 90deg;
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -1,50 +1,56 @@
 ---
-layout: page.njk
+layout: base.njk
 title: Contact - Fostering Research Synergies
 permalink: /contact.html
+footer:
+  number: "04"
 ---
-{% from "placeholder.njk" import placeholder %}
-    <header class="hero">
-        <div class="container">
-            <h1>Get in Touch</h1>
-            <p>We'd love to hear from you</p>
-        </div>
-    </header>
+{#- Contact: the team's texts from the old page, unchanged, without the emoji and the inline styles.
+    The address comes from site.yml; mailing list and contact form are not built (placeholders).
+    Styles: src/assets/css/pages.css. -#}
+{%- from "placeholder.njk" import placeholder -%}
+{%- from "section-head.njk" import sectionHead -%}
+<div class="page-head">
+    <div class="wrap">
+        <h1 class="page-title" id="page-title">Get in Touch</h1>
+        <p class="page-lede">We'd love to hear from you</p>
+    </div>
+</div>
 
-    <section class="content">
-        <div class="container">
-            <div class="grid">
-                <div>
-                    <h2>Contact Information</h2>
-                    <p>
-                        Have questions about our events, want to get involved, or need more information? Feel free to reach out to us!
-                    </p>
-
-                    <div style="margin-top: 2rem;">
-                        <h3 style="color: #2c3e50; margin-bottom: 1rem;">📧 Email</h3>
-                        <p>
-                            <a href="mailto:frscrefimt@gmail.com">frscrefimt@gmail.com</a>
-                        </p>
-                    </div>
-                    <!-- TODO(team): esistono account social reali? Se sì, aggiungere i link qui. -->
-
-                    <div style="margin-top: 2rem;">
-                        <h3 style="color: #2c3e50; margin-bottom: 1rem;">📬 Mailing List</h3>
-                        {{ placeholder("unbuilt", "mailing list.") }}
-                    </div>
+<section class="section section-flush-top" aria-labelledby="info-title">
+    <div class="wrap">
+        {{ sectionHead("Contact Information", "info-title", "01") }}
+        <div class="page-body">
+            <p class="page-text is-large">Have questions about our events, want to get involved, or need more information? Feel free to reach out to us!</p>
+            <dl class="page-facts">
+                <div class="page-fact">
+                    <dt class="label">Email</dt>
+                    <dd><a href="mailto:{{ site.email }}">{{ site.email }}</a></dd>
                 </div>
-
-                <div>
-                    <h2>Send Us a Message</h2>
-                    {% call placeholder("unbuilt") %}contact form. Please write to <a href="mailto:frscrefimt@gmail.com">frscrefimt@gmail.com</a>.{% endcall %}
+                <!-- TODO(team): esistono account social reali? Se sì, aggiungere i link qui. -->
+                <div class="page-fact">
+                    <dt class="label">Mailing List</dt>
+                    <dd>{{ placeholder("unbuilt", "mailing list.") }}</dd>
                 </div>
-            </div>
-
-            <div style="margin-top: 4rem; padding: 2rem; background: #f8f9fa; border-radius: 8px;">
-                <h2 style="text-align: center; margin-bottom: 1rem;">Organizing Committee</h2>
-                <p style="text-align: center; max-width: 600px; margin: 0 auto;">
-                    Our events are organized by a dedicated team of PhD students and postdocs. If you're interested in joining the organizing committee or have suggestions for future events, please reach out!
-                </p>
-            </div>
+            </dl>
         </div>
-    </section>
+    </div>
+</section>
+
+<section class="section section-flush-top" aria-labelledby="message-title">
+    <div class="wrap">
+        {{ sectionHead("Send Us a Message", "message-title", "02") }}
+        <div class="page-body">
+            {% call placeholder("unbuilt") %}contact form. Please write to <a href="mailto:{{ site.email }}">{{ site.email }}</a>.{% endcall %}
+        </div>
+    </div>
+</section>
+
+<section class="section section-flush-top" aria-labelledby="committee-title">
+    <div class="wrap">
+        {{ sectionHead("Organizing Committee", "committee-title", "03") }}
+        <div class="page-body">
+            <p class="page-text">Our events are organized by a dedicated team of PhD students and postdocs. If you're interested in joining the organizing committee or have suggestions for future events, please reach out!</p>
+        </div>
+    </div>
+</section>
