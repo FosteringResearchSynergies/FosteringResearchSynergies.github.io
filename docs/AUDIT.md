@@ -164,6 +164,7 @@ Critici e alti già risolti: content-01, code-03, deploy-11, code-02, content-08
   - Correzione: Delete all the taglines. Keep only the real data: time, title, speaker, affiliation and venue (San Lorenzo for the dinner). Ask whether the panel (:297) had a real topic or panelists.
 - **content-63** · low · riga 151: Senior-talk titles differ between the program and the commented block; affiliations need confirming. Azione: *verifica del team*.
   - Correzione: Ask the organizers for the official talk titles and speaker affiliations, and use one consistent version.
+  - Stato: **risolto** (`content/team-answers`): titoli e affiliazioni di `src/_data/programs/2024-rome.yml` confermati dall'organizzatore il 28 ottobre 2026.
 - **a11y-03** · medium · riga 167: Color-coded schedule rows push text below 3:1, and the color meaning has no legend.
   - Evidenza: Inline backgrounds: `style="background: #d1ecf1;"` (breaks, line 167), `#fff3cd` (openings, 143), `#f8d7da` (quiz/dinner, 219), `#e7f3e7` (panel, 295). On these, .schedule-time #3498db falls to 2.36-2.85:1 and .schedule-speaker #7f8c8d to 2.60-3.14:1.
   - Correzione: Replace the inline background tints with class variants (.slot--break, .slot--social) whose tints keep time, title and speaker text at 4.5:1 or more. No legend is needed, because the slot titles already state the type.
