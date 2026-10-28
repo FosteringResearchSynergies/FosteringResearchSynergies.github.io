@@ -1,8 +1,9 @@
 # Program of FRSummer 2025 · Lipari (v2.X). Keys: see _example.yml. Source: the team's sheet "Programma PhDay"
 # (Drive of frscrefimt@gmail.com, read on 28 October 2026); the organizer confirmed on 28 October 2026 that
 # the PhD Day is the FRS workshop at the Lipari School and that it took place on 29 July 2025.
-# Session titles as in the sheet; the abstracts are left out. The sheet has no rows for 10:45-11:30 and
-# 13:00-14:30. Fixed in the sheet's text: "he Network Origin" (first letter missing), "Salvo prestipino".
+# Session titles as in the sheet; the abstracts are left out. Fixed in the sheet's text: "he Network Origin"
+# (first letter missing), "Salvo prestipino". Not in the sheet, from the organizer (28 October 2026): the
+# breaks at 10:45-11:30 and 13:00-14:30, and the title of Giacomo Zelbi's talk (in the sheet with "???").
 # TODO(team): chair delle sessioni 1 e 3 (nel foglio "Chair: ???").
 days:
   - date: "2025-07-29"
@@ -26,6 +27,14 @@ days:
           - speaker: "Ottavia Falconi"
             title: "Critical Properties of Random Bipartite Networks"
         note: null
+      - start: "10:45"
+        end: "11:30"
+        type: break
+        title: "Break"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
       - start: "11:30"
         end: "13:00"
         type: session
@@ -35,7 +44,6 @@ days:
         talks:
           - speaker: "Domenico Longo"
             title: "The Network Origin of Business Cycle: insights from a Toy Agent-Based Model"
-          # TODO(team): verificare il titolo, nel foglio "Rewiring supply chain to lower systemic risk ???".
           - speaker: "Giacomo Zelbi"
             title: "Rewiring supply chain to lower systemic risk"
           - speaker: "Edoardo Maggioni"
@@ -47,6 +55,14 @@ days:
           - speaker: "Izaro Fernandez Iriondo"
             title: "Unveiling Functional Structures in Brain Networks with Limited Temporal Data"
         note: "Chair: Daniele Cirulli"
+      - start: "13:00"
+        end: "14:30"
+        type: break
+        title: "Break"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
       - start: "14:30"
         end: "15:00"
         type: session
