@@ -1,7 +1,8 @@
 # Program of FRS 2024 · Rome (v2.0), copied from src/events/frs2024-winter.njk. Keys: see _example.yml.
 # Left out on purpose: the joke captions under the slots, the emoji and the day nicknames
 # (docs/AUDIT.md, content-62 and content-64). Session titles are in title case (all caps on the page).
-# TODO(team): verificare titoli e affiliazioni dei talk senior (docs/AUDIT.md, content-63).
+# Titles and affiliations of the senior talks confirmed by the organizer on 28 October 2026 (docs/AUDIT.md,
+# content-63).
 days:
   - date: "2024-11-20"
     title: null
