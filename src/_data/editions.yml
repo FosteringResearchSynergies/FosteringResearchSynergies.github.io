@@ -112,8 +112,8 @@
   status: past
   # Team email of 14 March 2025: an FRS joint workshop hosted by the Lipari School on Complex Systems "at the
   # end of the conference week"; the school ran from 27 July to 2 August 2025 at the hotel "Giardino sul Mare".
-  # Day of the workshop (the "PhD Day" of the team's Drive) confirmed by the organizer on 28 October 2026.
-  # TODO(team): verificare nome e versione.
+  # Day of the workshop (the "PhD Day" of the team's Drive), name and version confirmed by the organizer on
+  # 28 October 2026.
   dates:
     start: "2025-07-29"
     end: "2025-07-29"
