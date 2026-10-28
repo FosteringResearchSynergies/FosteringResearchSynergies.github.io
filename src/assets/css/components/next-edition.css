@@ -104,8 +104,9 @@
     }
 }
 
+/* the dates, the longest value, get a wider column: "16–18 December 2026" breaks once, not twice */
 @media (min-width: 64rem) {
     .next-band-facts {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-columns: minmax(0, 1.25fr) repeat(3, minmax(0, 1fr));
     }
 }
