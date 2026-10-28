@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Serve the site locally for review, on 127.0.0.1 only.
+# Serve the site locally for review, at http://127.0.0.1:PORT.
+# The Eleventy dev server (3.1) has no host option and also answers on the other network interfaces:
+# use it on a trusted network.
 #
 #   scripts/preview.sh             # port derived from the checkout path, so parallel worktrees don't collide
 #   PORT=8123 scripts/preview.sh   # force a port
