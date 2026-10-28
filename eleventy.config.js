@@ -37,9 +37,13 @@ export default function (eleventyConfig) {
     // Dates of an edition as one string, from the quoted "YYYY-MM-DD" values of the data files:
     // "18–20 December 2025", "30 November – 2 December 2026", "18 December 2025" (no end or same day).
     // "YYYY-MM" while only the month is known: "November 2023", "November – December 2023".
-    // Returns "" when start is null: the template shows the TBA placeholder instead.
+    // Returns "" when start is null: the template shows the TBA placeholder instead. The space before
+    // the year is a no-break space, so the year never ends up alone on a line.
     eleventyConfig.addFilter("dateRange", (start, end) => {
         if (!start) return "";
+        return formatRange(start, end).replace(/ (\d{4})$/, "\u00a0$1");
+    });
+    const formatRange = (start, end) => {
         const parse = (value) => {
             const match = /^(\d{4})-(\d{2})(?:-(\d{2}))?$/.exec(String(value));
             if (!match) throw new Error(`dateRange: "${value}" is not a quoted "YYYY-MM-DD" or "YYYY-MM" date`);
@@ -56,7 +60,7 @@ export default function (eleventyConfig) {
         if (a.m !== b.m) return `${a.d} ${a.m} – ${b.d} ${b.m} ${b.y}`;
         if (a.d !== b.d) return `${a.d}–${b.d} ${b.m} ${b.y}`;
         return `${a.d} ${a.m} ${a.y}`;
-    });
+    };
 
     // Day of a program, for its heading: "Thursday 18 December", from a quoted "YYYY-MM-DD" value. The
     // year is left out: the dates of the edition give it. {{ day.date | dayDate }}
