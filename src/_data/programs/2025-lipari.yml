@@ -1,0 +1,69 @@
+# Program of FRSummer 2025 · Lipari (v2.X). Keys: see _example.yml. Source: the team's sheet "Programma PhDay"
+# (Drive of frscrefimt@gmail.com, read on 28 October 2026); the organizer confirmed on 28 October 2026 that
+# the PhD Day is the FRS workshop at the Lipari School and that it took place on 29 July 2025.
+# Session titles as in the sheet; the abstracts are left out. The sheet has no rows for 10:45-11:30 and
+# 13:00-14:30. Fixed in the sheet's text: "he Network Origin" (first letter missing), "Salvo prestipino".
+# TODO(team): chair delle sessioni 1 e 3 (nel foglio "Chair: ???").
+days:
+  - date: "2025-07-29"
+    title: null
+    slots:
+      - start: "09:30"
+        end: "10:45"
+        type: session
+        title: "Foundational Methods in Network Science"
+        theme: null
+        speakers: []
+        talks:
+          - speaker: "Daniele Cirulli"
+            title: "Comparative evaluation of statistical validation methods for weighted networks and projections"
+          - speaker: "Alessio Catanzaro"
+            title: "The Marginalization Group: Renormalization and Reconstruction for Random Networks"
+          - speaker: "Lorenzo Grimaldi"
+            title: "Unveiling the dimensionality of networks of networks"
+          - speaker: "Lorenzo Lucarini"
+            title: "Attraction Basins of Structural Fixed Points"
+          - speaker: "Ottavia Falconi"
+            title: "Critical Properties of Random Bipartite Networks"
+        note: null
+      - start: "11:30"
+        end: "13:00"
+        type: session
+        title: "Applications in Biological, Economic & Social Systems"
+        theme: null
+        speakers: []
+        talks:
+          - speaker: "Domenico Longo"
+            title: "The Network Origin of Business Cycle: insights from a Toy Agent-Based Model"
+          # TODO(team): verificare il titolo, nel foglio "Rewiring supply chain to lower systemic risk ???".
+          - speaker: "Giacomo Zelbi"
+            title: "Rewiring supply chain to lower systemic risk"
+          - speaker: "Edoardo Maggioni"
+            title: "Twitter anticipates the adoption of pro-environmental behaviours"
+          - speaker: "Emanuele Calò"
+            title: "Species vulnerability and ecosystem fragility: A dual perspective in food webs"
+          - speaker: "Gabriele Poidomani"
+            title: "Renormalizing the human connectome"
+          - speaker: "Izaro Fernandez Iriondo"
+            title: "Unveiling Functional Structures in Brain Networks with Limited Temporal Data"
+        note: "Chair: Daniele Cirulli"
+      - start: "14:30"
+        end: "15:00"
+        type: session
+        title: "AI, LLMs & Emergent Behavior"
+        theme: null
+        speakers: []
+        talks:
+          - speaker: "Salvo Prestipino"
+            title: "On-Demand LLM-Interrogable PubMed Knowledge Graphs"
+          - speaker: "Alessandro Bellina"
+            title: "Conformity in Large Language Models: Experimental Evidence from Visual Tasks"
+        note: null
+      - start: "15:00"
+        end: "16:00"
+        type: other
+        title: "Quiz"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
