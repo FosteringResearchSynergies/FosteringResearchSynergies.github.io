@@ -2,8 +2,8 @@
 # "Final Reminder and Program Details for PhD and Early Researchers Workshop" of 21 February 2024 (forwarded
 # by the organizer, read on 5 November 2026). Talks of 5 minutes plus 2-3 minutes of questions.
 # Speakers' roles and affiliations are left out, as in the other programs. Fixed in the email's text:
-# "Calo`" (Emanuele Calò, as in the Lipari 2025 program), a stray quote after "Seshat".
-# TODO(team): verificare l'accento di "Nicola Albore`" (nella mail con l'apostrofo inverso).
+# "Calo`" (Emanuele Calò, as in the Lipari 2025 program), "Albore`" (Nicola Alborè, accent confirmed by the
+# organizer on 5 November 2026), a stray quote after "Seshat".
 days:
   - date: "2024-02-22"
     title: null
@@ -87,7 +87,7 @@ days:
         theme: null
         speakers: []
         talks:
-          - speaker: "Nicola Albore"
+          - speaker: "Nicola Alborè"
             title: "In search for the invisible: motor inhibition in monkey premotor cortex and in recurrent neuronal networks"
           - speaker: "Giulio Colombini"
             title: "3-year monitoring of COVID-19 in the Bologna metropolitan area: what we learned from the integration of mathematical modelling, human mobility, clinical and vaccination data"

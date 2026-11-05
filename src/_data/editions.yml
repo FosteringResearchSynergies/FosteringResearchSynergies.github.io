@@ -59,14 +59,14 @@
   status: past
   # Date and program from the organizers' email to participants of 21 February 2024 (forwarded by the
   # organizer, read on 5 November 2026): one day, 22 February 2024. The email does not name the venue or the
-  # host. Its subject calls the event "PhD and Early Researchers Workshop".
-  # TODO(team): usare "PhD and Early Researchers Workshop" come nome dell'edizione?
+  # host. Its subject calls the event "PhD and Early Researchers Workshop"; the organizer keeps the name as it
+  # is (5 November 2026). Venue: CSH Vienna, from the organizer (5 November 2026).
   dates:
     start: "2024-02-22"
     end: "2024-02-22"
   host: null
   venue:
-    name: null
+    name: "Complexity Science Hub (CSH), Vienna"
     address: null
   participants: null
   summary: null
