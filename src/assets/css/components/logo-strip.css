@@ -1,0 +1,29 @@
+/* Logos of the organizers' institutions (include institutions.njk): a label over one row of logos on a
+   filet, all at the same height; the row wraps on narrow screens. Logos are shown as published by the
+   institutions, on paper, never recoloured. */
+
+.logo-strip {
+    display: grid;
+    gap: var(--space-5);
+    margin-top: var(--space-fluid-m);
+    padding-top: var(--space-5);
+    border-top: var(--rule) solid var(--color-rule);
+}
+
+.logo-strip-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-8) var(--space-12);
+}
+
+.logo-strip-list a {
+    display: block;
+}
+
+.logo-strip-list img {
+    display: block;
+    width: auto;
+    height: var(--logo-height);
+    max-width: 100%;
+}
