@@ -82,7 +82,7 @@ Sul blu e sul nero filetti ed etichette prendono il colore del testo.
 - /editions/2025-lucca/  (IMT Lucca, 18-20 Dec 2025: past-tense archive, final program from YAML, mandatory EFC/PNRR funding band; redirect_from /events/lucca.html)
 - /editions/2024-rome/  (v2.0 CREF Rome, 20-22 Nov 2024: real program and talk list, AI filler and phone number removed; redirect_from /events/frs2024-winter.html)
 - /editions/2025-lipari/  (FRSummer 2025, v2.X Lipari: stub with a lorem block (data-placeholder="lorem") and the dates as TBA until the team supplies them)
-- /editions/2024-vienna/  (v1.X CSH Vienna, February 2024 (month to confirm): stub as above)
+- /editions/2024-vienna/  (v1.X CSH Vienna, 22 February 2024: stub as above)
 - /editions/2023-lucca/  (v1.0 Lucca, November 2023 (month to confirm): stub as above)
 - /about/  (what FRS is, how editions are self-organized, how to propose or host the next one; team-written text or labelled lorem; redirect_from /about.html)
 - /people/  (NEW: organizers by edition from _data/people.yml, consent-gated)
