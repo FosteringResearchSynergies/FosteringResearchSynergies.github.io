@@ -1,0 +1,116 @@
+# Program of v1.X Vienna (2024). Keys: see _example.yml. Source: the organizers' email to participants
+# "Final Reminder and Program Details for PhD and Early Researchers Workshop" of 21 February 2024 (forwarded
+# by the organizer, read on 5 November 2026). Talks of 5 minutes plus 2-3 minutes of questions.
+# Speakers' roles and affiliations are left out, as in the other programs. Fixed in the email's text:
+# "Calo`" (Emanuele Calò, as in the Lipari 2025 program), a stray quote after "Seshat".
+# TODO(team): verificare l'accento di "Nicola Albore`" (nella mail con l'apostrofo inverso).
+days:
+  - date: "2024-02-22"
+    title: null
+    slots:
+      - start: "09:15"
+        end: "09:30"
+        type: other
+        title: "Welcome"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "09:30"
+        end: "10:30"
+        type: session
+        title: "Networks"
+        theme: null
+        speakers: []
+        talks:
+          - speaker: "Andrea Lo Sasso"
+            title: "Network assortativity for a multidimensional comparison of territorial biases in university rankings"
+          - speaker: "Gergely Odor"
+            title: "Awareness paradox induced by network density, degree heterogeneity, and disassortativity"
+          - speaker: "Mauritz Cartier van Dissel"
+            title: "Multi-attribute homophily on networks"
+          - speaker: "Sina Sajjadi"
+            title: "Homophily and Community Structure in Social Complex Systems"
+          - speaker: "Giordano De Marzo"
+            title: "Emergence of Scale-Free Networks in Social Interactions among Large Language Models"
+          - speaker: "Giambattista Albora"
+            title: "Sapling Similarity: Measuring Node Similarity in Bipartite Networks"
+          - speaker: "Valeria Secchini"
+            title: "Detecting Non-Markovian Higher Orders in Networks Sequences Data"
+        note: null
+      - start: "10:30"
+        end: "11:00"
+        type: break
+        title: "Coffee Break"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "11:00"
+        end: "12:00"
+        type: session
+        title: "Economic Complexity"
+        theme: null
+        speakers: []
+        talks:
+          - speaker: "Tobias Reisch"
+            title: "Evolving Production Networks"
+          - speaker: "Tim Booker"
+            title: "Catalytic networks of products"
+          - speaker: "Johannes Stangl"
+            title: "Reducing employment and economic output loss in rapid decarbonization scenarios using firm-level production networks"
+          - speaker: "Sophia Baum"
+            title: "Adaptive Shock Compensation in the Multi-layer Network of Global Food Production and Trade"
+          - speaker: "Emanuele Calò"
+            title: "Multidimensional Territorial Attractiveness: an Application to European Flows"
+          - speaker: "Matteo Straccamore"
+            title: "Economic Fitness of municipalities"
+          - speaker: "Simone Daniotti"
+            title: "Cultural accumulation and novelty production"
+          - speaker: "Lavinia Rossi Mori"
+            title: "Time-space dynamics of income segregation: a case study of Milan's neighbourhoods"
+          - speaker: "Hooman Habibnia"
+            title: "Merit or Luck: The Role of Inequality in Opportunity on Hiring Decisions - A MouseLab Study"
+        note: null
+      - start: "12:00"
+        end: "14:00"
+        type: break
+        title: "Lunch"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "14:00"
+        end: "15:00"
+        type: session
+        title: "Complex Systems Modelling"
+        theme: null
+        speakers: []
+        talks:
+          - speaker: "Nicola Albore"
+            title: "In search for the invisible: motor inhibition in monkey premotor cortex and in recurrent neuronal networks"
+          - speaker: "Giulio Colombini"
+            title: "3-year monitoring of COVID-19 in the Bologna metropolitan area: what we learned from the integration of mathematical modelling, human mobility, clinical and vaccination data"
+          - speaker: "Bukyoung Jhun"
+            title: "Abrupt transition of the optimal vaccination strategy in a population with heterogeneous fatality rates"
+          - speaker: "Edoardo Maggioni"
+            title: "Modeling Pro-Environmental Behavior: An ABM Approach Bridging Cognitive, Social, and Environmental Dimensions"
+          - speaker: "Samuel Martin-Gutierrez"
+            title: "Multi-polar social systems: measure polarization beyond dichotomous conflicts"
+          - speaker: "Alessandro Bellina"
+            title: "Urn Models for Opinion and Innovation Dynamics"
+          - speaker: "Gabriele Di Bona"
+            title: "The dynamics of higher order novelties"
+          - speaker: "Filippo Santoro"
+            title: "Avalanches of Non Novelties in Written Texts"
+          - speaker: "Jakob Hauser"
+            title: "A Natural Language Processing Dataset derived from the Seshat Databank"
+        note: null
+      - start: "15:00"
+        end: "16:00"
+        type: other
+        title: "Group Discussion"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
