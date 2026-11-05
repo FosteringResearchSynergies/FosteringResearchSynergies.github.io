@@ -63,6 +63,7 @@
     --space-8: 2rem;
     --space-10: 2.5rem;
     --space-12: 3rem;
+    --logo-height: 2.75rem;           /* institution logos (logo-strip) */
     --space-fluid-s: clamp(1rem, 2.4vw, 2.25rem);              /* navigation items */
     --space-fluid-m: clamp(2.5rem, 1rem + 5vw, 4rem);          /* between blocks of a section */
     --space-fluid-l: clamp(2rem, 1rem + 4vw, 4.5rem);          /* under a section head */
