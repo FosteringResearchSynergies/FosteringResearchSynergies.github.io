@@ -9,9 +9,11 @@
 # the organizers' final report of v1.0 Lucca and their emails to participants of October and November 2023
 # (from the team, read on 21 October 2026); the team's emails to participants (frscrefimt@gmail.com, read on
 # 21 October 2026) for Rome 2024, Lipari 2025 and Lucca 2025; the team's Drive (frscrefimt@gmail.com, read on
-# 28 October 2026) for the program of Lipari 2025 and the dates of Lucca 2025.
-# TODO(team): verificare le versioni e il mese di v1.X Vienna (febbraio 2024), indicati a memoria; completare
-# giorni, sede ed ente ospitante di Vienna e sede ed ente ospitante di Lucca 2023 (docs/ROADMAP.md, domanda 6).
+# 28 October 2026) for the program of Lipari 2025 and the dates of Lucca 2025; the organizers' email to
+# participants of 21 February 2024 (forwarded by the organizer, read on 5 November 2026) for the date and the
+# program of v1.X Vienna.
+# TODO(team): verificare le versioni, indicate a memoria; completare sede ed ente ospitante di Vienna e di
+# Lucca 2023 (docs/ROADMAP.md, domanda 6).
 - slug: "2023-lucca"
   # Final report: "Report on "Fostering Research Synergies: The IMT-CREF PhD Workshop"", two days in Lucca,
   # Monday 13 and Tuesday 14 November. It does not name the venue or the host institution.
@@ -55,17 +57,20 @@
   year: 2024
   city: "Vienna"
   status: past
-  # TODO(team): mese indicativo, da confermare; giorni da aggiungere.
+  # Date and program from the organizers' email to participants of 21 February 2024 (forwarded by the
+  # organizer, read on 5 November 2026): one day, 22 February 2024. The email does not name the venue or the
+  # host. Its subject calls the event "PhD and Early Researchers Workshop".
+  # TODO(team): usare "PhD and Early Researchers Workshop" come nome dell'edizione?
   dates:
-    start: "2024-02"
-    end: "2024-02"
+    start: "2024-02-22"
+    end: "2024-02-22"
   host: null
   venue:
     name: null
     address: null
   participants: null
   summary: null
-  program: null
+  program: "2024-vienna"
   report: null
   report_closing: null
   photos: null
