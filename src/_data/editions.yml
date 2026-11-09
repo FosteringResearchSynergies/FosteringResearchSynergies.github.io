@@ -71,6 +71,8 @@
   participants: null
   summary: null
   program: "2024-vienna"
+  # Logos of CREF, IMT Lucca and CSH on the page, at the organizer's request (5 November 2026).
+  institutions: ["cref", "imt-lucca", "csh"]
   report: null
   report_closing: null
   photos: null
@@ -233,6 +235,7 @@
 #   links:                        # real URLs only: without a URL there is no button
 #     call: null
 #     registration: null
+#   institutions: []              # ids from site.institutions (site.yml) whose logos the page shows
 #   funding: null                 # mandatory funding acknowledgement, or null if there is none:
 #   # funding:
 #   #   text: null                # wording required by the funder, verbatim
