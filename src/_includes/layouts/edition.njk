@@ -99,11 +99,11 @@ eleventyComputed:
             {%- else %}
             {{ placeholder("lorem", null, "edition-summary") }}
             {%- endif %}
+            {%- if edition.institutions and edition.institutions.length %}
+            {%- set logoIds = edition.institutions %}
+            {% include "institutions.njk" %}
+            {%- endif %}
         </div>
-        {%- if edition.institutions and edition.institutions.length %}
-        {%- set logoIds = edition.institutions %}
-        {% include "institutions.njk" %}
-        {%- endif %}
     </div>
 </section>
 {%- if milestones | length %}
