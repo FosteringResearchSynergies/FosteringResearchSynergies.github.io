@@ -64,7 +64,7 @@ eleventyComputed:
             </div>
             <div class="next-band-fact">
                 <dt class="label">Registration</dt>
-                <dd class="is-state">{% if next.links.registration %}<a href="{{ next.links.registration }}">Register</a>{% else %}Not open yet{% endif %}</dd>
+                <dd class="is-state">{% if next.links.registration %}<a href="{{ next.links.registration }}">{{ next.registration_text or "Register" }}</a>{% else %}Not open yet{% endif %}</dd>
             </div>
         </dl>
     </div>

@@ -1,0 +1,68 @@
+# Draft program of v4.0 Parma (2026). Keys: see _example.yml. Sources, from the team (9 November 2026): the
+# skeleton suggested by the organizers ("day 1: welcome, round table of introductions; day 2: keynote and
+# group activities; day 3: group activities"), to be updated as the structure is decided; the team's
+# brainstorming notes for the times of the three days (16 December 14-18, 17 December 11-18, 18 December
+# 11-16), the slots of the first day and the ideas for the activities; the founding assembly on the last day.
+# Meals at Il Pedale Veloce are not in the program until their times are known (practical info of the edition).
+note: "Draft program: the structure of the three days. Times and activities will be updated as the organizing committee defines them."
+days:
+  - date: "2026-12-16"
+    title: "Welcome and introductions"
+    note: null
+    slots:
+      - start: "14:00"
+        end: "14:30"
+        type: other
+        title: "Opening"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "14:30"
+        end: "16:00"
+        type: session
+        title: "Round of introductions"
+        theme: null
+        speakers: []
+        talks: []
+        note: "Two minutes each: who you are and what you work on."
+      - start: "16:00"
+        end: "16:30"
+        type: break
+        title: "Coffee break"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+      - start: "16:30"
+        end: "18:00"
+        type: social
+        title: "Complexity quiz and statistical physics mini-games"
+        theme: null
+        speakers: []
+        talks: []
+        note: null
+  - date: "2026-12-17"
+    title: "Keynotes and group activities"
+    note: null
+    slots:
+      - start: "11:00"
+        end: "18:00"
+        type: session
+        title: "Keynotes and Fostering activities"
+        theme: null
+        speakers: []
+        talks: []
+        note: "Group activities and discussions. Ideas on the table: AI in scientific research (tips and tricks), a spotlight on open-source software and its hidden gems."
+  - date: "2026-12-18"
+    title: "Group activities and FRS founding assembly"
+    note: null
+    slots:
+      - start: "11:00"
+        end: "16:00"
+        type: session
+        title: "Fostering activities and FRS founding assembly"
+        theme: null
+        speakers: []
+        talks: []
+        note: "The founding moment of a more structured FRS entity, horizontal and cooperative."
