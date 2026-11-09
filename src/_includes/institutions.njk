@@ -1,11 +1,14 @@
 {#- Logos of the organizers' institutions, from site.institutions (src/_data/site.yml). Each logo links to
-    the institution's website; the alt text is its name. Styles: components/logo-strip.css. -#}
+    the institution's website; the alt text is its name. Set logoIds (a list of ids) before the include to
+    show only those institutions; without it every institution is shown. Styles: components/logo-strip.css. -#}
 {%- if site.institutions and site.institutions.length %}
 <div class="logo-strip">
     <h3 class="label">Institutions</h3>
     <ul class="logo-strip-list">
         {%- for institution in site.institutions %}
+        {%- if not logoIds or institution.id in logoIds %}
         <li><a href="{{ institution.url }}"><img src="{{ institution.logo }}" width="{{ institution.width }}" height="{{ institution.height }}" alt="{{ institution.name }}" loading="lazy" decoding="async"></a></li>
+        {%- endif %}
         {%- endfor %}
     </ul>
 </div>
