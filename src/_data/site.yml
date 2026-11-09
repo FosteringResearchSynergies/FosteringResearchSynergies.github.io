@@ -11,19 +11,23 @@ email: "frscrefimt@gmail.com"
 url: "https://fosteringresearchsynergies.github.io"
 # The institutions of the organizers (CLAUDE.md), with their official logos: CSH and IMT as the SVG files of
 # their websites, CREF as the PNG of its website (no SVG published), downloaded on 5 November 2026 at the
-# organizer's request. Shown by the include institutions.njk; width and height are the files' own.
+# organizer's request. Shown by the include institutions.njk (all of them on the home; on an edition page
+# the ones listed by id in its "institutions" key in editions.yml); width and height are the files' own.
 institutions:
-  - name: "Centro Ricerche Enrico Fermi (CREF)"
+  - id: "cref"
+    name: "Centro Ricerche Enrico Fermi (CREF)"
     url: "https://www.cref.it/"
     logo: "/assets/images/logos/cref.png"
     width: 366
     height: 84
-  - name: "IMT School for Advanced Studies Lucca"
+  - id: "imt-lucca"
+    name: "IMT School for Advanced Studies Lucca"
     url: "https://www.imtlucca.it/"
     logo: "/assets/images/logos/imt-lucca.svg"
     width: 164
     height: 80
-  - name: "Complexity Science Hub (CSH)"
+  - id: "csh"
+    name: "Complexity Science Hub (CSH)"
     url: "https://csh.ac.at/"
     logo: "/assets/images/logos/csh.svg"
     width: 300
