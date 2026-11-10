@@ -81,7 +81,7 @@ eleventyComputed:
             {%- if isNext %}
             <div class="edition-fact">
                 <dt class="label">Call for abstracts</dt>
-                <dd>{% if edition.links.call %}<a href="{{ edition.links.call }}">Read the call</a>{% else %}{{ placeholder("tba") }}{% endif %}</dd>
+                <dd>{% if edition.links.call %}<a href="{{ edition.links.call }}">Read the call</a>{% elif edition.call_status %}{{ edition.call_status }}{% else %}{{ placeholder("tba") }}{% endif %}</dd>
             </div>
             <div class="edition-fact">
                 <dt class="label">Registration</dt>
