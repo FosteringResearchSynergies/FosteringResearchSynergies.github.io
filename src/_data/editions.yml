@@ -69,7 +69,9 @@
     name: "Complexity Science Hub (CSH), Vienna"
     address: null
   participants: null
-  summary: null
+  # Written by Claude at the organizer's request (10 November 2026): a short, informal report from the facts of
+  # the program and the organizer's note on the Cocktail Project (an event for a network study of cocktails).
+  summary: "For v1.X, FRS spent a day at the Complexity Science Hub in Vienna. Twenty-five talks of five minutes each, in three sessions on networks, economic complexity and complex systems modelling, brought together young researchers from CSH, CREF, IMT Lucca, CEU and beyond, and the day closed with an open group discussion. While in Vienna we also took part in the Cocktail Project, an event for a network study of cocktails: research, for once, with a garnish."
   program: "2024-vienna"
   # Logos of CREF, IMT Lucca and CSH on the page, at the organizer's request (5 November 2026).
   institutions: ["cref", "imt-lucca", "csh"]
