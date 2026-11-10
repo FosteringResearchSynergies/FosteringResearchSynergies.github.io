@@ -131,7 +131,10 @@
     name: "Hotel Giardino sul Mare"
     address: null
   participants: null
-  summary: null
+  # Written by Claude at the organizer's request (10 November 2026): a short, informal report from the program,
+  # the organizer's notes (FRS ran the young researchers' day of the school, closed by the Complexity Quiz) and
+  # the school's website https://secs25.liparischool.it/ (title and dates, read on 10 November 2026).
+  summary: "For its summer edition, FRS joined the Lipari School “Complex networks: from socio-economic systems to biology and the brain” (27 July to 2 August 2025) and ran one of its days. On 29 July the young researchers took the stage: thirteen talks in three sessions, from the foundations of network science to biological, economic and social systems, and on to AI and large language models. The day closed with the Complexity Quiz, where the competition was taken almost as seriously as the science."
   program: "2025-lipari"
   report: null
   report_closing: null
