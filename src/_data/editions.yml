@@ -186,24 +186,34 @@
   year: 2026
   city: "Parma"
   status: upcoming
-  # Dates given by the organizer on 22 October 2026.
+  # Dates given by the organizer on 22 October 2026. Host, summary, practical info and the form: the team's
+  # call for interest to participants "FRS@Parma, December 16-18, 2026 - Call for interest (special edition!)"
+  # (from the team, 9 November 2026), shortened. Host, venue and the open call: from the team (10 November 2026).
   dates:
     start: "2026-12-16"
     end: "2026-12-18"
-  host: null
+  host: "University of Parma"
   venue:
-    name: null
+    name: "University of Parma and Il Pedale Veloce"
     address: null
   participants: null
-  summary: null
-  program: null
+  summary: "A special edition, hosted by the University of Parma in collaboration with Il Pedale Veloce, ARCI circle of Parma. Besides meeting each other, we will hold a founding moment for something new: a more structured FRS entity, horizontal and cooperative. The details are still being worked out, in full fostering spirit."
+  program: "2026-parma"
+  info:
+    - title: "Participation"
+      text: "The workshop is for PhD students and early postdocs in complex systems. Spots are limited and participation is confirmed on a first-come, first-served basis: the earlier you fill out the form, the better your chances. Others are placed on a waiting list."
+    - title: "Meals"
+      text: "Meals and coffee breaks are provided at agreed prices at Il Pedale Veloce: about 80 € per person in total, paid on site meal by meal. You get a receipt for each meal, so you can claim them as mission expenses with your institution."
   report: null
   report_closing: null
   photos: null
   milestones: []
   links:
     call: null
-    registration: null
+    registration: "https://forms.gle/a7evAtmbJYZkQE2D8"
+  call_status: "Open"
+  # The form collects expressions of interest; places are confirmed afterwards.
+  registration_text: "Express your interest"
   funding: null
 
 # - slug: null                    # URL /editions/<slug>/: "<year>-<city>" in lower case; the city alone
@@ -234,9 +244,14 @@
 #   # - label: null               # e.g. abstract deadline, registration deadline
 #   #   date: null                # "YYYY-MM-DD", quoted; null = TBA
 #   #   state: upcoming           # upcoming | open | closed
+#   info: []                      # practical info, points written by the team; [] = no section
+#   # - title: null               # e.g. Meals
+#   #   text: null                # one paragraph
 #   links:                        # real URLs only: without a URL there is no button
 #     call: null
 #     registration: null
+#   call_status: null             # state of the call without a link to it (e.g. "Open"); null = TBA
+#   registration_text: null       # text of the registration link if not "Register"
 #   institutions: []              # ids from site.institutions (site.yml) whose logos the page shows
 #   funding: null                 # mandatory funding acknowledgement, or null if there is none:
 #   # funding:

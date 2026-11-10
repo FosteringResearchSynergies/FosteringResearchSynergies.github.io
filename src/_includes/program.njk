@@ -8,14 +8,21 @@
 
   Day headings are h3: the macro goes under the h2 of a Program section. Values are printed as
   published; a missing time or title is a TBA placeholder. The type of a keynote is written out
-  ("Keynote"), not only shown by the colour.
+  ("Keynote"), not only shown by the colour. The note of the program (a draft, for instance) comes before
+  the days, the note of a day under its heading.
 -#}
 {%- macro programDays(program) -%}
 {%- from "placeholder.njk" import placeholder -%}
+{%- if program.note %}
+<p class="program-note">{{ program.note }}</p>
+{%- endif %}
 {%- for day in program.days %}
 {%- set dayId = "day-" ~ (day.date or loop.index) %}
 <section class="program-table-day" id="{{ dayId }}" aria-labelledby="{{ dayId }}-title">
     <h3 class="program-table-heading" id="{{ dayId }}-title">{% if day.date %}<time datetime="{{ day.date }}">{{ day.date | dayDate }}</time>{% else %}Day {{ loop.index }}{% endif %}{% if day.title %} · {{ day.title }}{% endif %}</h3>
+    {%- if day.note %}
+    <p class="program-table-day-note">{{ day.note }}</p>
+    {%- endif %}
     <table class="program-table">
         <thead>
             <tr><th scope="col">Time</th><th scope="col">Session</th></tr>

@@ -4,9 +4,11 @@
 #
 # This file holds no data (templates see programs._example as null): copy it, then uncomment.
 #
+# note: null                     # one line before the days (e.g. a draft program), null if none
 # days:
 #   - date: null                  # "YYYY-MM-DD", quoted
 #     title: null                 # day title shown on the site, null if none
+#     note: null                  # one line under the day heading, null if none
 #     slots:
 #       - start: null             # "HH:MM", quoted
 #         end: null               # "HH:MM", quoted; null if open-ended

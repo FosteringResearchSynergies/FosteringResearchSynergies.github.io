@@ -19,12 +19,27 @@
      </table>
    </section> */
 
+/* Note of the program (before the days) and of a day (under its heading) */
+.program-note {
+    max-width: var(--measure);
+    margin-bottom: var(--space-fluid-m);
+    color: var(--color-ink-2);
+}
+
+.program-table-day-note {
+    max-width: var(--measure);
+    margin-top: calc(-1 * var(--space-2));
+    margin-bottom: var(--space-4);
+    color: var(--color-ink-2);
+}
+
 .program-table-day {
     --time-column: 4.5rem;
     margin-top: var(--space-fluid-m);
 }
 
-.program-table-day:first-child {
+.program-table-day:first-child,
+.program-note + .program-table-day {
     margin-top: 0;
 }
 
