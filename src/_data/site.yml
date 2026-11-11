@@ -32,3 +32,18 @@ institutions:
     logo: "/assets/images/logos/csh.svg"
     width: 300
     height: 83
+  # Added at the organizer's request (11 November 2026): the University of Parma, host of FRS 2026, with the
+  # black and white logo of its website (unipr-bn.svg, for light backgrounds), and the Lipari School on Complex
+  # Systems, host of FRSummer 2025, with the emblem of its website (favicon.svg, the only logo it publishes).
+  - id: "unipr"
+    name: "University of Parma"
+    url: "https://www.unipr.it/"
+    logo: "/assets/images/logos/unipr.svg"
+    width: 380
+    height: 121
+  - id: "lipari-school"
+    name: "Lipari School on Complex Systems"
+    url: "https://liparischool.it/"
+    logo: "/assets/images/logos/lipari-school.svg"
+    width: 561
+    height: 561

@@ -136,6 +136,7 @@
   # the school's website https://secs25.liparischool.it/ (title and dates, read on 10 November 2026).
   summary: "For its summer edition, FRS joined the Lipari School “Complex networks: from socio-economic systems to biology and the brain” (27 July to 2 August 2025) and ran one of its days. On 29 July the young researchers took the stage: thirteen talks in three sessions, from the foundations of network science to biological, economic and social systems, and on to AI and large language models. The day closed with the Complexity Quiz, where the competition was taken almost as seriously as the science."
   program: "2025-lipari"
+  institutions: ["lipari-school"]
   report: null
   report_closing: null
   photos: null
@@ -202,6 +203,7 @@
   participants: null
   summary: "A special edition, hosted by the University of Parma in collaboration with Il Pedale Veloce, ARCI circle of Parma. Besides meeting each other, we will hold a founding moment for something new: a more structured FRS entity, horizontal and cooperative. The details are still being worked out, in full fostering spirit."
   program: "2026-parma"
+  institutions: ["unipr"]
   info:
     - title: "Participation"
       text: "The workshop is for PhD students and early postdocs in complex systems. Spots are limited and participation is confirmed on a first-come, first-served basis: the earlier you fill out the form, the better your chances. Others are placed on a waiting list."

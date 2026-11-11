@@ -227,3 +227,69 @@
     font-weight: 700;
     letter-spacing: -0.02em;
 }
+
+/* ---------- Section snap ----------
+   Pages with "snap: true" in the front matter (the home) get <html class="has-snap">: the page turns
+   panel by panel. Every section of main and the photo band fills the screen, with its content centred
+   in height; scrolling stops at the top of each one (scroll-snap-stop: one panel per gesture). A panel
+   taller than the screen (the list of editions) scrolls freely inside. The header lies on the first
+   panel, so that header and masthead fill the screen together; the footer closes the page, aligned to
+   its bottom. Off for users who ask for reduced motion: the page then scrolls as any other. */
+@media (prefers-reduced-motion: no-preference) {
+    .has-snap {
+        scroll-snap-type: y mandatory;
+    }
+
+    .has-snap body {
+        position: relative;
+    }
+
+    .has-snap .site-header {
+        position: absolute;
+        inset: 0 0 auto;
+        z-index: 1;
+    }
+
+    .has-snap main > section,
+    .has-snap main > .photo-band {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 100vh;
+        min-height: 100svh;
+        padding-block: var(--space-fluid-l);
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+    }
+
+    /* room for the header, two rows on small screens, one from 48rem */
+    .has-snap main > .masthead {
+        padding-top: calc(var(--space-fluid-l) + 7rem);
+    }
+
+    .has-snap .site-footer {
+        scroll-snap-align: end;
+    }
+
+    /* the photo fits the screen with its caption */
+    .has-snap .photo-band .photo {
+        display: grid;
+        justify-items: center;
+    }
+
+    .has-snap .photo-band img {
+        width: auto;
+        max-height: calc(100svh - 2 * var(--space-fluid-l) - 3rem);
+    }
+
+    .has-snap .photo-band figcaption {
+        justify-self: stretch;
+        text-align: center;
+    }
+
+    @media (min-width: 48rem) {
+        .has-snap main > .masthead {
+            padding-top: calc(var(--space-fluid-l) + 5rem);
+        }
+    }
+}
