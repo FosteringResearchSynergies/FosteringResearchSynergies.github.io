@@ -186,21 +186,57 @@
     padding-top: var(--section);
 }
 
-.footer-email {
-    display: inline-block;
+/* The ways to reach the team: label and link, one per row between light filets; from 48rem the label
+   sits in a left column, from 64rem in the first three columns of the grid */
+.footer-channel {
+    display: grid;
+    gap: var(--space-2) var(--gap);
+    align-items: baseline;
+    padding-block: var(--space-4) var(--space-6);
+    border-top: var(--rule) solid var(--rule-color-soft);
+}
+
+.footer-channel dt {
+    color: var(--secondary-color);
+}
+
+.footer-channel dd {
     font-family: var(--font-display);
-    font-size: var(--step-email);
+    font-size: var(--step-3);
     font-weight: 600;
-    letter-spacing: -0.045em;
-    line-height: 1;
-    text-decoration-thickness: 0.04em;
-    text-underline-offset: 0.14em;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
     overflow-wrap: anywhere;
 }
 
-.footer-email:hover {
+.footer-channel a {
+    text-decoration-thickness: 0.05em;
+    text-underline-offset: 0.16em;
+}
+
+.footer-channel a:hover {
     text-decoration-color: var(--color-accent);
-    text-decoration-thickness: 0.06em;
+    text-decoration-thickness: 0.08em;
+}
+
+@media (min-width: 48rem) {
+    .footer-channel {
+        grid-template-columns: 10rem minmax(0, 1fr);
+    }
+}
+
+@media (min-width: 64rem) {
+    .footer-channel {
+        grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+    }
+
+    .footer-channel dt {
+        grid-column: 1 / 4;
+    }
+
+    .footer-channel dd {
+        grid-column: 4 / -1;
+    }
 }
 
 .footer-bar {
