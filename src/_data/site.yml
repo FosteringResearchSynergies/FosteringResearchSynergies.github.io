@@ -7,6 +7,12 @@ short_name: "FRS"
 description: "An informal association of PhD students and postdoctoral researchers fostering collaboration and knowledge exchange through workshops and conferences."
 # Public contact address, already on the site (contact page, Lucca 2025 page). docs/ROADMAP.md, domanda 9.
 email: "frscrefimt@gmail.com"
+# Mailing list and contact form, both on the team's Google account (frscrefimt@gmail.com), created on
+# 11 November 2026 at the organizer's request: the announcement list on Google Groups (anyone can join,
+# only the managers post) and the contact form on Google Forms (name, email, message; answers notified
+# by email to the team). Shown in the footer and on the contact page.
+mailing_list: "https://groups.google.com/g/fostering-research-synergies"
+contact_form: "https://forms.gle/hJ4jh3j4fBVTPQsS6"
 # Canonical address of the site, without the final slash (docs/ROADMAP.md, D3).
 url: "https://fosteringresearchsynergies.github.io"
 # The institutions of the organizers (CLAUDE.md), with their official logos: CSH and IMT as the SVG files of

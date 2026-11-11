@@ -44,7 +44,7 @@ Il blu sul nero (2.9:1) non si usa mai. I separatori leggeri non sono mai l'unic
 
 | File | Componente |
 | --- | --- |
-| `layout.css` | contenitore, griglia a 12 colonne, header con il marchio ("FRS" e il nome per esteso, separati da un filetto; link alla home, non `h1`), navigazione nell'HTML con `aria-current` (sotto 48rem su una riga sotto il marchio), intestazioni di sezione numerate (include `section-head.njk`), footer nero con l'email da `site.yml` in grande |
+| `layout.css` | contenitore, griglia a 12 colonne, header con il marchio ("FRS" e il nome per esteso, separati da un filetto; link alla home, non `h1`), navigazione nell'HTML con `aria-current` (sotto 48rem su una riga sotto il marchio), intestazioni di sezione numerate (include `section-head.njk`), footer nero con i contatti da `site.yml` (email, mailing list, modulo di contatto), uno per riga |
 | `components/masthead.css` | titolo della home molto grande con le iniziali F, R, S in blu, frase introduttiva, link alla prossima edizione |
 | `components/next-edition.css` | banda blu "Next edition": anno, città da bordo a bordo (classe `chars-N` dal filtro `fitChars`), quattro fatti (Dates, Venue, Call for abstracts, Registration) |
 | `components/edition-list.css` | le edizioni come lista tipografica: versione o "Next", città e anno in grande, dettagli in mezzo; la prossima in blu |
