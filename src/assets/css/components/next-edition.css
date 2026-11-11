@@ -44,6 +44,12 @@
     overflow-wrap: anywhere;
 }
 
+/* On the home the city also fits the height of the screen, so that the band holds in one screen */
+.next-band .next-band-city {
+    font-size: min(100cqi / (var(--chars, 5) * var(--letter-width)), var(--step-poster-max), 24vh);
+    font-size: min(100cqi / (var(--chars, 5) * var(--letter-width)), var(--step-poster-max), 24svh);
+}
+
 .next-band-facts {
     display: grid;
     margin-top: var(--space-fluid-xl);
