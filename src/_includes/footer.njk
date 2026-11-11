@@ -1,11 +1,25 @@
-{#- Site footer: the contact address from site.yml, set large on black.
-    Page data (optional): footer.number is the section number shown in the head (the home numbers its
-    sections); footer.copyright replaces the text after the copyright sign; footer.note adds a second line. -#}
+{#- Site footer: the three ways to reach the team, from site.yml (email, mailing list, contact form), one
+    per row on black. Page data (optional): footer.number is the section number shown in the head (the home
+    numbers its sections); footer.copyright replaces the text after the copyright sign; footer.note adds a
+    second line. -#}
 {%- from "section-head.njk" import sectionHead -%}
 <footer class="site-footer surface-ink" aria-labelledby="footer-title">
     <div class="wrap">
         {{ sectionHead("Contact", "footer-title", footer.number) }}
-        <a class="footer-email" href="mailto:{{ site.email }}">{{ site.email }}</a>
+        <dl class="footer-channels">
+            <div class="footer-channel">
+                <dt class="label">Email</dt>
+                <dd><a href="mailto:{{ site.email }}">{{ site.email }}</a></dd>
+            </div>
+            <div class="footer-channel">
+                <dt class="label">Mailing list</dt>
+                <dd><a href="{{ site.mailing_list }}">Subscribe on Google Groups</a></dd>
+            </div>
+            <div class="footer-channel">
+                <dt class="label">Message</dt>
+                <dd><a href="{{ site.contact_form }}">Write to us with the contact form</a></dd>
+            </div>
+        </dl>
         <div class="footer-bar">
             <div class="footer-text">
                 <p>&copy; {{ footer.copyright or site.name }}</p>

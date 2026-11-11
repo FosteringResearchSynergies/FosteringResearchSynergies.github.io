@@ -41,7 +41,6 @@
     --step-3: clamp(1.5rem, 1rem + 2.4vw, 2.75rem);             /* large values */
     --step-lede: clamp(1.25rem, 0.95rem + 1.3vw, 1.75rem);      /* lead paragraph */
     --step-city: clamp(2.75rem, 1.2rem + 6.4vw, 6.5rem);        /* city names in the editions list */
-    --step-email: clamp(1.625rem, 0.3rem + 7vw, 6.5rem);        /* the address in the footer */
     --step-hero: clamp(3.5rem, 0.6rem + 17vw, 14.5rem);         /* the site name on the home */
     --step-page: clamp(2.5rem, 1rem + 7.5vw, 8rem);             /* the h1 of an inner page */
     --step-hero-wide: min(13.4vw, 12.75rem);                    /* same, next to the side column */

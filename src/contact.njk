@@ -6,9 +6,8 @@ footer:
   number: "04"
 ---
 {#- Contact: the team's texts from the old page, unchanged, without the emoji and the inline styles.
-    The address comes from site.yml; mailing list and contact form are not built (placeholders).
+    Address, mailing list and contact form come from site.yml.
     Styles: src/assets/css/pages.css. -#}
-{%- from "placeholder.njk" import placeholder -%}
 {%- from "section-head.njk" import sectionHead -%}
 <div class="page-head">
     <div class="wrap">
@@ -30,7 +29,7 @@ footer:
                 <!-- TODO(team): esistono account social reali? Se sì, aggiungere i link qui. -->
                 <div class="page-fact">
                     <dt class="label">Mailing List</dt>
-                    <dd>{{ placeholder("unbuilt", "mailing list.") }}</dd>
+                    <dd><a href="{{ site.mailing_list }}">Subscribe on Google Groups</a></dd>
                 </div>
             </dl>
         </div>
@@ -41,7 +40,7 @@ footer:
     <div class="wrap">
         {{ sectionHead("Send Us a Message", "message-title", "02") }}
         <div class="page-body">
-            {% call placeholder("unbuilt") %}contact form. Please write to <a href="mailto:{{ site.email }}">{{ site.email }}</a>.{% endcall %}
+            <p class="page-text"><a href="{{ site.contact_form }}">Open the contact form</a> (Google Forms) or write to <a href="mailto:{{ site.email }}">{{ site.email }}</a>.</p>
         </div>
     </div>
 </section>
